@@ -3,8 +3,6 @@ window.addEventListener('DOMContentLoaded', function() {
     const canvas = document.querySelector('canvas');
     const ctx= canvas.getContext('2d');
 
-    
-
 ////////////////////////// AddEvenListener Pour recadrer la taille du canvas à chaque resize de l'écran
 function displayCanvas() {
     ctx.canvas.width=window.innerWidth
@@ -431,7 +429,6 @@ function animate() {
         ctx.drawImage(background, 0, 0, canvasSize.width/1.1, canvasSize.height/1.1, 0, 0, canvasSize.width, canvasSize.height);
         window.requestAnimationFrame(animate);
         enterInHouse()   
-        
         drawSprite(playerSprite, player.width*player.frameX, player.height*player.frameY, player.width, player.height, player.x, player.y, player.width*scale, player.height*scale )
         movePlayer()
         moveTouch()
@@ -441,7 +438,6 @@ function animate() {
         createHouseBox()
         rectColiision()
            
-   
     } 
 }
 startAnimating(15)
@@ -450,11 +446,35 @@ startAnimating(15)
 let inHouse=false
 let greenBoxs = [
     {
-        x:1334,
-        y:1120,
+        x:1150,
+        y:700,
         w:65,
+        h:400,
+},
+    {
+        x:1050,
+        y:670,
+        w:550,
         h:100,
-}
+},
+    {
+        x:1580,
+        y:670,
+        w:50,
+        h:450,
+},
+    {
+        x:1400,
+        y:1080,
+        w:200,
+        h:50,
+},
+    {
+        x:1200,
+        y:1080,
+        w:140,
+        h:50,
+},
 ]
 
 function rectColiision() {
@@ -468,7 +488,7 @@ function rectColiision() {
         for(let greenBox of greenBoxs ) {
             ctx.fillStyle='green'
             ctx.fillRect(greenBox.x, greenBox.y, greenBox.w, greenBox.h)
-            createHitBoxtwo()
+            greenHitBox()
         }
     }
 }
@@ -556,21 +576,17 @@ function createHouseBox(){
     for(let blueBox of blueBoxs ) {
         ctx.fillStyle='blue'
         ctx.fillRect(blueBox.x, blueBox.y, blueBox.w, blueBox.h)
-    }
- 
+    } 
 }
 const blueBoxs=[
     {
-        x:1334,
-        y:1120,
+        x:1340,
+        y:1105,
         w:65,
         h:5,
     }, 
     
 ]
-
-
-
 function enterInHouse() {
     for (let blueBox of blueBoxs) {
  
@@ -583,24 +599,20 @@ function enterInHouse() {
     }
         if(inHouse===true) {
             ctx.drawImage(office, 0, 0, 384, 352, 1200, 720, 400, 400 )
-          console.log(greenBoxs)  
-          console.log(blackBoxs)  
+
         }
 
 }
 
-function createHitBoxtwo(){
-    for (let object of greenBoxs){
+function greenHitBox(){
+    for (let greenBox of greenBoxs){
         // right
         
-        if((player.x>object.x && player.x<object.x+object.width) &&  (player.y+player.height> object.y && player.y+player.height< object.y + object.height) )  {
+        if((player.x>greenBox.x && player.x<greenBox.x+greenBox.w) &&  (player.y+player.h> greenBox.y && player.y+player.height< greenBox.y + greenBox.h) )  {
             collisionRight=true
             player.moving=false
         }  
-        if((player.x>object.x && player.x<object.x+object.width) &&  (player.y> object.y && player.y< object.y + object.height) )  {
-            collisionRight=true
-        }  
-        if((player.x>object.x && player.x<object.x+object.width) &&  (player.y+player.height/2> object.y && player.y+player.height/2< object.y + object.height) )  {
+        if((player.x>greenBox.x && player.x<greenBox.x+greenBox.w) &&  (player.y> greenBox.y && player.y< greenBox.y + greenBox.h) )  {
             collisionRight=true
         }  
         if( collisionRight===true) {
@@ -608,28 +620,29 @@ function createHitBoxtwo(){
             collisionRight=false
         }
         
+         
+       
         // left
-        if ((player.x+player.width>object.x && player.x+player.width<object.x+object.width) &&  (player.y> object.y && player.y< object.y + object.height)) {
-            collisionLeft=true;
-        } 
-         if ((player.x+player.width>object.x && player.x+player.width<object.x+object.width) &&  (player.y+player.height> object.y && player.y+player.height< object.y + object.height)) {
-            collisionLeft=true;         
-        } 
-         if ((player.x+player.width>object.x && player.x+player.width<object.x+object.width) &&  (player.y+player.height/2> object.y && player.y+player.height/2< object.y + object.height)) {
-            collisionLeft=true;         
-        } 
-        if(collisionLeft===true){
-            player.x-=player.speed  
-            collisionLeft=false
-        }
+        // if ((player.x+player.width>greenBox.x && player.x+player.width<greenBox.x+greenBox.w) &&  (player.y> greenBox.y && player.y< greenBox.y + greenBox.h)) {
+        //     collisionLeft=true;
+        // } 
+        //  if ((player.x+player.width>greenBox.x && player.x+player.width<greenBox.x+greenBox.w) &&  (player.y+player.height> greenBox.y && player.y+player.height< greenBox.y + greenBox.h)) {
+        //     collisionLeft=true;         
+        // } 
+
+        // if(collisionLeft===true){
+        //     player.x-=player.speed  
+        // //     collisionLeft=false
+        // }
         // // bottom
-        if ((player.y + player.height>object.y && player.y + player.height < object.y+object.height) && (player.x>object.x && player.x<object.x+object.width) ) {  
+        if(player.y+player.height+5>greenBox.y && player.y+player.height+5<greenBox.y+greenBox.h && player.x>greenBox.x && player.x<greenBox.x+greenBox.w) {
+            collisionUp=true;
+        }
+        
+        if ((player.y + player.height+5>greenBox.y && player.y + player.height+5 < greenBox.y+greenBox.h) && (player.x+player.width>greenBox.x && player.x+player.width<greenBox.x+greenBox.w) ) {
             collisionUp=true;
         } 
-        if ((player.y + player.height>object.y && player.y + player.height < object.y+object.height) && (player.x+player.width>object.x && player.x+player.width<object.x+object.width) ) {
-            collisionUp=true;
-        } 
-         if ((player.y + player.height>object.y && player.y + player.height < object.y+object.height) && (player.x+player.width/2>object.x && player.x+player.width/2<object.x+object.width) ) {
+         if ((player.y + player.height>greenBox.y && player.y + player.height < greenBox.y+greenBox.h) && (player.x+player.width/2>greenBox.x && player.x+player.width/2<greenBox.x+greenBox.w) ) {
             collisionUp=true;
         } 
         if(collisionUp===true) {
@@ -638,15 +651,15 @@ function createHitBoxtwo(){
         }
         // // up
         
-        if((player.y>object.y && player.y< object.y+object.height) && (player.x>object.x && player.x<object.x+object.width) )
+        if((player.y>greenBox.y && player.y< greenBox.y+greenBox.h) && (player.x>greenBox.x && player.x<greenBox.x+greenBox.w) )
         {
             collisionDown=true;   
         }     
-        if((player.y >object.y && player.y < object.y+object.height) && (player.x+player.width>object.x && player.x+player.width<object.x+object.width) )
+        if((player.y >greenBox.y && player.y < greenBox.y+greenBox.h) && (player.x+player.with>greenBox.x && player.x+player.width<greenBox.x+greenBox.w) )
         {
             collisionDown=true;
         }   
-        if((player.y >object.y && player.y < object.y+object.height) && (player.x+player.width/2>object.x && player.x+player.width/2<object.x+object.width) )
+        if((player.y >greenBox.y && player.y < greenBox.y+greenBox.h) && (player.x+player.width/2>greenBox.x && player.x+player.width/2<greenBox.x+greenBox.w) )
         {
             collisionDown=true;
         }   
@@ -654,12 +667,13 @@ function createHitBoxtwo(){
             player.y+=player.speed
             collisionDown=false
         }  
-        
+       
     }
     
 
 
 }
+
 
 
 
