@@ -17,3 +17,9 @@ Pour les maisons:
 
 J'ai fait une condition avec dans le premier if, si la variable "je suis à l'extérieur" est vrai, alors creer les rectangles noir (collision extérieur), si la variable est fausse (je suis à l'intérieur), alors créer les rectangles verts (collisions intérieur). 
 J'ai ensuite créer une fonction qui sert à intervertir la variable "je suis à l'extérieur" lorsque le personnage traverser les portes. cette fonction affiche aussi la maison. 
+
+
+10/03:  js. 638 
+ J'ai créé une fonction qui loop sur le tableau blueBoxs contenant la position de la boite bleau et les propriétés de l'image background des maisons. 
+//  j'ai rajouté la condition travers le carré bleu pour activer la variable inHouse. 
+//  Si inHouse est vrai, tu affiche le background avec les propriétés données à l'index i. 

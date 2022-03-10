@@ -25,8 +25,7 @@ let canvasSize= {
     height:2160,
 }
 
-const office =new Image();
-    office.src="img/interieur_git.png"
+
    
    
 ctx.imageSmoothingEnabled=false
@@ -48,8 +47,11 @@ const player= {
 const playerSprite= new Image(); 
 playerSprite.src= "img/main_chara.png ";
 const background= new Image(); 
-background.src="img/background.png"
-
+background.src="img/background.png";
+const office =new Image();
+office.src="img/interieur_git.png";
+const retraining= new Image();
+retraining.src='img/reconversion.png';
 
 
     
@@ -435,8 +437,10 @@ function animate() {
         handlePlayerFrame()
         ctx.resetTransform(); 
         ctx.translate(-(player.x-canvas.width / 2), -(player.y-canvas.height / 2));      
-        createHouseBox()
+        createBluebox()
         rectColiision()
+       console.log(indexBluebox)
+        
            
     } 
 }
@@ -584,9 +588,9 @@ function rectColiision() {
 
 }
 
-function createHouseBox(){
+function createBluebox(){
     for(let blueBox of blueBoxs ) {
-        ctx.fillStyle='transparent'
+        ctx.fillStyle='blue'
         ctx.fillRect(blueBox.x, blueBox.y, blueBox.w, blueBox.h)
     } 
 }
@@ -596,30 +600,65 @@ const blueBoxs=[
         y:1095,
         w:65,
         h:10,
+        background: office, 
+        dx: 0,
+        dy:0, 
+        dw:384,
+        dh:352,
+        dpx:1200,
+        dpy: 725,
+        dpw: 400,
+        dph: 400,
+
     }, 
-    
+    {
+        x:1665,
+        y:1095,
+        w:65,
+        h:10,
+        background: retraining, 
+        dx: 0,
+        dy:0, 
+        dw:384,
+        dh:384,
+        dpx:1500,
+        dpy: 720,
+        dpw: 400,
+        dph: 400,
+
+    }, 
+    {
+        x:1765,
+        y:1095,
+        w:65,
+        h:10,
+    },    
 ]
+
+let indexBluebox= -1
 function enterInHouse() {
-    for (let blueBox of blueBoxs) {
- 
-        if(((player.x+16>=blueBox.x && player.x+16<= blueBox.x+blueBox.w) ) &&(player.y>=blueBox.y && player.y<=blueBox.y+blueBox.h) && keys.includes('z')){
-            inHouse=!inHouse
-         }
-        if(((player.x+16>=blueBox.x && player.x+16<= blueBox.x+blueBox.w) ) &&(player.y>=blueBox.y && player.y<=blueBox.y+blueBox.h) && keys.includes('s')){
-            inHouse=!inHouse
-         }
+    for (let i=0; i< blueBoxs.length; i++) {
+
+        if(((player.x+16>= blueBoxs[i].x && player.x+16<=  blueBoxs[i].x+ blueBoxs[i].w) ) &&(player.y>= blueBoxs[i].y && player.y<= blueBoxs[i].y+ blueBoxs[i].h) && keys.includes('z')){
+                    inHouse=!inHouse
+                    indexBluebox= i
+                 }
+        if(((player.x+16>= blueBoxs[i].x && player.x+16<=  blueBoxs[i].x+ blueBoxs[i].w) ) &&(player.y>= blueBoxs[i].y && player.y<= blueBoxs[i].y+ blueBoxs[i].h) && keys.includes('s')){
+                    inHouse=!inHouse
+                    indexBluebox= -1
+                 } 
+        if(inHouse===true && indexBluebox=== i) {          
+            ctx.drawImage(blueBoxs[i].background, blueBoxs[i].dx, blueBoxs[i].dy, blueBoxs[i].dw, blueBoxs[i].dh, blueBoxs[i].dpx, blueBoxs[i].dpy, blueBoxs[i].dpw, blueBoxs[i].dph )
+                }       
     }
-        if(inHouse===true) {
-            ctx.drawImage(office, 0, 0, 384, 352, 1200, 720, 400, 400 )
-
-        }
-
+//   
+   
+        
 }
 
 function greenHitBox(){
     for (let greenBox of greenBoxs){
         // right
-        
         if((player.x>greenBox.x && player.x<greenBox.x+greenBox.w) &&  (player.y+player.h> greenBox.y && player.y+player.height< greenBox.y + greenBox.h) )  {
             collisionRight=true
             player.moving=false
