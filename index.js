@@ -464,7 +464,7 @@ let greenBoxs = [
         h:450,
 },
     {
-        x:1400,
+        x:1420,
         y:1080,
         w:200,
         h:50,
@@ -472,21 +472,33 @@ let greenBoxs = [
     {
         x:1200,
         y:1080,
-        w:140,
+        w:130,
         h:50,
+},
+    {
+        x:1310,
+        y:890,
+        w:80,
+        h:40,
+},
+    {
+        x:1460,
+        y:930,
+        w:70,
+        h:100,
 },
 ]
 
 function rectColiision() {
     if(inHouse===false) {
         for( let object of blackBoxs){
-            ctx.fillStyle="black"
+            ctx.fillStyle="transparent"
             ctx.fillRect(object.x, object.y, object.width, object.height)
-            createHitBox()
+            createBlackBox()
         }
     } else {
         for(let greenBox of greenBoxs ) {
-            ctx.fillStyle='green'
+            ctx.fillStyle='transparent'
             ctx.fillRect(greenBox.x, greenBox.y, greenBox.w, greenBox.h)
             greenHitBox()
         }
@@ -498,7 +510,7 @@ function rectColiision() {
 // Je dois faire disparaitre l'intérieur de la maison lorsque je sors et réactiver la collision extérieur
 
 
-    function createHitBox(){
+    function createBlackBox(){
     for (let object of blackBoxs){
         // right
         
@@ -574,16 +586,16 @@ function rectColiision() {
 
 function createHouseBox(){
     for(let blueBox of blueBoxs ) {
-        ctx.fillStyle='blue'
+        ctx.fillStyle='transparent'
         ctx.fillRect(blueBox.x, blueBox.y, blueBox.w, blueBox.h)
     } 
 }
 const blueBoxs=[
     {
         x:1340,
-        y:1105,
+        y:1095,
         w:65,
-        h:5,
+        h:10,
     }, 
     
 ]
@@ -623,17 +635,15 @@ function greenHitBox(){
          
        
         // left
-        // if ((player.x+player.width>greenBox.x && player.x+player.width<greenBox.x+greenBox.w) &&  (player.y> greenBox.y && player.y< greenBox.y + greenBox.h)) {
-        //     collisionLeft=true;
-        // } 
-        //  if ((player.x+player.width>greenBox.x && player.x+player.width<greenBox.x+greenBox.w) &&  (player.y+player.height> greenBox.y && player.y+player.height< greenBox.y + greenBox.h)) {
-        //     collisionLeft=true;         
-        // } 
 
-        // if(collisionLeft===true){
-        //     player.x-=player.speed  
-        // //     collisionLeft=false
-        // }
+        if(player.x+player.width>greenBox.x && player.x+player.width<greenBox.x+greenBox.w && player.y>greenBox.y && player.y<greenBox.y+greenBox.h) {
+            collisionLeft=true
+        }
+        if(collisionLeft===true) {
+            player.x-=player.speed 
+            collisionLeft=false 
+        }
+
         // // bottom
         if(player.y+player.height+5>greenBox.y && player.y+player.height+5<greenBox.y+greenBox.h && player.x>greenBox.x && player.x<greenBox.x+greenBox.w) {
             collisionUp=true;
