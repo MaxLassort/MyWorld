@@ -43,9 +43,16 @@ window.addEventListener('DOMContentLoaded', function () {
     office.src = "img/interieur_git.png";
     const retraining = new Image();
     retraining.src = 'img/reconversion.png';
-
     const contact = new Image();
     contact.src = 'img/contact_me.png';
+    const grangeOne= new Image();
+    grangeOne.src = 'img/grange.png'
+    const mainHouse= new Image();
+    mainHouse.src = 'img/maison_principale.png'
+    const house= new Image();
+    house.src = 'img/maison.png'
+    const bigHouse= new Image();
+    bigHouse.src='img/maison_principale.png'
 
 
 
@@ -150,6 +157,12 @@ window.addEventListener('DOMContentLoaded', function () {
             height: 700,
         },
         // fences
+        {
+            x: 2130,
+            y: 650,
+            width: 200,
+            height: 80,
+        },
         {
             x: 900,
             y: 1270,
@@ -625,6 +638,264 @@ window.addEventListener('keydown', function (e) {
                 h: 100,
             },
             
+        ], [
+            {
+                //left
+                x: 1170,
+                y: 1640,
+                w: 20,
+                h: 300,
+            },
+            {
+                //up
+                x: 1170,
+                y: 1620,
+                w: 340,
+                h: 20,
+            },
+            {
+                //left
+                x: 1480,
+                y: 1640,
+                w: 20,
+                h: 300,
+            },
+            {
+                //right down
+                x: 1380,
+                y: 1900,
+                w: 200,
+                h: 40,
+            },
+            {
+                //left down
+                x: 1100,
+                y: 1900,
+                w: 200,
+                h: 40,
+            },
+            {
+                //object
+                x: 1200,
+                y: 1750,
+                w: 80,
+                h: 40,
+            },
+            {
+                //object
+                x: 1350,
+                y: 1640,
+                w: 50,
+                h: 60,
+            },
+            {
+                //object
+                x: 1260,
+                y: 1640,
+                w: 40,
+                h: 60,
+            },
+            {
+                //object
+                x: 1370,
+                y: 1780,
+                w: 60,
+                h: 40,
+            },
+        ], 
+        [
+            // litl house
+            {
+                // left
+                x: 1490,
+                y: 1280,
+                w: 20,
+                h: 380,   
+            },
+            {
+                // in wall
+                x: 1635,
+                y: 1280,
+                w: 20,
+                h: 150,   
+            },
+            {
+                // in wall
+                x: 1570,
+                y: 1410,
+                w: 80,
+                h: 25,   
+            },
+            {
+                // in wall
+                x: 1570,
+                y: 1450,
+                w: 60,
+                h: 20,   
+            },
+            {
+                // Couch
+                x: 1720,
+                y: 1400,
+                w: 115,
+                h: 35,   
+            },
+            {
+                // table
+                x: 1770,
+                y: 1510,
+                w: 50,
+                h: 50,   
+            },
+            {
+                // tree
+                x: 1640,
+                y: 1600,
+                w: 20,
+                h: 20,   
+            },
+            {
+                // up
+                x: 1490,
+                y: 1280,
+                w: 400,
+                h: 50,   
+            },
+            {
+                // down left
+                x: 1490,
+                y: 1630,
+                w: 170,
+                h: 20,   
+            },
+            {
+                // down right
+                x: 1735,
+                y: 1630,
+                w: 170,
+                h: 20,   
+            },
+            {
+                // right
+                x: 1890,
+                y: 1280,
+                w: 20,
+                h: 380,   
+            }
+        ],
+        [
+            {
+                // wall left
+                x: 1830,
+                y: 1300,
+                w: 20,
+                h: 320,   
+            },
+            {
+                // wall right
+                x: 2510,
+                y: 1300,
+                w: 20,
+                h: 320,   
+            },
+            {
+                // wall down right
+                x: 2050,
+                y: 1620,
+                w: 485,
+                h: 20,   
+            },
+            {
+                // wall room
+                x: 2340,
+                y: 1430,
+                w: 200,
+                h: 25,   
+            },
+            {
+                //  dracaufeu
+                x: 2100,
+                y: 1320,
+                w: 300,
+                h: 25,   
+            },
+            {
+                //  table
+                x: 2090,
+                y: 1400,
+                w: 50,
+                h: 50,   
+            },
+            {
+                //  table
+                x: 1890,
+                y: 1500,
+                w: 50,
+                h: 50,   
+            },
+            {
+                //  tree
+                x: 2180,
+                y: 1565,
+                w: 20,
+                h: 50,   
+            },
+            {
+                //  down left
+                x: 1830,
+                y: 1620,
+                w: 140,
+                h: 20,   
+            },
+            {
+                //  wall room
+                x: 2190,
+                y: 1300,
+                w: 20,
+                h: 180,   
+            },
+            {
+                // bed
+                x: 2380,
+                y: 1320,
+                w: 40,
+                h: 60,   
+            },
+            {
+                // bed
+                x: 2480,
+                y: 1450,
+                w: 40,
+                h: 100,   
+            },
+            {
+                // computeur
+                x: 2395,
+                y: 1450,
+                w: 100,
+                h: 45,   
+            },
+            {
+                // wall inside kitchen
+                x: 1970,
+                y: 1300,
+                w: 20,
+                h: 100,   
+            },
+            {
+                // wall inside kitchen
+                x: 1890,
+                y: 1400,
+                w: 100,
+                h: 20,   
+            },
+            {
+                // wall up
+                x: 1830,
+                y: 1300,
+                w: 700,
+                h: 20,   
+            }
         ]
     ]
    
@@ -759,11 +1030,61 @@ window.addEventListener('keydown', function (e) {
             dph: 400,
 
         }, 
+        {
+            // grange
+            x: 1300,
+            y: 1920,
+            w: 80,
+            h: 10,
+            background: grangeOne,
+            dx: 0,
+            dy: 0,
+            dw: 384,
+            dh: 384,
+            dpx: 1170,
+            dpy: 1570,
+            dpw: 400,
+            dph: 400,
+           
+        },
+        
+        {
+            // litl hous
+            x: 1660,
+            y: 1650,
+            w: 50,
+            h: 10,
+            background: house,
+            dx: 0,
+            dy: 0,
+            dw: 384,
+            dh: 384,
+            dpx: 1500,
+            dpy: 1270,
+            dpw: 400,
+            dph: 400,  
+        },
+        {
+            // litl house
+            x: 1980,
+            y: 1650,
+            w: 50,
+            h: 10,
+            background: bigHouse,
+            dx: 0,
+            dy: 0,
+            dw: 800,
+            dh: 800,
+            dpx: 1825,
+            dpy: 950,
+            dpw: 800,
+            dph: 800,  
+        }
            
     ]
     const player = {
-        x: 2000,
-        y: 1200,
+        x: 1900,
+        y: 1700,
         width: 32,
         height: 32,
         frameX: 0,
@@ -789,7 +1110,7 @@ window.addEventListener('keydown', function (e) {
             }
             if (inHouse === false) {
                 for (let object of blackBoxs) {
-                    ctx.fillStyle = "transparent"
+                    ctx.fillStyle = "black"
                     ctx.fillRect(object.x, object.y, object.width, object.height)
                     createBlackBox()
                 }
@@ -797,7 +1118,7 @@ window.addEventListener('keydown', function (e) {
             if (inHouse === true && indexBluebox === i ){   
                 for ( let j= 0; j<greenBoxsArray.length; j++) {
                     for (let greenBox of greenBoxsArray[i]) {
-                        ctx.fillStyle = 'transparent'
+                        ctx.fillStyle = 'green'
                         ctx.fillRect(greenBox.x, greenBox.y, greenBox.w, greenBox.h) 
                     }
                 for (let greenBox of greenBoxsArray[i]) {
