@@ -23,3 +23,6 @@ J'ai ensuite créer une fonction qui sert à intervertir la variable "je suis à
  J'ai créé une fonction qui loop sur le tableau blueBoxs contenant la position de la boite bleau et les propriétés de l'image background des maisons. 
 //  j'ai rajouté la condition travers le carré bleu pour activer la variable inHouse. 
 //  Si inHouse est vrai, tu affiche le background avec les propriétés données à l'index i. 
+
+14/03 : 
+fin des intérieurs avec collisions, j'essaye maintenant d'organiser mon code en créant des modules, notamment des variables, et des tableaus. 
