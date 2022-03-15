@@ -25,13 +25,13 @@ body {
     left: 0;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;  
 }
 .landscape {
     width: 80vw;
     height: 120px;
     background-image: url(/img/background_modal.png);
-    background-size: contain;
+    background-size: 100% 100%;;
     background-repeat: no-repeat;
     background-position: center;
     text-align: center;
@@ -39,16 +39,206 @@ body {
     align-items: center;
     justify-content: center; 
     font-size: .7rem;
+    z-index: 1;
+    display: none;
+    
 }
 .direction_button {
     display: none;
 }
 
+.game_boy {
+    position: relative;
+    width: 50%;
+    min-width: 300px;
+    background-color: #B7B5B6;
+    border: solid black 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 6rem;
+}
+.game_boy::after{
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+  
+}
+.hello {
+    position: relative;
+    background-color:#B4C96E ;
+    border: solid black 2px;
+    width: 70%;
+    overflow-y: scroll ;
+    padding: 1rem; 
+}
+.hello::after {
+    content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.text {
+    position:relative
+}
+
+
+
+.led {
+    position: absolute;
+    top: 42%;
+    left: 6%;
+    width: 5%;
+    height: 5%;
+    max-height: 18px;
+    max-width: 18px;
+    background-color: red;
+    border: black solid 1px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    
+}
+.blue_rect {
+    width: 26%;
+    height: 1%;
+    background-color: blue;
+    position: absolute;
+    top: 7%;
+    left: 2%;
+}
+.red_rect {
+    width: 26%;
+    height: 1%;
+    background-color: red; 
+    position: absolute; 
+    top: 5%;
+    left: 2%;
+}
+.blue_rect2 {
+    width: 11%;
+    height: 1%;
+    background-color: blue;
+    position: absolute;
+    top: 7%;
+    left: 87%;
+}
+.red_rect2 {
+    width: 11%;
+    height: 1%;
+    background-color: red; 
+    position: absolute; 
+    top: 5%; 
+    left: 87%;
+}
+.battery img {
+    position: absolute;
+    top: 50%;
+    left: 4%;
+    width: 10%;
+}
+.matrix img {
+    position: absolute;
+    top: 5%;
+    left: 29%;
+    width: 57%;
+    height: 3%;
+}
+/* .game_boy {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    background-color: #B7B5B6;
+    border: solid black 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 6rem;
+}
+.hello {
+    background-color:#B4C96E ;
+    border: solid black 2px;
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    padding: 1rem;
+
+}
+.led {
+    position: absolute;
+    top: 151px;
+    left: 33px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border: black solid 1px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+.blue_rect {
+    width: 177px;
+    height: 4px;
+    background-color: blue;
+    position: absolute;
+    top: 40px;
+    left: 10px;
+}
+.red_rect {
+    width: 177px; 
+    height: 4px ; 
+    background-color: red; 
+    position: absolute; 
+    top: 47px; 
+    left: 10px;
+}
+.blue_rect2 {
+    width: 75px;
+    height: 4px;
+    background-color: blue;
+    position: absolute;
+    top: 40px;
+    left: 504px;
+}
+.red_rect2 {
+    width: 75px;
+    height: 4px;
+    background-color: red; 
+    position: absolute; 
+    top: 47px; 
+    left: 504px;
+}
+.battery {
+    font-size: 1rem;
+    position: absolute;
+    top: 180px;
+    left: 10px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.matrix {
+    font-size: 1.1rem;
+    position: absolute;
+    top: 36px;
+    left: 191px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+} */
 
 @media (orientation: landscape) {
-    .landscape {
-        display: none;
-    }
+   
     .direction_button {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -56,7 +246,7 @@ body {
     width: 150px;
     height: 150px;
     position: absolute;
-    bottom: 20px;
+    bottom: 50px;
     left: 20px;
     
     }

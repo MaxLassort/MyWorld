@@ -25,4 +25,8 @@ J'ai ensuite créer une fonction qui sert à intervertir la variable "je suis à
 //  Si inHouse est vrai, tu affiche le background avec les propriétés données à l'index i. 
 
 14/03 : 
-fin des intérieurs avec collisions, j'essaye maintenant d'organiser mon code en créant des modules, notamment des variables, et des tableaus. 
+fin des intérieurs avec collisions, j'essaye maintenant d'organiser mon code en créant des modules, notamment des variables, et des tableaus.
+
+15/03 : 
+Ajout du background du modal, 
+technique de mettre une width et un ::after avec margin bottom à 100% pour que le carré reste un carré en responsive. 
