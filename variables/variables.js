@@ -59,9 +59,9 @@ export const blueBoxs = [
 
     }, 
     {
-        // 3W
+        // cotact
         x: 2130,
-        y: 1155,
+        y: 1140,
         w: 40,
         h: 10,
         background: Images_array[4],

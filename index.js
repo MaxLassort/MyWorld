@@ -178,6 +178,7 @@ window.addEventListener('DOMContentLoaded', function () {
             ctx.resetTransform();
             ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
             createBluebox()    
+            creatRedBox()
         }
     }
     startAnimating(15)
@@ -186,14 +187,15 @@ window.addEventListener('DOMContentLoaded', function () {
         for (let object of blackBoxs) {
             // right
 
-            if ((player.x-8 > object.x && player.x-8 < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
+            if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
                 collisionRight = true
                 player.moving = false
             }
-            if ((player.x-8 > object.x && player.x-8 < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
+            // haut gauche vrai
+            if ((player.x > object.x && player.x < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
                 collisionRight = true
             }
-            if ((player.x-8 > object.x && player.x-8 < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
+            if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
                 collisionRight = true
             }
             if (collisionRight === true) {
@@ -231,13 +233,13 @@ window.addEventListener('DOMContentLoaded', function () {
             }
             // // up
 
-            if ((player.y-6 > object.y && player.y-6 < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
+            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
                 collisionDown = true;
             }
-            if ((player.y-6 > object.y && player.y-6 < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
+            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
                 collisionDown = true;
             }
-            if ((player.y-6 > object.y && player.y-6 < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
+            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
                 collisionDown = true;
             }
             if (collisionDown === true) {
@@ -255,7 +257,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     function createBluebox() {
         for (let blueBox of blueBoxs) {
-            ctx.fillStyle = 'transparent'
+            ctx.fillStyle = 'blue'
             ctx.fillRect(blueBox.x, blueBox.y, blueBox.w, blueBox.h)
         }
     }
@@ -285,7 +287,7 @@ window.addEventListener('DOMContentLoaded', function () {
             if (inHouse === true && indexBluebox === i ){   
                 for ( let j= 0; j<greenBoxsArray.length; j++) {
                     for (let greenBox of greenBoxsArray[i]) {
-                        ctx.fillStyle = 'transparent'
+                        ctx.fillStyle = 'green'
                         ctx.fillRect(greenBox.x, greenBox.y, greenBox.w, greenBox.h) 
                     }
                 for (let greenBox of greenBoxsArray[i]) {
@@ -349,8 +351,25 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
     } 
+let redBoxs=[
+    {
+        x: 1865,
+         
+        y: 1210,
+        w: 50,
+        h: 50,
+    }
+]
+
+function creatRedBox(){
+    for (let redBox of redBoxs) {
+        ctx.fillStyle = 'red'
+        ctx.fillRect(redBox.x, redBox.y, redBox.w, redBox.h)
+    }
+}
 
 
+collisionRedbox
 
 if(window.innerHeight > window.innerWidth){
         
