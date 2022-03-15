@@ -109,22 +109,26 @@ window.addEventListener('DOMContentLoaded', function () {
             player.y -= player.speed
             player.frameY = 3;
             player.moving = true
+            console.log(player.x, player.y)
 
         }
         if (keys.includes('s') && player.y < 2000) {
             player.y += player.speed
             player.frameY = 0;
             player.moving = true
+            console.log(player.x, player.y)
         }
         if (keys.includes('d') && player.x < 3000) {
             player.x += player.speed
             player.frameY = 2;
             player.moving = true
+            console.log(player.x, player.y)
         }
         if (keys.includes('q') && player.x > 360) {
             player.x -= player.speed
             player.frameY = 1;
             player.moving = true
+            console.log(player.x, player.y)
         }
     }
     // J'incrémente frameX pour animer le sprite en déplacant draw image de gauche à droite 
@@ -182,14 +186,14 @@ window.addEventListener('DOMContentLoaded', function () {
         for (let object of blackBoxs) {
             // right
 
-            if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
+            if ((player.x-8 > object.x && player.x-8 < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
                 collisionRight = true
                 player.moving = false
             }
-            if ((player.x > object.x && player.x < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
+            if ((player.x-8 > object.x && player.x-8 < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
                 collisionRight = true
             }
-            if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
+            if ((player.x-8 > object.x && player.x-8 < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
                 collisionRight = true
             }
             if (collisionRight === true) {
@@ -198,13 +202,13 @@ window.addEventListener('DOMContentLoaded', function () {
             }
 
             // left
-            if ((player.x + player.width > object.x && player.x + player.width < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
+            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
                 collisionLeft = true;
             }
-            if ((player.x + player.width > object.x && player.x + player.width < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
+            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
                 collisionLeft = true;
             }
-            if ((player.x + player.width > object.x && player.x + player.width < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
+            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
                 collisionLeft = true;
             }
             if (collisionLeft === true) {
@@ -212,13 +216,13 @@ window.addEventListener('DOMContentLoaded', function () {
                 collisionLeft = false
             }
             // // bottom
-            if ((player.y + player.height > object.y && player.y + player.height < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
+            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
                 collisionUp = true;
             }
-            if ((player.y + player.height > object.y && player.y + player.height < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
+            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
                 collisionUp = true;
             }
-            if ((player.y + player.height > object.y && player.y + player.height < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
+            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
                 collisionUp = true;
             }
             if (collisionUp === true) {
@@ -227,13 +231,13 @@ window.addEventListener('DOMContentLoaded', function () {
             }
             // // up
 
-            if ((player.y > object.y && player.y < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
+            if ((player.y-6 > object.y && player.y-6 < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
                 collisionDown = true;
             }
-            if ((player.y > object.y && player.y < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
+            if ((player.y-6 > object.y && player.y-6 < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
                 collisionDown = true;
             }
-            if ((player.y > object.y && player.y < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
+            if ((player.y-6 > object.y && player.y-6 < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
                 collisionDown = true;
             }
             if (collisionDown === true) {
@@ -273,8 +277,8 @@ window.addEventListener('DOMContentLoaded', function () {
             }
             if (inHouse === false) {
                 for (let object of blackBoxs) {
-                    ctx.fillStyle = "transparent"
-                    ctx.fillRect(object.x, object.y, object.width, object.height)
+                    ctx.strokeStyle = "black"
+                    ctx.strokeRect(object.x, object.y, object.width, object.height)
                     createBlackBox()
                 }
             } 

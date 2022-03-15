@@ -374,6 +374,103 @@ export const blackBoxs = [
         width: 30,
         height: 30,
     },
+    
+    {
+        // contact letter_box
+        x: 2075,
+        y: 1155,
+        width: 30,
+        height: 30, 
+    },
+    {
+        // contact panels
+        x: 2175,
+        y: 1155,
+        width: 90,
+        height: 30, 
+    },
+    {
+        // college panels
+        x: 1960,
+        y: 700,
+        width: 70,
+        height: 30, 
+    },
+    {
+        // college letterbox
+        x: 1865,
+        y: 700,
+        width: 30,
+        height: 30, 
+    },
+    {
+        // football pannel
+        x: 1620,
+        y: 655,
+        width: 40,
+        height: 30, 
+    },
+    {
+        // forest pannel
+        x: 2645,
+        y: 1210,
+        width: 40,
+        height: 30, 
+    },
+    {
+        // main_house letterbox
+        x: 1940,
+        y: 1645,
+        width: 30,
+        height: 30, 
+    },
+    {
+        // main_house flower
+        x: 1735,
+        y: 1660,
+        width: 50,
+        height: 30, 
+    },
+    {
+        // main_house flower
+        x: 1590,
+        y: 1660,
+        width: 50,
+        height: 30, 
+    },
+    {
+        // mountain
+        x: 710,
+        y: 1495,
+        width: 50,
+        height: 30, 
+    },
+     
+
+     
+     
+     
+     
+
+     
+    // {
+    //     // contact panels
+    //     x: 2175,
+    //     y: 1155,
+    //     width: 90,
+    //     height: 30, 
+    // },
+    // {
+    //     // college panels
+    //     x: 1960,
+    //     y: 700,
+    //     width: 70,
+    //     height: 30, 
+    // },
+
+
+
+
 
 ];
 export let greenBoxsArray=[
