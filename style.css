@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 body {
@@ -15,6 +16,7 @@ body {
     font-family: 'Press Start 2P', cursive;
     padding: 0;
     margin: 0;
+    line-height: 1.3rem;
 }
 
 .modal_parent {
@@ -61,6 +63,7 @@ body {
     width: 70%;
     overflow-y: scroll ;
     padding: 1rem; 
+    font-size: .8rem;
 }
 .hello::after {
     content: "";
@@ -70,6 +73,18 @@ body {
 
 .text {
     position:absolute
+}
+.Presentation {
+    display: none;
+    position: absolute;
+}
+.contact {
+    position: absolute;
+    display: none;
+}
+.formationDev {
+    position: absolute;
+    display: none;
 }
 
 .led {

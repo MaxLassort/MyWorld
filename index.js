@@ -54,10 +54,8 @@ window.addEventListener('DOMContentLoaded', function () {
     const down = document.querySelector('.down');
     const left = document.querySelector('.left');
     const up = document.querySelector('.up');
-
-    // up.addEventListener('click', function(){
-    //     console.log("a")
-    // })
+    let pannelsOpen=false
+    
        function moveTouch() {
         up.addEventListener('touchstart', function () {
             (keys.push('z'))
@@ -105,31 +103,48 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Je rajoute la variable player.moving true à chaque if pour actualiser la keydown, car cela peut bug avec le fait qu'on ne relache pas le bouton avant d'appuyer sur un autre bouton (je clique sur 'aller a gauche' avant de relacher 'descendre')
     function movePlayer() {
-        if (keys.includes('z') && player.y > 360) {
-            player.y -= player.speed
-            player.frameY = 3;
-            player.moving = true
-            console.log(player.x, player.y)
-
+        if(pannelsOpen===false) {
+            if (keys.includes('z') && player.y > 360) {
+                player.y -= player.speed
+                player.frameY = 3;
+                player.moving = true
+            }
+            if (keys.includes('s') && player.y < 2000) {
+                player.y += player.speed
+                player.frameY = 0;
+                player.moving = true
+            }
+            if (keys.includes('d') && player.x < 3000) {
+                player.x += player.speed
+                player.frameY = 2;
+                player.moving = true
+            }
+            if (keys.includes('q') && player.x > 360) {
+                player.x -= player.speed
+                player.frameY = 1;
+                player.moving = true
+            }
         }
-        if (keys.includes('s') && player.y < 2000) {
-            player.y += player.speed
-            player.frameY = 0;
-            player.moving = true
-            console.log(player.x, player.y)
-        }
-        if (keys.includes('d') && player.x < 3000) {
-            player.x += player.speed
-            player.frameY = 2;
-            player.moving = true
-            console.log(player.x, player.y)
-        }
-        if (keys.includes('q') && player.x > 360) {
-            player.x -= player.speed
-            player.frameY = 1;
-            player.moving = true
-            console.log(player.x, player.y)
-        }
+        // if (keys.includes('z') && player.y > 360) {
+        //     player.y -= player.speed
+        //     player.frameY = 3;
+        //     player.moving = true
+        // }
+        // if (keys.includes('s') && player.y < 2000) {
+        //     player.y += player.speed
+        //     player.frameY = 0;
+        //     player.moving = true
+        // }
+        // if (keys.includes('d') && player.x < 3000) {
+        //     player.x += player.speed
+        //     player.frameY = 2;
+        //     player.moving = true
+        // }
+        // if (keys.includes('q') && player.x > 360) {
+        //     player.x -= player.speed
+        //     player.frameY = 1;
+        //     player.moving = true
+        // }
     }
     // J'incrémente frameX pour animer le sprite en déplacant draw image de gauche à droite 
     // je rajoute la condition player.moving pour définir quand l'animation doit être lancée
@@ -178,7 +193,8 @@ window.addEventListener('DOMContentLoaded', function () {
             ctx.resetTransform();
             ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
             createBluebox()    
-            creatRedBox()
+            collisionRedbox()
+            console.log(player.x, player.y)
         }
     }
     startAnimating(15)
@@ -257,7 +273,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     function createBluebox() {
         for (let blueBox of blueBoxs) {
-            ctx.fillStyle = 'blue'
+            ctx.fillStyle = 'transparent'
             ctx.fillRect(blueBox.x, blueBox.y, blueBox.w, blueBox.h)
         }
     }
@@ -279,7 +295,7 @@ window.addEventListener('DOMContentLoaded', function () {
             }
             if (inHouse === false) {
                 for (let object of blackBoxs) {
-                    ctx.strokeStyle = "black"
+                    ctx.strokeStyle = "transparent"
                     ctx.strokeRect(object.x, object.y, object.width, object.height)
                     createBlackBox()
                 }
@@ -287,7 +303,7 @@ window.addEventListener('DOMContentLoaded', function () {
             if (inHouse === true && indexBluebox === i ){   
                 for ( let j= 0; j<greenBoxsArray.length; j++) {
                     for (let greenBox of greenBoxsArray[i]) {
-                        ctx.fillStyle = 'green'
+                        ctx.fillStyle = 'transparent'
                         ctx.fillRect(greenBox.x, greenBox.y, greenBox.w, greenBox.h) 
                     }
                 for (let greenBox of greenBoxsArray[i]) {
@@ -353,23 +369,63 @@ window.addEventListener('DOMContentLoaded', function () {
     } 
 let redBoxs=[
     {
-        x: 1865,
-         
-        y: 1210,
-        w: 50,
-        h: 50,
-    }
+        // Contact
+        x: 2180,
+        y: 1195,
+        width: 50,
+        height: 50,
+        textToShow: document.querySelector('.contact')
+    },
+    {
+        // Formation Dev
+        x: 1475,
+        y: 1105,
+        width: 80,
+        height: 50,
+        textToShow: document.querySelector('.formationDev')
+    },
+   
 ]
-
-function creatRedBox(){
+let insideRedbox=false
+let modal=document.querySelector('.game_boy')
+function collisionRedbox(){
+  
     for (let redBox of redBoxs) {
         ctx.fillStyle = 'red'
-        ctx.fillRect(redBox.x, redBox.y, redBox.w, redBox.h)
+        ctx.fillRect(redBox.x, redBox.y, redBox.width, redBox.height)
+       
+        
+        if(window.getComputedStyle(modal).display==='flex'){
+            pannelsOpen= true
+        } else if (window.getComputedStyle(modal).display==='none') {
+            pannelsOpen= false
+        };
+
+        if(  ((player.y+player.height) > (redBox.y)) &&
+               ((player.y < (redBox.y + redBox.height))) &&
+               ((player.x+player.width)> redBox.x) &&
+               (player.x < (redBox.x+redBox.width))
+           ) {
+        insideRedbox= true
+        if (insideRedbox===true && keys.includes('e') && player.frameY===3) {
+            modal.style.display='flex'
+            redBox.textToShow.style.display='flex'
+        }
+        if(keys.includes('t')) {
+            modal.style.display='none'
+            redBox.textToShow.style.display='none'
+            insideRedbox=false
+        }
+        if(  ((player.y+player.height) < (redBox.y)) &&
+               ((player.y > (redBox.y + redBox.height))) &&
+               ((player.x+player.width)< redBox.x) &&
+               (player.x > (redBox.x+redBox.width))
+           ) {
+        insideRedbox= false
+            }
     }
-}
+    }
 
-
-collisionRedbox
 
 if(window.innerHeight > window.innerWidth){
         
@@ -380,7 +436,7 @@ if(window.innerHeight > window.innerWidth){
 
 
 
-
+}
 })
 
 // i added player.x-1600 player.y-1600 at the drawImage to zoom on the character, but the collision box are now not align...
