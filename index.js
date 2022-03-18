@@ -182,77 +182,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     startAnimating(15)
     // espace colision ///////////////////////////////////////////////////////////////////////////////
-     function createBlackBox() {
-        for (let object of blackBoxs) {
-            // right
-
-            if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
-                collisionRight = true
-                player.moving = false
-            }
-            // haut gauche vrai
-            if ((player.x > object.x && player.x < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
-                collisionRight = true
-            }
-            if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
-                collisionRight = true
-            }
-            if (collisionRight === true) {
-                player.x += player.speed
-                collisionRight = false
-            }
-
-            // left
-            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
-                collisionLeft = true;
-            }
-            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
-                collisionLeft = true;
-            }
-            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
-                collisionLeft = true;
-            }
-            if (collisionLeft === true) {
-                player.x -= player.speed
-                collisionLeft = false
-            }
-            // // bottom
-            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
-                collisionUp = true;
-            }
-            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
-                collisionUp = true;
-            }
-            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
-                collisionUp = true;
-            }
-            if (collisionUp === true) {
-                player.y -= player.speed
-                collisionUp = false
-            }
-            // // up
-
-            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
-                collisionDown = true;
-            }
-            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
-                collisionDown = true;
-            }
-            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
-                collisionDown = true;
-            }
-            if (collisionDown === true) {
-                player.y += player.speed
-                collisionDown = false
-            }
-            // I made a const collisionRight who is false, i made a condition, if player.y> object.y && player.y<object.y+height AND i made an other condition if if player.y+player.height> object.y && player.y +player.height<object.y+height the collisionRight will be true. After if collisionRight is true, so player.x++ and collisionRight cameback false, i'll do the same for the 4 side. 
-            // Why do this? bescause the character glitch when player.y theire is only one condition (player.y for example) cause the player.y+height is doesnt announce and the bottom condition (collision for bottom) take effect.  
-            // I add the -5 at player.y to avoid that the right or left condition swicth to true and provoke a player.x ++ or --
-        }
-
-        // fonction qui loop sur objects, et qui définit des barrières pour bloquer le personnage dans chaque if 
-
-    }
+  
 
     function createBluebox() {
         for (let blueBox of blueBoxs) {
@@ -281,7 +211,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 for (let object of blackBoxs) {
                     ctx.strokeStyle = "black"
                     ctx.strokeRect(object.x, object.y, object.width, object.height)
-                    
+                   
             if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
                 collisionRight = true
                 player.moving = false
