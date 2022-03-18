@@ -175,7 +175,7 @@ window.addEventListener('DOMContentLoaded', function () {
             ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
             createBluebox()    
             collisionRedbox()
-            
+            collision(greyBoxs, 'grey')
             
       
         }
@@ -281,7 +281,66 @@ window.addEventListener('DOMContentLoaded', function () {
                 for (let object of blackBoxs) {
                     ctx.strokeStyle = "black"
                     ctx.strokeRect(object.x, object.y, object.width, object.height)
-                    createBlackBox()
+                    
+            if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
+                collisionRight = true
+                player.moving = false
+            }
+            // haut gauche vrai
+            if ((player.x > object.x && player.x < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
+                collisionRight = true
+            }
+            if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
+                collisionRight = true
+            }
+            if (collisionRight === true) {
+                player.x += player.speed
+                collisionRight = false
+            }
+
+            // left
+            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
+                collisionLeft = true;
+            }
+            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
+                collisionLeft = true;
+            }
+            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
+                collisionLeft = true;
+            }
+            if (collisionLeft === true) {
+                player.x -= player.speed
+                collisionLeft = false
+            }
+            // // bottom
+            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
+                collisionUp = true;
+            }
+            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
+                collisionUp = true;
+            }
+            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
+                collisionUp = true;
+            }
+            if (collisionUp === true) {
+                player.y -= player.speed
+                collisionUp = false
+            }
+            // // up
+
+            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
+                collisionDown = true;
+            }
+            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
+                collisionDown = true;
+            }
+            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
+                collisionDown = true;
+            }
+            if (collisionDown === true) {
+                player.y += player.speed
+                collisionDown = false
+            }
                 }
             } 
             if (inHouse === true && indexBluebox === i ){   
@@ -443,8 +502,8 @@ let greyBoxs=[
    
 ]
 
-function collision(){
-    
+    function collision(){
+    let collision
     for (let element of greyBoxs) {
         ctx.fillStyle = 'grey'
         ctx.fillRect(element.x, element.y, element.width, element.height)
@@ -470,33 +529,11 @@ function collision(){
             player.x+=player.speed
            } 
         }
-
-// grid 
-
-// Box width
+    }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
 })
 
 // i added player.x-1600 player.y-1600 at the drawImage to zoom on the character, but the collision box are now not align...
