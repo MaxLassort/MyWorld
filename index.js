@@ -442,7 +442,7 @@ let greyBoxs=[
     
    
 ]
-let collision= false
+
 function collision(){
     
     for (let element of greyBoxs) {
