@@ -185,7 +185,7 @@ let modal=document.querySelector('.game_boy')
     ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
     createBluebox()    
     collisionRedbox()
-    
+    window.requestAnimationFrame(animate);
     }
     animate()
 
