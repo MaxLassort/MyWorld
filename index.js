@@ -25,7 +25,7 @@ window.addEventListener('DOMContentLoaded', function () {
         height: 32,
         frameX: 0,
         frameY: 0,
-        speed: 15,
+        speed: 4,
         moving: false,
     };
     let indexBluebox = -1
@@ -129,58 +129,67 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     // J'incrémente frameX pour animer le sprite en déplacant draw image de gauche à droite 
     // je rajoute la condition player.moving pour définir quand l'animation doit être lancée
+
+    let frameChanging=0
     function handlePlayerFrame() {
-        if (player.frameX < 3 && player.moving === true) {
-            player.frameX++
-        } else {
-            player.frameX = 0
+        frameChanging++
+        
+        if(frameChanging===5){
+            if (player.frameX < 3 && player.moving === true) {
+                player.frameX++
+            } else {
+                player.frameX = 0
+            } 
+            frameChanging=0
         }
+       
     }
-    // function animate() {
-    //     ctx.clearRect(0,0,canvas.width, canvas.height)
-    //     window.requestAnimationFrame(animate);
-    //     drawSprite(playerSprite, player.width*player.frameX, player.height*player.frameY, player.width, player.height, player.x, player.y, player.width, player.height )
-    //     movePlayer()
-    //     handlePlayerFrame()
-    // }
-    // animate()
-
-    // Je crée une fonction capable de mofifier la valeur des FPS de requestAnimationFrame
-    let fpsInterval, startTime, now, then, elapsed;
-
-    function startAnimating(fps) {
-        // fpsInterval va etre le temps entre chaque frame, je le met en miliseconde 
-        fpsInterval = 1000 / fps;
-        // Je calcule combien de temps s'est écoulé entre la derniere frame et maintenant
-        then = Date.now();
-        startTime = then;
-        animate();
-    }
-    // J'ai rien compris je copie du code betement
+    let redBoxs=[
+        {
+            // Contact
+            x: 2180,
+            y: 1195,
+            width: 50,
+            height: 50,
+            textToShow: document.querySelector('.contact')
+        },
+        {
+            // Formation Dev
+            x: 1475,
+            y: 1105,
+            width: 80,
+            height: 50,
+            textToShow: document.querySelector('.formationDev')
+        },
+        {
+            x: 2108,
+            y: 1088,
+            width: 32,
+            height: 32,
+            textToShow: document.querySelector('.formationDev')
+        }
+        
+       
+    ]
+    
+    let insideRedbox=false
+let modal=document.querySelector('.game_boy')
     function animate() {
-        requestAnimationFrame(animate);
-        now = Date.now();
-        elapsed = now - then;
-        if (elapsed > fpsInterval) {
-            then = now - (elapsed % fpsInterval);
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
-            ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height);
-            window.requestAnimationFrame(animate);
-            enterInHouse()
-            drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)
-            movePlayer()
-            moveTouch()
-            handlePlayerFrame()
-            ctx.resetTransform();
-            ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
-            createBluebox()    
-            collisionRedbox()
-            collision(greyBoxs, 'grey')
-            
-      
-        }
+    ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height);
+    enterInHouse()
+    drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)
+    movePlayer()
+    moveTouch()
+    handlePlayerFrame()
+    ctx.resetTransform();
+    ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
+    createBluebox()    
+    collisionRedbox()
+    
     }
-    startAnimating(15)
+    animate()
+
+    
     // espace colision ///////////////////////////////////////////////////////////////////////////////
   
 
@@ -328,39 +337,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
     } 
-let redBoxs=[
-    {
-        // Contact
-        x: 2180,
-        y: 1195,
-        width: 50,
-        height: 50,
-        textToShow: document.querySelector('.contact')
-    },
-    {
-        // Formation Dev
-        x: 1475,
-        y: 1105,
-        width: 80,
-        height: 50,
-        textToShow: document.querySelector('.formationDev')
-    },
-    {
-        x: 2108,
-        y: 1088,
-        width: 32,
-        height: 32,
-        textToShow: document.querySelector('.formationDev')
-    }
-    
-   
-]
 
 
 
 
-let insideRedbox=false
-let modal=document.querySelector('.game_boy')
 function collisionRedbox(){
   
     for (let redBox of redBoxs) {
@@ -407,18 +387,8 @@ function collisionRedbox(){
 // if(window.innerHeight > window.innerWidth){
         
 // }
-let greyBoxs=[
-    {
-        // test
-        x: 1900,
-        y: 1200,
-        width: 50,
-        height: 50,
-        textToShow: document.querySelector('.contact')
-    },
-    
-   
-]
+
+
 
     function collision(){
     let collision
