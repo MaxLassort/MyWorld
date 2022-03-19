@@ -219,67 +219,38 @@ let modal=document.querySelector('.game_boy')
             if (inHouse === false) {
                 for (let object of blackBoxs) {
                     ctx.strokeStyle = "black"
-                    ctx.strokeRect(object.x, object.y, object.width, object.height)
-                   
-            if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
-                collisionRight = true
-                player.moving = false
-            }
-            // haut gauche vrai
-            if ((player.x > object.x && player.x < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
-                collisionRight = true
-            }
-            if ((player.x > object.x && player.x < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
-                collisionRight = true
-            }
-            if (collisionRight === true) {
-                player.x += player.speed
-                collisionRight = false
-            }
-
-            // left
-            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
-                collisionLeft = true;
-            }
-            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y + player.height > object.y && player.y + player.height < object.y + object.height)) {
-                collisionLeft = true;
-            }
-            if ((player.x + player.width+5 > object.x && player.x + player.width+5 < object.x + object.width) && (player.y + player.height / 2 > object.y && player.y + player.height / 2 < object.y + object.height)) {
-                collisionLeft = true;
-            }
-            if (collisionLeft === true) {
-                player.x -= player.speed
-                collisionLeft = false
-            }
-            // // bottom
-            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
-                collisionUp = true;
-            }
-            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
-                collisionUp = true;
-            }
-            if ((player.y + player.height+6 > object.y && player.y + player.height+6 < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
-                collisionUp = true;
-            }
-            if (collisionUp === true) {
-                player.y -= player.speed
-                collisionUp = false
-            }
-            // // up
-
-            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x > object.x && player.x < object.x + object.width)) {
-                collisionDown = true;
-            }
-            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x + player.width > object.x && player.x + player.width < object.x + object.width)) {
-                collisionDown = true;
-            }
-            if ((player.y-7 > object.y && player.y-7 < object.y + object.height) && (player.x + player.width / 2 > object.x && player.x + player.width / 2 < object.x + object.width)) {
-                collisionDown = true;
-            }
-            if (collisionDown === true) {
-                player.y += player.speed
-                collisionDown = false
-            }
+                    ctx.strokeRect(object.x, object.y, object.width, object.height)                  
+                    if ((player.x+5 > object.x && player.x+5 < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
+                        collisionRight = true
+                    }
+                    if (collisionRight === true) {
+                        player.x += player.speed
+                        collisionRight = false
+                    }
+                    // left
+                    if (player.x + player.width-5 > object.x && player.x + player.width-5 < object.x + object.width && player.y > object.y && player.y < object.y + object.height) {
+                        collisionLeft = true
+                    }
+                    if (collisionLeft === true) {
+                        player.x -= player.speed
+                        collisionLeft = false
+                    }
+                    // // bottom                      
+                    if ((player.y + player.height > object.y && player.y + player.height < object.y + object.height) && (player.x + player.width-5 > object.x && player.x + player.width-5 < object.x + object.width)) {
+                        collisionUp = true;
+                    }
+                    if (collisionUp === true) {
+                        player.y -= player.speed
+                        collisionUp = false
+                    }
+                    // // up
+                    if ((player.y > object.y && player.y < object.y + object.height) && (player.x+5 > object.x && player.x+5 < object.x + object.width)) {
+                        collisionDown = true;
+                    }
+                    if (collisionDown === true) {
+                        player.y += player.speed
+                        collisionDown = false
+                    }
                 }
             } 
             if (inHouse === true && indexBluebox === i ){   
@@ -309,7 +280,7 @@ let modal=document.querySelector('.game_boy')
                         // // bottom
                      
             
-                        if ((player.y + player.height > greenBox.y && player.y + player.height < greenBox.y + greenBox.h) && (player.x + player.width-5 > greenBox.x && player.x + player.width-5 < greenBox.x + greenBox.w)) {
+                        if ((player.y + player.height+10 > greenBox.y && player.y + player.height+10 < greenBox.y + greenBox.h) && (player.x + player.width-5 > greenBox.x && player.x + player.width-5 < greenBox.x + greenBox.w)) {
                             collisionUp = true;
                         }
                        
