@@ -281,11 +281,8 @@ window.addEventListener('DOMContentLoaded', function () {
                     }
                 for (let greenBox of greenBoxsArray[i]) {
                         // right
-                        if ((player.x > greenBox.x && player.x < greenBox.x + greenBox.w) && (player.y + player.h > greenBox.y && player.y + player.height < greenBox.y + greenBox.h)) {
-                            collisionRight = true
-                            player.moving = false
-                        }
-                        if ((player.x > greenBox.x && player.x < greenBox.x + greenBox.w) && (player.y > greenBox.y && player.y < greenBox.y + greenBox.h)) {
+                     
+                        if ((player.x+5 > greenBox.x && player.x+5 < greenBox.x + greenBox.w) && (player.y > greenBox.y && player.y < greenBox.y + greenBox.h)) {
                             collisionRight = true
                         }
                         if (collisionRight === true) {
@@ -293,7 +290,7 @@ window.addEventListener('DOMContentLoaded', function () {
                             collisionRight = false
                         }
                         // left
-                        if (player.x + player.width > greenBox.x && player.x + player.width < greenBox.x + greenBox.w && player.y > greenBox.y && player.y < greenBox.y + greenBox.h) {
+                        if (player.x + player.width-5 > greenBox.x && player.x + player.width-5 < greenBox.x + greenBox.w && player.y > greenBox.y && player.y < greenBox.y + greenBox.h) {
                             collisionLeft = true
                         }
                         if (collisionLeft === true) {
@@ -301,31 +298,22 @@ window.addEventListener('DOMContentLoaded', function () {
                             collisionLeft = false
                         }
                         // // bottom
-                        if (player.y + player.height > greenBox.y && player.y + player.height < greenBox.y + greenBox.h && player.x > greenBox.x && player.x < greenBox.x + greenBox.w) {
-                            collisionUp = true;
-                        }
+                     
             
-                        if ((player.y + player.height > greenBox.y && player.y + player.height < greenBox.y + greenBox.h) && (player.x + player.width > greenBox.x && player.x + player.width < greenBox.x + greenBox.w)) {
+                        if ((player.y + player.height > greenBox.y && player.y + player.height < greenBox.y + greenBox.h) && (player.x + player.width-5 > greenBox.x && player.x + player.width-5 < greenBox.x + greenBox.w)) {
                             collisionUp = true;
                         }
-                        // if ((player.y + player.height > greenBox.y && player.y + player.height < greenBox.y + greenBox.h) && (player.x + player.width / 2 > greenBox.x && player.x + player.width / 2 < greenBox.x + greenBox.w)) {
-                        //     collisionUp = true;
-                        // }
+                       
                         if (collisionUp === true) {
                             player.y -= player.speed
                             collisionUp = false
                         }
                         // // up
             
-                        if ((player.y > greenBox.y && player.y < greenBox.y + greenBox.h) && (player.x > greenBox.x && player.x < greenBox.x + greenBox.w)) {
+                        if ((player.y > greenBox.y && player.y < greenBox.y + greenBox.h) && (player.x+5 > greenBox.x && player.x+5 < greenBox.x + greenBox.w)) {
                             collisionDown = true;
                         }
-                        if ((player.y > greenBox.y && player.y < greenBox.y + greenBox.h) && (player.x + player.with > greenBox.x && player.x + player.width < greenBox.x + greenBox.w)) {
-                            collisionDown = true;
-                        }
-                        if ((player.y > greenBox.y && player.y < greenBox.y + greenBox.h) && (player.x + player.width / 2 > greenBox.x && player.x + player.width / 2 < greenBox.x + greenBox.w)) {
-                            collisionDown = true;
-                        }
+                    
                         if (collisionDown === true) {
                             player.y += player.speed
                             collisionDown = false
