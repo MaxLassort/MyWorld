@@ -172,6 +172,8 @@ window.addEventListener('DOMContentLoaded', function () {
        
     ]
     
+let greenBoxIn=false;
+
     let insideRedbox=false
 let modal=document.querySelector('.game_boy')
     function animate() {
@@ -186,6 +188,7 @@ let modal=document.querySelector('.game_boy')
     createBluebox()    
     collisionRedbox()
     window.requestAnimationFrame(animate);
+    
     }
     animate()
 
@@ -219,91 +222,41 @@ let modal=document.querySelector('.game_boy')
             if (inHouse === false) {
                 for (let object of blackBoxs) {
                     ctx.strokeStyle = "black"
-                    ctx.strokeRect(object.x, object.y, object.width, object.height)                  
-                    if ((player.x+5 > object.x && player.x+5 < object.x + object.width) && (player.y > object.y && player.y < object.y + object.height)) {
-                        collisionRight = true
-                    }
-                    if (collisionRight === true) {
-                        player.x += player.speed
-                        collisionRight = false
-                    }
-                    // left
-                    if (player.x + player.width-5 > object.x && player.x + player.width-5 < object.x + object.width && player.y > object.y && player.y < object.y + object.height) {
-                        collisionLeft = true
-                    }
-                    if (collisionLeft === true) {
-                        player.x -= player.speed
-                        collisionLeft = false
-                    }
-                    // // bottom                      
-                    if ((player.y + player.height > object.y && player.y + player.height < object.y + object.height) && (player.x + player.width-5 > object.x && player.x + player.width-5 < object.x + object.width)) {
-                        collisionUp = true;
-                    }
-                    if (collisionUp === true) {
-                        player.y -= player.speed
-                        collisionUp = false
-                    }
-                    // // up
-                    if ((player.y > object.y && player.y < object.y + object.height) && (player.x+5 > object.x && player.x+5 < object.x + object.width)) {
-                        collisionDown = true;
-                    }
-                    if (collisionDown === true) {
-                        player.y += player.speed
-                        collisionDown = false
-                    }
+                    ctx.strokeRect(object.x, object.y, object.width, object.height)    
+                    
+                    if(  (player.y+player.height > object.y && player.x+(player.width-5) > object.x && (player.x+15 ) < object.x+object.width && player.y < object.y+object.height) ) {
+                        if(player.frameY===0 ){
+                        player.y-=player.speed}
+                        else if(player.frameY===1){
+                            player.x+=player.speed 
+                        } else if (player.frameY===2) {
+                            player.x-=player.speed
+                        } else if (player.frameY===3){
+                            player.y+=player.speed
+                        }
+                         }
                 }
             } 
             if (inHouse === true && indexBluebox === i ){   
                 for ( let j= 0; j<greenBoxsArray.length; j++) {
                     for (let greenBox of greenBoxsArray[i]) {
-                        ctx.fillStyle = 'green'
+                        ctx.fillStyle = 'transparent'
                         ctx.fillRect(greenBox.x, greenBox.y, greenBox.w, greenBox.h) 
-                    }
-                for (let greenBox of greenBoxsArray[i]) {
-                        // right
-                     
-                        if ((player.x+5 > greenBox.x && player.x+5 < greenBox.x + greenBox.w) && (player.y > greenBox.y && player.y < greenBox.y + greenBox.h)) {
-                            collisionRight = true
-                        }
-                        if (collisionRight === true) {
-                            player.x += player.speed
-                            collisionRight = false
-                        }
-                        // left
-                        if (player.x + player.width-5 > greenBox.x && player.x + player.width-5 < greenBox.x + greenBox.w && player.y > greenBox.y && player.y < greenBox.y + greenBox.h) {
-                            collisionLeft = true
-                        }
-                        if (collisionLeft === true) {
-                            player.x -= player.speed
-                            collisionLeft = false
-                        }
-                        // // bottom
-                     
-            
-                        if ((player.y + player.height+10 > greenBox.y && player.y + player.height+10 < greenBox.y + greenBox.h) && (player.x + player.width-5 > greenBox.x && player.x + player.width-5 < greenBox.x + greenBox.w)) {
-                            collisionUp = true;
-                        }
-                       
-                        if (collisionUp === true) {
-                            player.y -= player.speed
-                            collisionUp = false
-                        }
-                        // // up
-            
-                        if ((player.y > greenBox.y && player.y < greenBox.y + greenBox.h) && (player.x+5 > greenBox.x && player.x+5 < greenBox.x + greenBox.w)) {
-                            collisionDown = true;
-                        }
-                    
-                        if (collisionDown === true) {
-                            player.y += player.speed
-                            collisionDown = false
-                        }
+                        if(  (player.y+player.height > greenBox.y && player.x+(player.width-5) > greenBox.x && (player.x+15 ) < greenBox.x+greenBox.w && player.y < greenBox.y+greenBox.h) ) {
+                            if(player.frameY===0 ){
+                            player.y-=player.speed}
+                            else if(player.frameY===1){
+                                player.x+=player.speed 
+                            } else if (player.frameY===2) {
+                                player.x-=player.speed
+                            } else if (player.frameY===3){
+                                player.y+=player.speed
+                            }
+                             }
                     }
                 }
             }
-           
-            
-            
+               
         }
 
 

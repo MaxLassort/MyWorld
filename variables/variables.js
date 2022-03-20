@@ -612,7 +612,7 @@ export let greenBoxsArray=[
        {
         x: 33*tile*scaleCanvas,
         y: 20*tile*scaleCanvas,
-        w:1*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
         h:12*tile*scaleCanvas,
        },
        {
@@ -847,7 +847,7 @@ export let greenBoxsArray=[
     [
         // litl house
         {
-            x: 41*tile*scaleCanvas,
+            x: 42*tile*scaleCanvas,
             y: 35*tile*scaleCanvas,
             w:1*tile*scaleCanvas,
             h:11*tile*scaleCanvas,
@@ -922,7 +922,7 @@ export let greenBoxsArray=[
     [
        // main house
        {
-        x: 50*tile*scaleCanvas,
+        x: 51*tile*scaleCanvas,
         y: 35*tile*scaleCanvas,
         w:1*tile*scaleCanvas,
         h:12*tile*scaleCanvas,
