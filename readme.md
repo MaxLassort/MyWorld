@@ -30,3 +30,13 @@ fin des intérieurs avec collisions, j'essaye maintenant d'organiser mon code en
 15/03 : 
 Ajout du background du modal, 
 technique de mettre une width et un ::after avec margin bottom à 100% pour que le carré reste un carré en responsive. 
+
+21/03 : 
+Bug résolu, plus de probleme de collision, 
+
+je dois maintenant ajouter le modal pour le landscape, je dois aussi ajouter un loader, desactiver le scroll.
+
+
+
+je met à tous les messages la classe message, si message = true gameboy= flex, 
+chaque message à en plus une classe propre, si message_propre=true affichage du message

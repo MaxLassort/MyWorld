@@ -18,7 +18,7 @@ const house= new Image();
 house.src = 'img/maison.png'
 const bigHouse= new Image();
 bigHouse.src='img/maison_principale.png'
-let tile=32;
+export let tile=32;
 export let scaleCanvas=1.1
 export const Images_array = [
     playerSprite, background, office, retraining, contact, grangeOne, house, bigHouse

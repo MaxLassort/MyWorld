@@ -2,6 +2,8 @@ import {blackBoxs} from './variables/variables.js';
 import {blueBoxs} from './variables/variables.js';
 import {greenBoxsArray} from './variables/variables.js';
 import {Images_array} from './variables/variables.js';
+import {tile} from './variables/variables.js';
+import {scaleCanvas} from './variables/variables.js';
 window.addEventListener('DOMContentLoaded', function () {
 
     const canvas = document.querySelector('canvas');
@@ -31,8 +33,8 @@ window.addEventListener('DOMContentLoaded', function () {
     let indexBluebox = -1
     ////////////////////////// AddEvenListener Pour recadrer la taille du canvas à chaque resize de l'écran
     function displayCanvas() {
-        ctx.canvas.width = canvasSize.width;
-        ctx.canvas.height = canvasSize.height
+        ctx.canvas.width = window.innerWidth;
+        ctx.canvas.height = window.innerHeight
 
 
     }
@@ -147,25 +149,42 @@ window.addEventListener('DOMContentLoaded', function () {
     let redBoxs=[
         {
             // Contact
-            x: 2180,
-            y: 1195,
-            width: 50,
-            height: 50,
+            x: 62*tile*scaleCanvas,
+            y: 34*tile*scaleCanvas,
+            width: 1*tile*scaleCanvas,
+            height: 1*tile*scaleCanvas,
             textToShow: document.querySelector('.contact')
         },
         {
-            // Formation Dev
-            x: 1475,
-            y: 1105,
-            width: 80,
-            height: 50,
-            textToShow: document.querySelector('.formationDev')
+            // oldlife
+            x: 56*tile*scaleCanvas,
+            y: 21*tile*scaleCanvas,
+            width: 1*tile*scaleCanvas,
+            height: 1*tile*scaleCanvas,
+            textToShow: document.querySelector('.oldLife')
         },
         {
-            x: 2108,
-            y: 1088,
-            width: 32,
-            height: 32,
+            // oldlife
+            x: 58*tile*scaleCanvas,
+            y: 48*tile*scaleCanvas,
+            width: 1*tile*scaleCanvas,
+            height: 1*tile*scaleCanvas,
+            textToShow: document.querySelector('.personalLife')
+        },
+        {
+            // oldlife
+            x: 46*tile*scaleCanvas,
+            y: 20*tile*scaleCanvas,
+            width: 1*tile*scaleCanvas,
+            height: 1*tile*scaleCanvas,
+            textToShow: document.querySelector('.personalLife')
+        },
+        {
+             // Formation Dev
+            x: 42*tile*scaleCanvas,
+            y: 31*tile*scaleCanvas,
+            width: 2*tile*scaleCanvas,
+            height: 2*tile*scaleCanvas,
             textToShow: document.querySelector('.formationDev')
         }
         
@@ -175,8 +194,57 @@ window.addEventListener('DOMContentLoaded', function () {
 let greenBoxIn=false;
 
     let insideRedbox=false
-let modal=document.querySelector('.game_boy')
-    function animate() {
+    const landscape= document.querySelector('.landscape') 
+    let modal=document.querySelector('.game_boy')
+  
+
+    const presentation= document.querySelector('.Presentation');
+   
+    function landscapeDisplay(){
+    
+      
+    }
+    
+    let openPannels= false
+    let presentationReaded=false;
+    let landscapetwo= false
+    let close_presentation= document.querySelector('.close_presentation')
+
+
+    function displaGameboy(){
+        if(window.innerHeight > window.innerWidth){
+            pannelsOpen=true
+            landscape.style.display="block"
+        } else if (window.innerHeight < window.innerWidth) {
+            landscape.style.display="none"
+            pannelsOpen=false
+        }
+
+        if(presentationReaded===false) {
+            openPannels=true
+            presentation.style.display='flex'
+            landscape.style.display="none"
+        } 
+        close_presentation.addEventListener('click',function(){
+            presentation.style.display='none'
+            landscape.style.display="none"
+            presentationReaded=true
+            openPannels=false 
+        })
+        
+        
+        if(openPannels===true) {
+            modal.style.display='flex'
+        } else if (openPannels===false) {
+            modal.style.display='none'
+        }
+          
+
+    }
+
+
+
+    function animate() { 
     ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height);
     enterInHouse()
     drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)
@@ -187,8 +255,10 @@ let modal=document.querySelector('.game_boy')
     ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
     createBluebox()    
     collisionRedbox()
+    landscapeDisplay()
+    // presentationDisplay()
+    displaGameboy()
     window.requestAnimationFrame(animate);
-    
     }
     animate()
 
@@ -262,21 +332,12 @@ let modal=document.querySelector('.game_boy')
 
     } 
 
-
-
-
-function collisionRedbox(){
+    function collisionRedbox(){
   
     for (let redBox of redBoxs) {
         ctx.fillStyle = 'red'
         ctx.fillRect(redBox.x, redBox.y, redBox.width, redBox.height)
        
-        
-        if(window.getComputedStyle(modal).display==='flex'){
-            pannelsOpen= true
-        } else if (window.getComputedStyle(modal).display==='none') {
-            pannelsOpen= false
-        };
 
         if(  ((player.y+player.height) > (redBox.y)) &&
                ((player.y < (redBox.y + redBox.height))) &&
@@ -285,11 +346,11 @@ function collisionRedbox(){
            ) {
         insideRedbox= true
         if (insideRedbox===true && keys.includes('e') && player.frameY===3) {
-            modal.style.display='flex'
-            redBox.textToShow.style.display='flex'
+            openPannels=true
+            redBox.textToShow.style.display='block'
         }
         if(keys.includes('t')) {
-            modal.style.display='none'
+            openPannels=false
             redBox.textToShow.style.display='none'
             insideRedbox=false
         }
@@ -308,41 +369,10 @@ function collisionRedbox(){
 }
 
 
-// if(window.innerHeight > window.innerWidth){
-        
-// }
 
 
 
-    function collision(){
-    let collision
-    for (let element of greyBoxs) {
-        ctx.fillStyle = 'grey'
-        ctx.fillRect(element.x, element.y, element.width, element.height)
-
-        if(  (player.y+player.height*scale > element.y && player.x+(player.width-5)*scale>element.x && player.x+5<element.x+element.width && player.y<element.y+element.height) 
-           ) {
-                collision= true
-                player.x-= player.speed
-                player.x+=player.speed
-            ctx.fillRect(element.x, element.y, element.width, element.height)
-           }
-           if(collision===true && keys.includes('s') ) {
-            player.y-=player.speed
-           }
-           if(collision===true && keys.includes('z') ) {
-            player.y+=player.speed
-           } 
-           if(collision===true && keys.includes('d') ) {
-            player.x-=player.speed
-           } 
-            
-           if(collision===true && keys.includes('q') ) {
-            player.x+=player.speed
-           } 
-        }
-    }
-
+  
 
 
 
