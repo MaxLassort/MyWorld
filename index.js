@@ -105,7 +105,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Je rajoute la variable player.moving true à chaque if pour actualiser la keydown, car cela peut bug avec le fait qu'on ne relache pas le bouton avant d'appuyer sur un autre bouton (je clique sur 'aller a gauche' avant de relacher 'descendre')
     function movePlayer() {
-        if(pannelsOpen===false) {
+        if(openPannels===false) {
             if (keys.includes('z') && player.y > 360) {
                 player.y -= player.speed
                 player.frameY = 3;
@@ -268,7 +268,7 @@ let greenBoxIn=false;
 
     function createBluebox() {
         for (let blueBox of blueBoxs) {
-            ctx.fillStyle = 'blue'
+            ctx.fillStyle = 'transparent'
             ctx.fillRect(blueBox.x, blueBox.y, blueBox.w, blueBox.h)
         }
     }
@@ -291,7 +291,7 @@ let greenBoxIn=false;
             }
             if (inHouse === false) {
                 for (let object of blackBoxs) {
-                    ctx.strokeStyle = "black"
+                    ctx.strokeStyle = "transparent"
                     ctx.strokeRect(object.x, object.y, object.width, object.height)    
                     
                     if(  (player.y+player.height > object.y && player.x+(player.width-5) > object.x && (player.x+15 ) < object.x+object.width && player.y < object.y+object.height) ) {
@@ -335,7 +335,7 @@ let greenBoxIn=false;
     function collisionRedbox(){
   
     for (let redBox of redBoxs) {
-        ctx.fillStyle = 'red'
+        ctx.fillStyle = 'transparent'
         ctx.fillRect(redBox.x, redBox.y, redBox.width, redBox.height)
        
 
