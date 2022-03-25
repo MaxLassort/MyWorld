@@ -1035,36 +1035,7 @@ window.addEventListener('DOMContentLoaded', function () {
         ]
     ];
     
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
     const keys = [];
@@ -1098,9 +1069,6 @@ window.addEventListener('DOMContentLoaded', function () {
     displayCanvas()
 
     
-
-
-
  ctx.imageSmoothingEnabled = false
   function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
         ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
@@ -1123,78 +1091,107 @@ window.addEventListener('DOMContentLoaded', function () {
     let pannelsOpen=false
     let actionTouch=false
     
+    let movingUp=false; 
+    let movingDown=false;
+    let movingRight=false;
+    let movingLeft=false;
+
+
     let moving=false
        function moveTouch() {
         
 
         up.addEventListener('touchstart', function () {
-            (keys.push('z'))
+            (movingUp=true)
+            player.moving = true
         },{ passive: true })
         up.addEventListener('touchend', function () {
-            keys.splice(0, 100)
+            movingUp=false
             player.moving = false
         },)
         right.addEventListener('touchstart', function () {
-            (keys.push('d'))
+            (movingRight=true)
+            player.moving = true
         },{ passive: true })
         right.addEventListener('touchend', function () {
-            keys.splice(0, 100)
+            movingRight=false
             player.moving = false
         },)
         down.addEventListener('touchstart', function () {
-            (keys.push('s'))
+            (movingDown=true)
+            player.moving = true
         },{ passive: true })
         down.addEventListener('touchend', function () {
-            keys.splice(0, 100)
+            movingDown=false
             player.moving = false
         },)
         left.addEventListener('touchstart', function () {
-            (keys.push('q'))
+            (movingLeft=true)
+            player.moving = true
         },{ passive: true })
         left.addEventListener('touchend', function () {
-            keys.splice(0, 100)
+            movingLeft=false
             player.moving = false
         },)
     }
-    window.addEventListener('keydown',  function (e) {
-        //    Attention à la majuscule 
-        keys.push(e.key);
-     
+    window.addEventListener('keydown',  function (e) {     
+        if(e.key=== "s" ){ 
+            movingDown=true
+        }
+        if(e.key=== "z" ) {
+            movingUp=true
+        }
+        if (e.key=== "d" ) {
+            movingRight=true;
+        }
+        if (e.key=== "q") {
+            movingLeft=true;
+        }
         // player.moving=true
     },  )
    
-    // keys[e.code]=true ==> une autre façon d'ajouter la valeur a l'array
+    
     window.addEventListener('keyup', function (e) {
-        keys.splice(0, 1000)
+        
         player.moving = false
+        movingDown=false
+        movingUp=false;
+        movingRight=false;
+        movingLeft=false;
+        
     })
     // Pour crée une fonction avec tous les keydown, je crée un tableau, auquel j'atoute la keyCode lorsque keydown et je la delete lorsque keyup. Je peux ensuite crée une fonction en mettant en condition : "si mon array est vrai alors tu peux bouger"
 
     // Je rajoute la variable player.moving true à chaque if pour actualiser la keydown, car cela peut bug avec le fait qu'on ne relache pas le bouton avant d'appuyer sur un autre bouton (je clique sur 'aller a gauche' avant de relacher 'descendre')
     function movePlayer() {
         if(openPannels===false) {
-            if (keys.includes('z') && player.y > 360) {
+            if (movingUp===true && player.y > 360) {
                 player.y -= player.speed
                 player.frameY = 3;
                 player.moving = true
             }
-            if (keys.includes('s') && player.y < 2000) {
+            if (movingDown===true && player.y < 2000) {
                 player.y += player.speed
                 player.frameY = 0;
                 player.moving = true
             }
-            if (keys.includes('d') && player.x < 3000) {
+            if (movingRight===true && player.x < 3000) {
                 player.x += player.speed
                 player.frameY = 2;
                 player.moving = true
             }
-            if (keys.includes('q') && player.x > 360) {
+            if (movingLeft===true && player.x > 360) {
                 player.x -= player.speed
                 player.frameY = 1;
                 player.moving = true
             }
         }
      
+     
+        
+
+
+
     }
     // J'incrémente frameX pour animer le sprite en déplacant draw image de gauche à droite 
     // je rajoute la condition player.moving pour définir quand l'animation doit être lancée
@@ -1319,9 +1316,8 @@ let greenBoxIn=false;
     handlePlayerFrame()
     ctx.resetTransform();
     ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
-     console.log(player.moving)
+     console.log(insideRedbox)
     collisionRedbox()
-    // presentationDisplay()
     displaGameboy()
     document.addEventListener('contextmenu', event => event.preventDefault());
     window.addEventListener('resize', displayCanvas)
@@ -1345,11 +1341,11 @@ let greenBoxIn=false;
     function enterInHouse() {
         for (let i = 0; i < blueBoxs.length; i++) {
 
-            if (((player.x + 16 >= blueBoxs[i].x && player.x + 16 <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && keys.includes('z')) {
+            if (((player.x + 16 >= blueBoxs[i].x && player.x + 16 <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingUp===true) {
                 inHouse = true
                 indexBluebox = i
             }
-            if (((player.x + 16 >= blueBoxs[i].x && player.x + 16 <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && keys.includes('s')) {
+            if (((player.x + 16 >= blueBoxs[i].x && player.x + 16 <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingDown===true) {
                 inHouse = false
                 indexBluebox = -1
             }
@@ -1404,7 +1400,7 @@ let greenBoxIn=false;
     function collisionRedbox(){
   
     for (let redBox of redBoxs) {
-        ctx.fillStyle = 'transparent'
+        ctx.fillStyle = 'red'
         ctx.fillRect(redBox.x, redBox.y, redBox.width, redBox.height)
        
 
@@ -1414,7 +1410,8 @@ let greenBoxIn=false;
                (player.x < (redBox.x+redBox.width))
            ) {
         insideRedbox= true
-        if (insideRedbox===true && (keys.includes('e') ||actionTouch===true ) && player.frameY===3) {
+        
+        if (insideRedbox===true && keys.includes('e')  && player.frameY===3) {
             openPannels=true
             redBox.textToShow.style.display='block'
         }
