@@ -1,9 +1,9 @@
-import {blackBoxs} from 'variables/variables.js';
-import {blueBoxs} from 'variables/variables.js';
-import {greenBoxsArray} from 'variables/variables.js';
-import {Images_array} from 'variables/variables.js';
-import {tile} from 'variables/variables.js';
-import {scaleCanvas} from 'variables/variables.js';
+import {blackBoxs} from './variables/variables.js';
+import {blueBoxs} from './variables/variables.js';
+import {greenBoxsArray} from './variables/variables.js';
+import {Images_array} from './variables/variables.js';
+import {tile} from './variables/variables.js';
+import {scaleCanvas} from './variables/variables.js';
 window.addEventListener('DOMContentLoaded', function () {
 
     const canvas = document.querySelector('canvas');
