@@ -1118,9 +1118,15 @@ window.addEventListener('DOMContentLoaded', function () {
     const down = document.querySelector('.down');
     const left = document.querySelector('.left');
     const up = document.querySelector('.up');
+    const action_btn_right= document.querySelector('.btn_red_right');
+    const action_btn_left= document.querySelector('.btn_red');
     let pannelsOpen=false
+    let actionTouch=false
     
+    let moving=false
        function moveTouch() {
+        
+
         up.addEventListener('touchstart', function () {
             (keys.push('z'))
         },{ passive: true })
@@ -1261,14 +1267,12 @@ let greenBoxIn=false;
 
     const presentation= document.querySelector('.Presentation');
    
-    function landscapeDisplay(){
-    
-      
-    }
+ 
     
     let openPannels= false
     let presentationReaded=false;
-    let landscapetwo= false
+   
+
     let close_presentation= document.querySelector('.close_presentation')
 
 
@@ -1302,7 +1306,8 @@ let greenBoxIn=false;
           
 
     }
-
+    createBluebox()   
+   
     
     function animate() { 
   
@@ -1314,13 +1319,14 @@ let greenBoxIn=false;
     handlePlayerFrame()
     ctx.resetTransform();
     ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
-    createBluebox()    
+     console.log(player.moving)
     collisionRedbox()
-    landscapeDisplay()
     // presentationDisplay()
     displaGameboy()
     document.addEventListener('contextmenu', event => event.preventDefault());
     window.addEventListener('resize', displayCanvas)
+    
+    
     window.requestAnimationFrame(animate);
     }
     animate()
@@ -1408,7 +1414,7 @@ let greenBoxIn=false;
                (player.x < (redBox.x+redBox.width))
            ) {
         insideRedbox= true
-        if (insideRedbox===true && keys.includes('e') && player.frameY===3) {
+        if (insideRedbox===true && (keys.includes('e') ||actionTouch===true ) && player.frameY===3) {
             openPannels=true
             redBox.textToShow.style.display='block'
         }

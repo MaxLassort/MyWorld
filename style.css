@@ -142,23 +142,16 @@ canvas {
     -o-border-radius: 50px;
     
 }
-.btn_red {
+
+
+.action_btn {
     position: absolute;
-    bottom: 1%;
-    right: 26%;
-    width: 12%;
-    height: 12%;
-    max-height: 45px;
-    max-width: 45px;
-    background-color: #E2312F;
-    border: black solid 2px;
-    border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    -o-border-radius: 50px;
-    
+    bottom: 15%;
+    right: 10%;
+    border: red solid 3px;
+    width: 16%;
 }
+
 .blue_rect {
     width: 26%;
     height: 1%;
