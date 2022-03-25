@@ -1094,11 +1094,13 @@ window.addEventListener('DOMContentLoaded', function () {
     function displayCanvas() {
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight
-
-
     }
     displayCanvas()
-    window.addEventListener('resize', displayCanvas)
+
+    
+
+
+
  ctx.imageSmoothingEnabled = false
   function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
         ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
@@ -1301,9 +1303,9 @@ let greenBoxIn=false;
 
     }
 
-
-
+    
     function animate() { 
+  
     ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height);
     enterInHouse()
     drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)
@@ -1317,6 +1319,8 @@ let greenBoxIn=false;
     landscapeDisplay()
     // presentationDisplay()
     displaGameboy()
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    window.addEventListener('resize', displayCanvas)
     window.requestAnimationFrame(animate);
     }
     animate()
