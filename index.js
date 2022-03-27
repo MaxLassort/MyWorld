@@ -1082,9 +1082,9 @@ window.addEventListener('DOMContentLoaded', function () {
     const down = document.querySelector('.down');
     const left = document.querySelector('.left');
     const up = document.querySelector('.up');
-    const action_btn_right= document.querySelector('.btn_red_right');
-    const action_btn_left= document.querySelector('.btn_red');
-    let pannelsOpen=false
+    const action_btnt= document.querySelector(".action_button_img");
+ 
+    let pannelsOpen=false;
     let actionTouch=false
     
     let movingUp=false; 
@@ -1097,6 +1097,10 @@ window.addEventListener('DOMContentLoaded', function () {
        function moveTouch() {
         
 
+        action_btnt.addEventListener('touchstart', function () {
+            (actionBtn=true)
+        },{ passive: true })
+       
         up.addEventListener('touchstart', function () {
             (movingUp=true)
             player.moving = true
@@ -1137,9 +1141,6 @@ window.addEventListener('DOMContentLoaded', function () {
         if(e.key=== "t" || e.key=== "T" ){ 
             actionBtn=false
         }
-
-
-
         if(e.key=== "s" || e.key=== "S" || e.key==="ArrowDown"  ){ 
             movingDown=true
         }
@@ -1274,7 +1275,7 @@ window.addEventListener('DOMContentLoaded', function () {
     let presentationReaded=false;
    
 
-    let close_presentation= document.querySelector('.close_presentation')
+    let close_presentation= document.querySelectorAll('.close_presentation')
 
 
     function displaGameboy(){
@@ -1291,13 +1292,15 @@ window.addEventListener('DOMContentLoaded', function () {
             presentation.style.display='flex'
             landscape.style.display="none"
         } 
-        close_presentation.addEventListener('click',function(){
-            presentation.style.display='none'
-            landscape.style.display="none"
-            presentationReaded=true
-            openPannels=false 
-        })
-        
+        close_presentation.forEach(element => {
+            element.addEventListener('click',function(){
+                presentation.style.display='none'
+                landscape.style.display="none"
+                presentationReaded=true
+                openPannels=false 
+                actionBtn=false
+            })
+        });
         
         if(openPannels===true) {
             modal.style.display='flex'
@@ -1311,7 +1314,6 @@ window.addEventListener('DOMContentLoaded', function () {
    
     
     function animate() { 
-  
     ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height);
     enterInHouse()
     drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)
@@ -1320,7 +1322,6 @@ window.addEventListener('DOMContentLoaded', function () {
     handlePlayerFrame()
     ctx.resetTransform();
     ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
-     console.log(insideRedbox)
     collisionRedbox()
     displaGameboy()
     document.addEventListener('contextmenu', event => event.preventDefault());
