@@ -1038,11 +1038,7 @@ window.addEventListener('DOMContentLoaded', function () {
   
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
-    const keys = [];
-    let collisionRight = false;
-    let collisionLeft = false;
-    let collisionDown = false;
-    let collisionUp = false;
+    
     let scale = 1.3
     let canvasSize = {
         width: 3800,
@@ -1095,9 +1091,9 @@ window.addEventListener('DOMContentLoaded', function () {
     let movingDown=false;
     let movingRight=false;
     let movingLeft=false;
+    let actionBtn=false
 
-
-    let moving=false
+   
        function moveTouch() {
         
 
@@ -1134,17 +1130,26 @@ window.addEventListener('DOMContentLoaded', function () {
             player.moving = false
         },)
     }
-    window.addEventListener('keydown',  function (e) {     
-        if(e.key=== "s" ){ 
+    window.addEventListener('keydown',  function (e) {   
+        if(e.key=== "e" || e.key=== "E" ){ 
+            actionBtn=true
+        }
+        if(e.key=== "t" || e.key=== "T" ){ 
+            actionBtn=false
+        }
+
+
+
+        if(e.key=== "s" || e.key=== "S" || e.key==="ArrowDown"  ){ 
             movingDown=true
         }
-        if(e.key=== "z" ) {
+        if(e.key=== "z" || e.key=== "Z" || e.key==="ArrowUp" ) {
             movingUp=true
         }
-        if (e.key=== "d" ) {
+        if (e.key=== "d" || e.key=== "D" || e.key==="ArrowRight" ) {
             movingRight=true;
         }
-        if (e.key=== "q") {
+        if (e.key=== "q" || e.key=== "Q" || e.key==="ArrowLeft") {
             movingLeft=true;
         }
         // player.moving=true
@@ -1255,7 +1260,6 @@ window.addEventListener('DOMContentLoaded', function () {
        
     ]
     
-let greenBoxIn=false;
 
     let insideRedbox=false
     const landscape= document.querySelector('.landscape') 
@@ -1410,12 +1414,14 @@ let greenBoxIn=false;
                (player.x < (redBox.x+redBox.width))
            ) {
         insideRedbox= true
+        ctx.fillStyle = 'yellow'
+        ctx.fillRect(redBox.x, redBox.y, redBox.width, redBox.height)
         
-        if (insideRedbox===true && keys.includes('e')  && player.frameY===3) {
+        if (insideRedbox===true && actionBtn===true  && player.frameY===3) {
             openPannels=true
             redBox.textToShow.style.display='block'
         }
-        if(keys.includes('t')) {
+        if(actionBtn===false) {
             openPannels=false
             redBox.textToShow.style.display='none'
             insideRedbox=false
