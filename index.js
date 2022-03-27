@@ -4,6 +4,29 @@
 // import {Images_array} from '/variables/variables.js';
 // import {tile} from '/variables/variables.js';
 // import {scaleCanvas} from '/variables/variables.js';
+
+// class Collision {   
+//     constructor (boxs) {
+//         this.boxs=boxs;
+//     };
+
+//     static createBox(boxs){
+//         for (let box of boxs) {
+//             ctx.fillStyle = 'blue'
+//             ctx.fillRect(box.x, box.y, box.w, box.h)
+//         }
+//         return
+//     };
+// };
+    
+// let createBluebox= new Collision();
+// createBluebox.createBox(blueBoxs);
+
+
+
+
+
+
 window.addEventListener('DOMContentLoaded', function () {
 
 
@@ -32,7 +55,7 @@ window.addEventListener('DOMContentLoaded', function () {
      const Images_array = [
         playerSprite, background, office, retraining, contact, grangeOne, house, bigHouse
     ];
-    
+    let index=false
      const blueBoxs = [
         {
             // Git
@@ -616,7 +639,7 @@ window.addEventListener('DOMContentLoaded', function () {
     
     ];
      let greenBoxsArray=[
-        [
+        [ index=false,
             // Maison Git
            {
             x: 33*tile*scaleCanvas,
@@ -668,6 +691,7 @@ window.addEventListener('DOMContentLoaded', function () {
            },
         ], 
         [
+            index=false,
             // Maison 3W
             {
                 x: 42*tile*scaleCanvas,
@@ -1034,8 +1058,8 @@ window.addEventListener('DOMContentLoaded', function () {
          }, 
         ]
     ];
-    
-  
+
+
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
     
@@ -1094,46 +1118,7 @@ window.addEventListener('DOMContentLoaded', function () {
     let actionBtn=false
 
    
-       function moveTouch() {
-        
-
-        action_btnt.addEventListener('touchstart', function () {
-            (actionBtn=true)
-        },{ passive: true })
-       
-        up.addEventListener('touchstart', function () {
-            (movingUp=true)
-            player.moving = true
-        },{ passive: true })
-        up.addEventListener('touchend', function () {
-            movingUp=false
-            player.moving = false
-        },)
-        right.addEventListener('touchstart', function () {
-            (movingRight=true)
-            player.moving = true
-        },{ passive: true })
-        right.addEventListener('touchend', function () {
-            movingRight=false
-            player.moving = false
-        },)
-        down.addEventListener('touchstart', function () {
-            (movingDown=true)
-            player.moving = true
-        },{ passive: true })
-        down.addEventListener('touchend', function () {
-            movingDown=false
-            player.moving = false
-        },)
-        left.addEventListener('touchstart', function () {
-            (movingLeft=true)
-            player.moving = true
-        },{ passive: true })
-        left.addEventListener('touchend', function () {
-            movingLeft=false
-            player.moving = false
-        },)
-    }
+      
     window.addEventListener('keydown',  function (e) {   
         if(e.key=== "e" || e.key=== "E" ){ 
             actionBtn=true
@@ -1170,17 +1155,57 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Je rajoute la variable player.moving true à chaque if pour actualiser la keydown, car cela peut bug avec le fait qu'on ne relache pas le bouton avant d'appuyer sur un autre bouton (je clique sur 'aller a gauche' avant de relacher 'descendre')
     function movePlayer() {
+        action_btnt.addEventListener('touchstart', function () {
+            (actionBtn=true)
+        },{ passive: true })
+       
+        up.addEventListener('touchstart', function () {
+            (movingUp=true)
+            player.moving = true
+        },{ passive: true })
+        up.addEventListener('touchend', function () {
+            movingUp=false
+            player.moving = false
+        },)
+        right.addEventListener('touchstart', function () {
+            (movingRight=true)
+            player.moving = true
+        },{ passive: true })
+        right.addEventListener('touchend', function () {
+            movingRight=false
+            player.moving = false
+        },)
+        down.addEventListener('touchstart', function () {
+            (movingDown=true)
+            player.moving = true
+        },{ passive: true })
+        down.addEventListener('touchend', function () {
+            movingDown=false
+            player.moving = false
+        },)
+        left.addEventListener('touchstart', function () {
+            (movingLeft=true)
+            player.moving = true
+        },{ passive: true })
+        left.addEventListener('touchend', function () {
+            movingLeft=false
+            player.moving = false
+        },)
+
+
         if(openPannels===false) {
-            if (movingUp===true && player.y > 360) {
-                player.y -= player.speed
-                player.frameY = 3;
-                player.moving = true
-            }
+          if(movingRight===false && movingLeft===false){
             if (movingDown===true && player.y < 2000) {
                 player.y += player.speed
                 player.frameY = 0;
                 player.moving = true
             }
+            if (movingUp===true && player.y > 360) {
+                player.y -= player.speed
+                player.frameY = 3;
+                player.moving = true
+            }
+          }
             if (movingRight===true && player.x < 3000) {
                 player.x += player.speed
                 player.frameY = 2;
@@ -1310,7 +1335,7 @@ window.addEventListener('DOMContentLoaded', function () {
           
 
     }
-    createBluebox()   
+  
    
     
     function animate() { 
@@ -1318,7 +1343,7 @@ window.addEventListener('DOMContentLoaded', function () {
     enterInHouse();
     drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)
     movePlayer()
-    moveTouch()
+    
     handlePlayerFrame()
     
     ctx.resetTransform();
@@ -1344,6 +1369,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
     
+
     function enterInHouse() {
         for (let i = 0; i < blueBoxs.length; i++) {
 
@@ -1353,17 +1379,13 @@ window.addEventListener('DOMContentLoaded', function () {
             }
             if (((player.x + 16 >= blueBoxs[i].x && player.x + 16 <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingDown===true) {
                 inHouse = false
-                indexBluebox = -1
             }
            
-            if (inHouse === true && indexBluebox === i) {
-                ctx.drawImage(blueBoxs[i].background, blueBoxs[i].dx, blueBoxs[i].dy, blueBoxs[i].dw, blueBoxs[i].dh, blueBoxs[i].dpx, blueBoxs[i].dpy, blueBoxs[i].dpw, blueBoxs[i].dph)
-      
-            }
+          
             if (inHouse === false) {
                 for (let object of blackBoxs) {
-                    ctx.strokeStyle = "transparent"
-                    ctx.strokeRect(object.x, object.y, object.width, object.height)    
+                    // ctx.strokeStyle = "transparent"
+                    // ctx.strokeRect(object.x, object.y, object.width, object.height)    
                     
                     if(  (player.y+player.height > object.y && player.x+(player.width-5) > object.x && (player.x+15 ) < object.x+object.width && player.y < object.y+object.height) ) {
                         if(player.frameY===0 ){
@@ -1378,11 +1400,12 @@ window.addEventListener('DOMContentLoaded', function () {
                          }
                 }
             } 
-            if (inHouse === true && indexBluebox === i ){   
+            if (inHouse === true && indexBluebox === i ){  
+                ctx.drawImage(blueBoxs[i].background, blueBoxs[i].dx, blueBoxs[i].dy, blueBoxs[i].dw, blueBoxs[i].dh, blueBoxs[i].dpx, blueBoxs[i].dpy, blueBoxs[i].dpw, blueBoxs[i].dph) 
                 for ( let j= 0; j<greenBoxsArray.length; j++) {
                     for (let greenBox of greenBoxsArray[i]) {
-                        ctx.fillStyle = 'transparent'
-                        ctx.fillRect(greenBox.x, greenBox.y, greenBox.w, greenBox.h) 
+                        // ctx.fillStyle = 'transparent'
+                        // ctx.fillRect(greenBox.x, greenBox.y, greenBox.w, greenBox.h) 
                         if(  (player.y+player.height > greenBox.y && player.x+(player.width-5) > greenBox.x && (player.x+15 ) < greenBox.x+greenBox.w && player.y < greenBox.y+greenBox.h) ) {
                             if(player.frameY===0 ){
                             player.y-=player.speed}
@@ -1406,8 +1429,8 @@ window.addEventListener('DOMContentLoaded', function () {
     function collisionRedbox(){
   
     for (let redBox of redBoxs) {
-        ctx.fillStyle = 'red'
-        ctx.fillRect(redBox.x, redBox.y, redBox.width, redBox.height)
+        // ctx.fillStyle = 'red'
+        // ctx.fillRect(redBox.x, redBox.y, redBox.width, redBox.height)
        
 
         if(  ((player.y+player.height) > (redBox.y)) &&
@@ -1416,8 +1439,7 @@ window.addEventListener('DOMContentLoaded', function () {
                (player.x < (redBox.x+redBox.width))
            ) {
         insideRedbox= true
-        ctx.fillStyle = 'yellow'
-        ctx.fillRect(redBox.x, redBox.y, redBox.width, redBox.height)
+       
         
         if (insideRedbox===true && actionBtn===true  && player.frameY===3) {
             openPannels=true
