@@ -1315,11 +1315,12 @@ window.addEventListener('DOMContentLoaded', function () {
     
     function animate() { 
     ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height);
-    enterInHouse()
+    enterInHouse();
     drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)
     movePlayer()
     moveTouch()
     handlePlayerFrame()
+    
     ctx.resetTransform();
     ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
     collisionRedbox()
