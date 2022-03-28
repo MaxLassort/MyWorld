@@ -29,16 +29,48 @@
 
 window.addEventListener('DOMContentLoaded', function () {
 
+ const full = document.querySelector('.fullscreen')
+ let mydocument= document.documentElement;
 
-    const full = document.querySelector(".fullscreen");
-function openFullscreen() {
-    full.addEventListener('click', function(){
-        canvas.requestFullscreen()
-        canvas.webkitRequestFullscreen();
-    })
-   
+ full.addEventListener("click", function(){
+     if (full.textContent==="Plein Ecran"){
+         full.textContent= "Quitter Plein Ecran"
+         if(mydocument.requestFullscreen){
+             mydocument.requestFullscreen();
+         }
+         else if (mydocument.msRequestFullScreen){
+            mydocument.msRequestFullScreen();
+         }
+         else if (mydocument.mozRequestFullScreen){
+            mydocument.mozRequestFullScreen();
+         }
+         else if(mydocument.webkitRequestFullScreen){
+             mydocument.webkitRequestFullScreen();
+         }
 
-}
+     }
+     else 
+     {
+         if(document.exitFullscreen){
+             document.exitFullscreen();
+         }
+         else if (document.msexitFullscreen){
+            document.msexitFullscreen();
+         }
+         else if (document.mozexitFullscreen){
+            document.exitFullscreen();
+         }
+         else if (document.webkitexitFullscreen){
+            document.ewebkitxitFullscreen();
+         }
+         full.textContent="Plein Ecran"
+     }
+ })
+
+ 
+
+
+
 
 
     const playerSprite = new Image();
@@ -1352,7 +1384,7 @@ function openFullscreen() {
    
     
     function animate() { 
-    openFullscreen()
+       
     ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height);
     enterInHouse();
     drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)

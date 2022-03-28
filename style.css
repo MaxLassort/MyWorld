@@ -103,7 +103,7 @@ content: "";
     margin-top: 1rem;
     padding: 1rem;
     background-color: #b4c96e00;
-    border: black solid 1px;
+    border: none;
 
 }
 
@@ -296,9 +296,9 @@ content: "";
     right: 10px;
     padding:1rem;
     font-family: 'Press Start 2P', cursive;
-    z-index: 10;
+    border: black solid 1px;
+   
 }
-
 
 .landscape {
     width: 100%;
