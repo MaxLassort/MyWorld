@@ -287,6 +287,19 @@ content: "";
     font-weight: bold;
 } */
 
+
+
+.fullscreen{
+    background-color: #B4C96E;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    padding:1rem;
+    font-family: 'Press Start 2P', cursive;
+    z-index: 10;
+}
+
+
 .landscape {
     width: 100%;
     text-align: center;

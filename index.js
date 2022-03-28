@@ -30,8 +30,15 @@
 window.addEventListener('DOMContentLoaded', function () {
 
 
+    const full = document.querySelector(".fullscreen");
+function openFullscreen() {
+    full.addEventListener('click', function(){
+        canvas.requestFullscreen()
+        canvas.webkitRequestFullscreen();
+    })
+   
 
-
+}
 
 
     const playerSprite = new Image();
@@ -1062,7 +1069,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
-    
+    var elem = document.getElementById("myvideo");
+
     let scale = 1.3
     let canvasSize = {
         width: 3800,
@@ -1155,42 +1163,47 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Je rajoute la variable player.moving true à chaque if pour actualiser la keydown, car cela peut bug avec le fait qu'on ne relache pas le bouton avant d'appuyer sur un autre bouton (je clique sur 'aller a gauche' avant de relacher 'descendre')
     function movePlayer() {
-        action_btnt.addEventListener('touchstart', function () {
+        action_btnt.addEventListener('touchstart', function (e) {
             (actionBtn=true)
+            e.stopPropagation();
         },{ passive: true })
        
-        up.addEventListener('touchstart', function () {
+        up.addEventListener('touchstart', function (e) {
             (movingUp=true)
             player.moving = true
+            e.stopPropagation();
         },{ passive: true })
         up.addEventListener('touchend', function () {
             movingUp=false
             player.moving = false
-        },)
-        right.addEventListener('touchstart', function () {
+        },{ passive: true })
+        right.addEventListener('touchstart', function (e) {
             (movingRight=true)
             player.moving = true
+            e.stopPropagation();
         },{ passive: true })
         right.addEventListener('touchend', function () {
             movingRight=false
             player.moving = false
-        },)
-        down.addEventListener('touchstart', function () {
+        },{ passive: true })
+        down.addEventListener('touchstart', function (e) {
             (movingDown=true)
             player.moving = true
+            e.stopPropagation();
         },{ passive: true })
         down.addEventListener('touchend', function () {
             movingDown=false
             player.moving = false
-        },)
-        left.addEventListener('touchstart', function () {
+        },{ passive: true })
+        left.addEventListener('touchstart', function (e) {
             (movingLeft=true)
             player.moving = true
+            e.stopPropagation();
         },{ passive: true })
         left.addEventListener('touchend', function () {
             movingLeft=false
             player.moving = false
-        },)
+        },{ passive: true })
 
 
         if(openPannels===false) {
@@ -1339,6 +1352,7 @@ window.addEventListener('DOMContentLoaded', function () {
    
     
     function animate() { 
+    openFullscreen()
     ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height);
     enterInHouse();
     drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)
@@ -1351,6 +1365,7 @@ window.addEventListener('DOMContentLoaded', function () {
     collisionRedbox()
     displaGameboy()
     document.addEventListener('contextmenu', event => event.preventDefault());
+ 
     window.addEventListener('resize', displayCanvas)
     
     
@@ -1463,7 +1478,6 @@ window.addEventListener('DOMContentLoaded', function () {
    
         
 }
-
 
 
 
