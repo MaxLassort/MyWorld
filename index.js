@@ -31,6 +31,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
  const full = document.querySelector('.fullscreen')
  let mydocument= document.documentElement;
+ document.getElementById('body').addEventListener("touchstart", (e)=>{
+    e.stopPropagation();
+}, { passive: true });
 
  full.addEventListener("click", function(){
      if (full.textContent==="Plein Ecran"){
@@ -61,7 +64,7 @@ window.addEventListener('DOMContentLoaded', function () {
             document.exitFullscreen();
          }
          else if (document.webkitexitFullscreen){
-            document.ewebkitxitFullscreen();
+            document.webkitexitFullscreen();
          }
          full.textContent="Plein Ecran"
      }
@@ -287,9 +290,15 @@ window.addEventListener('DOMContentLoaded', function () {
         },
         {
             x:77*tile*scaleCanvas,
-            y:37*tile*scaleCanvas,
+            y:36*tile*scaleCanvas,
             width:3*tile*scaleCanvas,
             height:3*tile*scaleCanvas
+        },
+        {
+            x:72*tile*scaleCanvas,
+            y:32*tile*scaleCanvas,
+            width:1*tile*scaleCanvas,
+            height:1*tile*scaleCanvas
         },
         {
             x:75*tile*scaleCanvas,
@@ -600,6 +609,13 @@ window.addEventListener('DOMContentLoaded', function () {
             x:49*tile*scaleCanvas,
             y:47*tile*scaleCanvas,
             width:2*tile*scaleCanvas,
+            height:1*tile*scaleCanvas
+        },
+        {
+            // house
+            x:58*tile*scaleCanvas,
+            y:47*tile*scaleCanvas,
+            width:1*tile*scaleCanvas,
             height:1*tile*scaleCanvas
         },
         {
@@ -1431,9 +1447,8 @@ window.addEventListener('DOMContentLoaded', function () {
           
             if (inHouse === false) {
                 for (let object of blackBoxs) {
-                    // ctx.strokeStyle = "transparent"
+                    // ctx.strokeStyle = "black"
                     // ctx.strokeRect(object.x, object.y, object.width, object.height)    
-                    
                     if(  (player.y+player.height > object.y && player.x+(player.width-5) > object.x && (player.x+15 ) < object.x+object.width && player.y < object.y+object.height) ) {
                         if(player.frameY===0 ){
                         player.y-=player.speed}
