@@ -5,42 +5,50 @@
 // import {tile} from '/variables/variables.js';
 // import {scaleCanvas} from '/variables/variables.js';
 
-// class Collision {   
-//     constructor (boxs) {
-//         this.boxs=boxs;
-//     };
-//     createBox(boxs=[]){
-//         for (let box of this.boxs) {
-//             ctx.fillStyle = 'blue'
-//             console.log('box:', box);
-//         }
-//         return
-//     };
-// };
-
-
-
 class Collision {   
-  constructor (boxs, ctx) {
-      this.boxs=boxs;
-      this.ctx=ctx;
+    constructor (boxes, ctx, player) {
+        this.boxes=boxes;
+        this.ctx=ctx;
+        this.player=player;
+    };
+  
+    createBox(){
+        for (let box of this.boxes) {
+          this.ctx.fillStyle = 'blue'
+          this.ctx.fillRect(box.x, box.y, box.w, box.h)
+        }
+        return
+    };
+   
+    enterInCollision(){
+      
+      for (let box of this.boxes) {  
+          if(  (this.player.y+this.player.height > box.y && this.player.x+(this.player.width-5) > box.x && (this.player.x+15 ) < box.x+box.w && this.player.y < box.y+box.h) ) {
+            // this.ctx.fillStyle = 'yellow'
+            // this.ctx.fillRect(box.x, box.y, box.w, box.h)
+            if(this.player.frameY===0 ){
+                this.player.y-=this.player.speed}
+            else if(this.player.frameY===1){
+                this.player.x+=this.player.speed 
+            } else if (this.player.frameY===2) {
+                this.player.x-=this.player.speed
+            } else if (this.player.frameY===3){
+                this.player.y+=this.player.speed
+            }
+          }
+      }
+    }
+   
+  
   };
 
-  createBox(boxs=[], ctx){
-      for (let box of this.boxs) {
-        this.ctx.fillStyle = 'blue'
-        this.ctx.fillRect(box.x, box.y, box.w, box.h)
-      }
-      return
-  };
- 
-};
-// let createBluebox= new Collision(blueBoxs, ctx); 
-// createBluebox.createBox();
 
 
     
 window.addEventListener('DOMContentLoaded', function () {
+
+
+
 
  const full = document.querySelector('.fullscreen')
  let mydocument= document.documentElement;
@@ -107,6 +115,7 @@ window.addEventListener('DOMContentLoaded', function () {
      const blueBoxs = [
         {
             // Git
+            open:false,
             x: 38*tile*scaleCanvas,
             y: 31*tile*scaleCanvas,
             w:2*tile*scaleCanvas,
@@ -119,12 +128,11 @@ window.addEventListener('DOMContentLoaded', function () {
             dpx: 34*tile*scaleCanvas,
             dpy: 21*tile*scaleCanvas,
             dpw: 12*tile*scaleCanvas,
-            dph: 11*tile*scaleCanvas,
-                
-            
+            dph: 11*tile*scaleCanvas,     
         },
         {
             // 3W
+            open:false,
             x: 47*tile*scaleCanvas,
             y: 31*tile*scaleCanvas,
             w:2*tile*scaleCanvas,
@@ -142,6 +150,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }, 
         {
             // contact
+            open:false,
             x: 60*tile*scaleCanvas,
             y: 32*tile*scaleCanvas,
             w:2*tile*scaleCanvas,
@@ -158,6 +167,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }, 
         {
             // grange
+            open:false,
             x: 37*tile*scaleCanvas,
             y: 54*tile*scaleCanvas,
             w:2*tile*scaleCanvas,
@@ -175,6 +185,7 @@ window.addEventListener('DOMContentLoaded', function () {
         
         {
             // litl hous
+            open:false,
             x: 47*tile*scaleCanvas,
             y: 46*tile*scaleCanvas,
             w:2*tile*scaleCanvas,
@@ -191,6 +202,7 @@ window.addEventListener('DOMContentLoaded', function () {
         },
         {
             // main
+            open:false,
             x:56*tile*scaleCanvas,
             y:46*tile*scaleCanvas,
             w:2*tile*scaleCanvas,
@@ -212,117 +224,117 @@ window.addEventListener('DOMContentLoaded', function () {
         {
             x:23*tile*scaleCanvas,
             y:29*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:2*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
         {
             x:19*tile*scaleCanvas,
             y:30*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:2*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
         {
             x:15*tile*scaleCanvas,
             y:33*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:2*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
         {
             x:13*tile*scaleCanvas,
             y:38*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:2*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
         {
             x:23*tile*scaleCanvas,
             y:38*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:2*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
         {
             x:15*tile*scaleCanvas,
             y:42*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:2*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
         {
             x:42*tile*scaleCanvas,
             y:49*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
         {
             x:46*tile*scaleCanvas,
             y:50*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:2*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
         {
             x:47*tile*scaleCanvas,
             y:52*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
         {
             x:42*tile*scaleCanvas,
             y:54*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         // Mountains
         {
             x:11*tile*scaleCanvas,
             y:45*tile*scaleCanvas,
-            width:20*tile*scaleCanvas,
-            height:14*tile*scaleCanvas
+            w:20*tile*scaleCanvas,
+            h:14*tile*scaleCanvas
         },
         {
             x:64*tile*scaleCanvas,
             y:29*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
         {
             x:65*tile*scaleCanvas,
             y:31*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
         {
             x:67*tile*scaleCanvas,
             y:32*tile*scaleCanvas,
-            width:3*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:3*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
         {
             x:77*tile*scaleCanvas,
             y:36*tile*scaleCanvas,
-            width:3*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:3*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
         {
             x:72*tile*scaleCanvas,
             y:32*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:75*tile*scaleCanvas,
             y:38*tile*scaleCanvas,
-            width:3*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:3*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
         {
             x:70*tile*scaleCanvas,
             y:33*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
         {
             x:73*tile*scaleCanvas,
             y:33*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
     
        
@@ -330,56 +342,56 @@ window.addEventListener('DOMContentLoaded', function () {
         {
             x:30*tile*scaleCanvas,
             y:10*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:9*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:9*tile*scaleCanvas
         },
         {
             x:25*tile*scaleCanvas,
             y:37*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:8*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:8*tile*scaleCanvas
         },
         {
             x:30*tile*scaleCanvas,
             y:19*tile*scaleCanvas,
-            width:13*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:13*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:47*tile*scaleCanvas,
             y:10*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:9*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:9*tile*scaleCanvas
         },
         {
             x:47*tile*scaleCanvas,
             y:18*tile*scaleCanvas,
-            width:4*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:4*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:60*tile*scaleCanvas,
             y:20*tile*scaleCanvas,
-            width:4*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:4*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:60*tile*scaleCanvas,
             y:39*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:20*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:20*tile*scaleCanvas
         },
         {
             x:33*tile*scaleCanvas,
             y:45*tile*scaleCanvas,
-            width:12*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:12*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:33*tile*scaleCanvas,
             y:45*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:14*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:14*tile*scaleCanvas
         },
     
     
@@ -387,190 +399,190 @@ window.addEventListener('DOMContentLoaded', function () {
         {
             x:34*tile*scaleCanvas,
             y:58*tile*scaleCanvas,
-            width:26*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:26*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:25*tile*scaleCanvas,
             y:31*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:25*tile*scaleCanvas,
             y:32*tile*scaleCanvas,
-            width:1*tile,
-            height:1*tile
+            w:1*tile,
+            h:1*tile
         },
         {
             x:25*tile*scaleCanvas,
             y:35*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:2*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
         {
             x:25*tile*scaleCanvas,
             y:36*tile*scaleCanvas,
-            width:27*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:27*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:51*tile*scaleCanvas,
             y:36*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:11*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:11*tile*scaleCanvas
         },
         {
             x:54*tile*scaleCanvas,
             y:37*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:10*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:10*tile*scaleCanvas
         },
         {
             x:54*tile*scaleCanvas,
             y:37*tile*scaleCanvas,
-            width:4*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:4*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:57*tile*scaleCanvas,
             y:36*tile*scaleCanvas,
-            width:5*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:5*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:61*tile*scaleCanvas,
             y:36*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
         {
             x:61*tile*scaleCanvas,
             y:38*tile*scaleCanvas,
-            width:14*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:14*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:57*tile*scaleCanvas,
             y:31*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:3*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:3*tile*scaleCanvas
         },
         {
             x:56*tile*scaleCanvas,
             y:23*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:9*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:9*tile*scaleCanvas
         },
         
         {
             x:56*tile*scaleCanvas,
             y:23*tile*scaleCanvas,
-            width:9*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:9*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:64*tile*scaleCanvas,
             y:20*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:4*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:4*tile*scaleCanvas
         },
         {
             x:52*tile*scaleCanvas,
             y:23*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:9*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:9*tile*scaleCanvas
         },
         {
             x:43*tile*scaleCanvas,
             y:23*tile*scaleCanvas,
-            width:10*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:10*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:43*tile*scaleCanvas,
             y:19*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:5*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:5*tile*scaleCanvas
         },
         // house
         { 
             // grange
             x:35*tile*scaleCanvas,
             y:48*tile*scaleCanvas,
-            width:6*tile*scaleCanvas,
-            height:6*tile*scaleCanvas
+            w:6*tile*scaleCanvas,
+            h:6*tile*scaleCanvas
         },
         {
             // house
             x:45*tile*scaleCanvas,
             y:42*tile*scaleCanvas,
-            width:6*tile*scaleCanvas,
-            height:4*tile*scaleCanvas
+            w:6*tile*scaleCanvas,
+            h:4*tile*scaleCanvas
         },
         {
             // house
             x:27*tile*scaleCanvas,
             y:19*tile*scaleCanvas,
-            width:6*tile*scaleCanvas,
-            height:7*tile*scaleCanvas
+            w:6*tile*scaleCanvas,
+            h:7*tile*scaleCanvas
         },
         {
             // mainHouse
             x:54*tile*scaleCanvas,
             y:40*tile*scaleCanvas,
-            width:6*tile*scaleCanvas,
-            height:6*tile*scaleCanvas
+            w:6*tile*scaleCanvas,
+            h:6*tile*scaleCanvas
         },
         
         {
             // contact
             x:58*tile*scaleCanvas,
             y:28*tile*scaleCanvas,
-            width:6*tile*scaleCanvas,
-            height:4*tile*scaleCanvas
+            w:6*tile*scaleCanvas,
+            h:4*tile*scaleCanvas
         },
         {
             // newLide
             x:27*tile*scaleCanvas,
             y:24*tile*scaleCanvas,
-            width:25*tile*scaleCanvas,
-            height:7*tile*scaleCanvas
+            w:25*tile*scaleCanvas,
+            h:7*tile*scaleCanvas
         },
         {
             // oldLife
             x:51*tile*scaleCanvas,
             y:13*tile*scaleCanvas,
-            width:14*tile*scaleCanvas,
-            height:6*tile*scaleCanvas
+            w:14*tile*scaleCanvas,
+            h:6*tile*scaleCanvas
         },
         {
             // oldLife
             x:51*tile*scaleCanvas,
             y:19*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             // oldLife
             x:58*tile*scaleCanvas,
             y:19*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
              // contact letter_box
             x:58*tile*scaleCanvas,
             y:33*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
              // contact panels
             x:62*tile*scaleCanvas,
             y:33*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         
     
@@ -578,99 +590,99 @@ window.addEventListener('DOMContentLoaded', function () {
             // college panels
             x:56*tile*scaleCanvas,
             y:20*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
     
         {
             // college letterbox
             x:53*tile*scaleCanvas,
             y:20*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             // football pannel
             x:46*tile*scaleCanvas,
             y:18*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:2*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
         {
             // forest pannel
             x:75*tile*scaleCanvas,
             y:34*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:2*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
         {
             // main_house letterbox
             x:55*tile*scaleCanvas,
             y:47*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             // main_house flower
             x:49*tile*scaleCanvas,
             y:47*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             // house
             x:58*tile*scaleCanvas,
             y:47*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             // main_house flower
             x:45*tile*scaleCanvas,
             y:47*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:1*tile*scaleCanvas 
+            w:2*tile*scaleCanvas,
+            h:1*tile*scaleCanvas 
         },
         {
             // 
             x:58*tile*scaleCanvas,
             y:50*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas 
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas 
         },
         {
             // banc
             x:57*tile*scaleCanvas,
             y:51*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:2*tile*scaleCanvas 
+            w:2*tile*scaleCanvas,
+            h:2*tile*scaleCanvas 
         },
         {
             // banc
             x:58*tile*scaleCanvas,
             y:50*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas 
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas 
         },
         {
             // banc
             x:57*tile*scaleCanvas,
             y:54*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:2*tile*scaleCanvas 
+            w:1*tile*scaleCanvas,
+            h:2*tile*scaleCanvas 
         },
         // Various
         {
             x:50*tile*scaleCanvas,
             y:31*tile*scaleCanvas,
-            width:2*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:2*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
         {
             x:40*tile*scaleCanvas,
             y:31*tile*scaleCanvas,
-            width:1*tile*scaleCanvas,
-            height:1*tile*scaleCanvas
+            w:1*tile*scaleCanvas,
+            h:1*tile*scaleCanvas
         },
     
          
@@ -1129,7 +1141,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     let inHouse = false
     
-    const player = {
+    let player = {
         x: 1700,
         y: 1100,
         width: 32,
@@ -1365,6 +1377,9 @@ window.addEventListener('DOMContentLoaded', function () {
    
 
     let close_presentation= document.querySelectorAll('.close_presentation')
+    let createBluebox= new Collision(blackBoxs, ctx, player); 
+    
+   
 
 
     function displaGameboy(){
@@ -1404,48 +1419,19 @@ window.addEventListener('DOMContentLoaded', function () {
 
             if (((player.x + 16 >= blueBoxs[i].x && player.x + 16 <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingUp===true) {
                 inHouse = true
-                indexBluebox = i
+                blueBoxs[i].open=true
+                
             }
             if (((player.x + 16 >= blueBoxs[i].x && player.x + 16 <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingDown===true) {
                 inHouse = false
+                blueBoxs[i].open=false
             }
            
-          
-            if (inHouse === false) {
-                for (let object of blackBoxs) {
-                    // ctx.strokeStyle = "black"
-                    // ctx.strokeRect(object.x, object.y, object.width, object.height)    
-                    if(  (player.y+player.height > object.y && player.x+(player.width-5) > object.x && (player.x+15 ) < object.x+object.width && player.y < object.y+object.height) ) {
-                        if(player.frameY===0 ){
-                        player.y-=player.speed}
-                        else if(player.frameY===1){
-                            player.x+=player.speed 
-                        } else if (player.frameY===2) {
-                            player.x-=player.speed
-                        } else if (player.frameY===3){
-                            player.y+=player.speed
-                        }
-                         }
-                }
-            } 
-            if (inHouse === true && indexBluebox === i ){  
+            if (inHouse === true && blueBoxs[i].open===true ){  
                 ctx.drawImage(blueBoxs[i].background, blueBoxs[i].dx, blueBoxs[i].dy, blueBoxs[i].dw, blueBoxs[i].dh, blueBoxs[i].dpx, blueBoxs[i].dpy, blueBoxs[i].dpw, blueBoxs[i].dph) 
                 for ( let j= 0; j<greenBoxsArray.length; j++) {
-                    for (let greenBox of greenBoxsArray[i]) {
-                        // ctx.fillStyle = 'transparent'
-                        // ctx.fillRect(greenBox.x, greenBox.y, greenBox.w, greenBox.h) 
-                        if(  (player.y+player.height > greenBox.y && player.x+(player.width-5) > greenBox.x && (player.x+15 ) < greenBox.x+greenBox.w && player.y < greenBox.y+greenBox.h) ) {
-                            if(player.frameY===0 ){
-                            player.y-=player.speed}
-                            else if(player.frameY===1){
-                                player.x+=player.speed 
-                            } else if (player.frameY===2) {
-                                player.x-=player.speed
-                            } else if (player.frameY===3){
-                                player.y+=player.speed
-                            }
-                             }
-                    }
+                    let createGreenbox= new Collision(greenBoxsArray[i], ctx, player); 
+                    createGreenbox.enterInCollision(greenBoxsArray[i], ctx, player)
                 }
             }
                
@@ -1505,7 +1491,12 @@ window.addEventListener('DOMContentLoaded', function () {
     collisionRedbox()
     displaGameboy()
     document.addEventListener('contextmenu', event => event.preventDefault());
-
+    
+    if (inHouse === false) {
+        createBluebox.enterInCollision(blackBoxs, player)
+        
+    } 
+   
     
     window.addEventListener('resize', displayCanvas)
     window.requestAnimationFrame(animate); 
