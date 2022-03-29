@@ -52,7 +52,7 @@ canvas {
     border-top-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 6rem;
-    display: flex;
+    display: none;
 }
 .game_boy::after{
   content: "";
