@@ -1303,48 +1303,53 @@ document.addEventListener('contextmenu', event => event.preventDefault());
         movingLeft=false;
         
     })
+
+
+    action_btnt.addEventListener('touchstart', function (e) {
+        (actionBtn=true)
+        e.stopPropagation();
+    },{ passive: true })
+   
+    up.addEventListener('touchstart', function (e) {
+        (movingUp=true)
+        player.moving = true
+        e.stopPropagation();
+    },{ passive: true })
+    up.addEventListener('touchend', function () {
+        movingUp=false
+        player.moving = false
+    },{ passive: true })
+    right.addEventListener('touchstart', function (e) {
+        (movingRight=true)
+        player.moving = true
+        e.stopPropagation();
+    },{ passive: true })
+    right.addEventListener('touchend', function () {
+        movingRight=false
+        player.moving = false
+    },{ passive: true })
+    down.addEventListener('touchstart', function (e) {
+        (movingDown=true)
+        player.moving = true
+        e.stopPropagation();
+    },{ passive: true })
+    down.addEventListener('touchend', function () {
+        movingDown=false
+        player.moving = false
+    },{ passive: true })
+    left.addEventListener('touchstart', function (e) {
+        (movingLeft=true)
+        player.moving = true
+        e.stopPropagation();
+    },{ passive: true })
+    left.addEventListener('touchend', function () {
+        movingLeft=false
+        player.moving = false
+    },{ passive: true })
+
+
     function movePlayer() {
-        action_btnt.addEventListener('touchstart', function (e) {
-            (actionBtn=true)
-            e.stopPropagation();
-        },{ passive: true })
        
-        up.addEventListener('touchstart', function (e) {
-            (movingUp=true)
-            player.moving = true
-            e.stopPropagation();
-        },{ passive: true })
-        up.addEventListener('touchend', function () {
-            movingUp=false
-            player.moving = false
-        },{ passive: true })
-        right.addEventListener('touchstart', function (e) {
-            (movingRight=true)
-            player.moving = true
-            e.stopPropagation();
-        },{ passive: true })
-        right.addEventListener('touchend', function () {
-            movingRight=false
-            player.moving = false
-        },{ passive: true })
-        down.addEventListener('touchstart', function (e) {
-            (movingDown=true)
-            player.moving = true
-            e.stopPropagation();
-        },{ passive: true })
-        down.addEventListener('touchend', function () {
-            movingDown=false
-            player.moving = false
-        },{ passive: true })
-        left.addEventListener('touchstart', function (e) {
-            (movingLeft=true)
-            player.moving = true
-            e.stopPropagation();
-        },{ passive: true })
-        left.addEventListener('touchend', function () {
-            movingLeft=false
-            player.moving = false
-        },{ passive: true })
 
 
         if(openPannels===false) {
@@ -1373,6 +1378,15 @@ document.addEventListener('contextmenu', event => event.preventDefault());
         }
      
      
+
+
+
+
+
+
+
+
+
         
 
 
@@ -1491,7 +1505,7 @@ document.addEventListener('contextmenu', event => event.preventDefault());
     ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2)); //for center the character on the map
     ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height); //drawing the background
    
-    
+    enterInHouse()
     drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale) // drawing the sprite
     movePlayer() 
     handlePlayerFrame()
