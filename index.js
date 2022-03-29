@@ -9,24 +9,37 @@
 //     constructor (boxs) {
 //         this.boxs=boxs;
 //     };
-
-//     static createBox(boxs){
-//         for (let box of boxs) {
+//     createBox(boxs=[]){
+//         for (let box of this.boxs) {
 //             ctx.fillStyle = 'blue'
-//             ctx.fillRect(box.x, box.y, box.w, box.h)
+//             console.log('box:', box);
 //         }
 //         return
 //     };
 // };
+
+
+
+class Collision {   
+  constructor (boxs, ctx) {
+      this.boxs=boxs;
+      this.ctx=ctx;
+  };
+
+  createBox(boxs=[], ctx){
+      for (let box of this.boxs) {
+        this.ctx.fillStyle = 'blue'
+        this.ctx.fillRect(box.x, box.y, box.w, box.h)
+      }
+      return
+  };
+ 
+};
+// let createBluebox= new Collision(blueBoxs, ctx); 
+// createBluebox.createBox();
+
+
     
-// let createBluebox= new Collision();
-// createBluebox.createBox(blueBoxs);
-
-
-
-
-
-
 window.addEventListener('DOMContentLoaded', function () {
 
  const full = document.querySelector('.fullscreen')
@@ -69,13 +82,6 @@ window.addEventListener('DOMContentLoaded', function () {
          full.textContent="Plein Ecran"
      }
  })
-
- 
-
-
-
-
-
     const playerSprite = new Image();
     playerSprite.src = "img/main_chara.png ";
     const background = new Image();
@@ -1114,11 +1120,8 @@ window.addEventListener('DOMContentLoaded', function () {
         ]
     ];
 
-
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
-    var elem = document.getElementById("myvideo");
-
     let scale = 1.3
     let canvasSize = {
         width: 3800,
@@ -1139,10 +1142,10 @@ window.addEventListener('DOMContentLoaded', function () {
     let indexBluebox = -1
     ////////////////////////// AddEvenListener Pour recadrer la taille du canvas à chaque resize de l'écran
     function displayCanvas() {
-        ctx.canvas.width = window.innerWidth;
-        ctx.canvas.height = window.innerHeight
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight
     }
-    displayCanvas()
+  
 
     
  ctx.imageSmoothingEnabled = false
@@ -1396,43 +1399,6 @@ window.addEventListener('DOMContentLoaded', function () {
           
 
     }
-  
-   
-    
-    function animate() { 
-       
-    ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height);
-    enterInHouse();
-    drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)
-    movePlayer()
-    
-    handlePlayerFrame()
-    
-    ctx.resetTransform();
-    ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
-    collisionRedbox()
-    displaGameboy()
-    document.addEventListener('contextmenu', event => event.preventDefault());
- 
-    window.addEventListener('resize', displayCanvas)
-    
-    
-    window.requestAnimationFrame(animate);
-    }
-    animate()
-
-    
-    // espace colision ///////////////////////////////////////////////////////////////////////////////
-  
-
-    function createBluebox() {
-        for (let blueBox of blueBoxs) {
-            ctx.fillStyle = 'transparent'
-            ctx.fillRect(blueBox.x, blueBox.y, blueBox.w, blueBox.h)
-        }
-    }
-    
-
     function enterInHouse() {
         for (let i = 0; i < blueBoxs.length; i++) {
 
@@ -1525,6 +1491,35 @@ window.addEventListener('DOMContentLoaded', function () {
    
         
 }
+   
+    
+    function animate() {    
+    ctx.clearRect(0,0, canvasSize.width, canvasSize.height)
+    ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height);
+    enterInHouse();
+    drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale)
+    movePlayer()
+    handlePlayerFrame()
+    ctx.resetTransform();
+    ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2));
+    collisionRedbox()
+    displaGameboy()
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    
+    window.addEventListener('resize', displayCanvas)
+    window.requestAnimationFrame(animate); 
+    }
+    animate()
+
+    
+    // espace colision ///////////////////////////////////////////////////////////////////////////////
+  
+
+   
+    
+
+  
 
 
 
