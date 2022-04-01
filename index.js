@@ -1645,7 +1645,7 @@ full.addEventListener("click", function(){
                 for ( let j= 0; j<greenBoxsArray.length; j++) {
                     let createGreenbox= new Collision(greenBoxsArray[i], ctx, player); 
                     createGreenbox.enterInCollision(greenBoxsArray[i], ctx, player)
-                    createGreenbox.createBox()
+                
                     
                 }
             }          
