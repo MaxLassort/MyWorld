@@ -1432,7 +1432,7 @@ window.addEventListener('DOMContentLoaded', function () {
     ctx.imageSmoothingEnabled = false
     let frameChanging=0
 
- 
+
 document.getElementById('body').addEventListener("touchstart", (e)=>{
     e.stopPropagation();
 }, { passive: true });
@@ -1513,47 +1513,63 @@ full.addEventListener("click", function(){
         
     })
 
+    function eventListener(){
+        action_btnt.addEventListener('touchstart', function (e) {
+            (actionBtn=true)
+            e.stopPropagation();
+        },{ passive: true })
+        up.addEventListener('touchstart', function (e) {
+            (movingUp=true)
+            player.moving = true
+            e.stopPropagation();
+        },{ passive: true })
+        up.addEventListener('touchend', function () {
+            movingUp=false
+            player.moving = false
+        },{ passive: true })
+        right.addEventListener('touchstart', function (e) {
+            (movingRight=true)
+            player.moving = true
+            e.stopPropagation();
+        },{ passive: true })
+        right.addEventListener('touchend', function () {
+            movingRight=false
+            player.moving = false
+        },{ passive: true })
+        down.addEventListener('touchstart', function (e) {
+            (movingDown=true)
+            player.moving = true
+            e.stopPropagation();
+        },{ passive: true })
+        down.addEventListener('touchend', function () {
+            movingDown=false
+            player.moving = false
+        },{ passive: true })
+        left.addEventListener('touchstart', function (e) {
+            (movingLeft=true)
+            player.moving = true
+            e.stopPropagation();
+        },{ passive: true })
+        left.addEventListener('touchend', function () {
+            movingLeft=false
+            player.moving = false
+        },{ passive: true })
 
-    action_btnt.addEventListener('touchstart', function (e) {
-        (actionBtn=true)
-        e.stopPropagation();
-    },{ passive: true })
-    up.addEventListener('touchstart', function (e) {
-        (movingUp=true)
-        player.moving = true
-        e.stopPropagation();
-    },{ passive: true })
-    up.addEventListener('touchend', function () {
-        movingUp=false
-        player.moving = false
-    },{ passive: true })
-    right.addEventListener('touchstart', function (e) {
-        (movingRight=true)
-        player.moving = true
-        e.stopPropagation();
-    },{ passive: true })
-    right.addEventListener('touchend', function () {
-        movingRight=false
-        player.moving = false
-    },{ passive: true })
-    down.addEventListener('touchstart', function (e) {
-        (movingDown=true)
-        player.moving = true
-        e.stopPropagation();
-    },{ passive: true })
-    down.addEventListener('touchend', function () {
-        movingDown=false
-        player.moving = false
-    },{ passive: true })
-    left.addEventListener('touchstart', function (e) {
-        (movingLeft=true)
-        player.moving = true
-        e.stopPropagation();
-    },{ passive: true })
-    left.addEventListener('touchend', function () {
-        movingLeft=false
-        player.moving = false
-    },{ passive: true })
+        window.addEventListener('resize', displayCanvas)
+
+        close_presentation.forEach(element => {
+            element.addEventListener('click',function(){
+                presentation.style.display='none'
+                landscape.style.display="none"
+                presentationReaded=true
+                openPannels=false 
+                actionBtn=false
+                actionBtn=false
+            })
+        });
+    }
+    eventListener()
+    
 
 
     function movePlayer() {
@@ -1596,16 +1612,6 @@ full.addEventListener("click", function(){
        
     }
 
-
-    close_presentation.forEach(element => {
-        element.addEventListener('click',function(){
-            presentation.style.display='none'
-            landscape.style.display="none"
-            presentationReaded=true
-            openPannels=false 
-            actionBtn=false
-        })
-    });
     function displaGameboy(){
         if(window.innerHeight > window.innerWidth){
             pannelsOpen=true
@@ -1620,7 +1626,6 @@ full.addEventListener("click", function(){
             presentation.style.display='flex'
             landscape.style.display="none"
         } 
-        
         
         if(openPannels===true) {
             modal.style.display='flex'
@@ -1658,16 +1663,12 @@ full.addEventListener("click", function(){
     for (let redBox of redBoxs) {
         // ctx.fillStyle = 'red'
         // ctx.fillRect(redBox.x, redBox.y, redBox.width, redBox.height)
-       
-
         if(  ((player.y+player.height) > (redBox.y)) &&
-               ((player.y < (redBox.y + redBox.height))) &&
-               ((player.x+player.width)> redBox.x) &&
-               (player.x < (redBox.x+redBox.width))
-           ) {
+            ((player.y < (redBox.y + redBox.height))) &&
+            ((player.x+player.width)> redBox.x) &&
+            (player.x < (redBox.x+redBox.width))
+        ) {
         insideRedbox= true
-       
-        
         if (insideRedbox===true && actionBtn===true  && player.frameY===3) {
             openPannels=true
             redBox.textToShow.style.display='block'
@@ -1678,10 +1679,10 @@ full.addEventListener("click", function(){
             insideRedbox=false
         }
         if(  ((player.y+player.height) < (redBox.y)) &&
-               ((player.y > (redBox.y + redBox.height))) &&
-               ((player.x+player.width)< redBox.x) &&
-               (player.x > (redBox.x+redBox.width))
-           ) {
+            ((player.y > (redBox.y + redBox.height))) &&
+            ((player.x+player.width)< redBox.x) &&
+            (player.x > (redBox.x+redBox.width))
+        ) {
         insideRedbox= false
             }
     }
@@ -1691,7 +1692,6 @@ full.addEventListener("click", function(){
         
     }
     displayCanvas()
- 
     function animate() {    
         ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height); //drawing the background
         enterInHouse()
@@ -1709,7 +1709,7 @@ full.addEventListener("click", function(){
     
     window.requestAnimationFrame(animate); 
 }
-window.addEventListener('resize', displayCanvas)
+
     animate()
 
 })

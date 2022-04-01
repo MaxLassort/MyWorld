@@ -218,93 +218,6 @@ content: "";
     position: absolute;
 }
 
-/* .game_boy {
-    position: relative;
-    width: 600px;
-    height: 600px;
-    background-color: #B7B5B6;
-    border: solid black 2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 6rem;
-}
-.hello {
-    background-color:#B4C96E ;
-    border: solid black 2px;
-    width: 400px;
-    height: 400px;
-    overflow: hidden;
-    padding: 1rem;
-
-}
-.led {
-    position: absolute;
-    top: 151px;
-    left: 33px;
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    border: black solid 1px;
-    border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    -ms-border-radius: 50px;
-    -o-border-radius: 50px;
-}
-.blue_rect {
-    width: 177px;
-    height: 4px;
-    background-color: blue;
-    position: absolute;
-    top: 40px;
-    left: 10px;
-}
-.red_rect {
-    width: 177px; 
-    height: 4px ; 
-    background-color: red; 
-    position: absolute; 
-    top: 47px; 
-    left: 10px;
-}
-.blue_rect2 {
-    width: 75px;
-    height: 4px;
-    background-color: blue;
-    position: absolute;
-    top: 40px;
-    left: 504px;
-}
-.red_rect2 {
-    width: 75px;
-    height: 4px;
-    background-color: red; 
-    position: absolute; 
-    top: 47px; 
-    left: 504px;
-}
-.battery {
-    font-size: 1rem;
-    position: absolute;
-    top: 180px;
-    left: 10px;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-}
-.matrix {
-    font-size: 1.1rem;
-    position: absolute;
-    top: 36px;
-    left: 191px;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-} */
 
 
 
@@ -316,7 +229,6 @@ content: "";
     padding:1rem;
     font-family: 'Press Start 2P', cursive;
     border: black solid 1px;
-   
 }
 
 .landscape {
@@ -331,7 +243,6 @@ content: "";
 }
 
 @media (orientation: landscape) {
-   
     .direction_button {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
