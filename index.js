@@ -6,7 +6,7 @@
 // import {scaleCanvas} from '/variables/variables.js';
 
 class Collision {   
-    constructor (boxes, ctx, player, color,) {
+    constructor (boxes, ctx, player, color) {
         this.boxes=boxes;
         this.ctx=ctx;
         this.player=player;
@@ -44,8 +44,8 @@ class Collision {
     EnterInbox(){
         for (let box of this.boxes) {  
             if(  (this.player.y+this.player.height > box.y && this.player.x+(this.player.width-5) > box.x && (this.player.x+15 ) < box.x+box.w && this.player.y+26 < box.y+box.h) ) {
-                this.ctx.fillStyle = 'blue'
-                this.ctx.fillRect(box.x, box.y, box.w, box.h)
+                // this.ctx.fillStyle = 'blue'
+                // this.ctx.fillRect(box.x, box.y, box.w, box.h)
                 this.inBox=true
             }
             if((this.player.y+this.player.height < box.y && this.player.x+(this.player.width-5) < box.x && (this.player.x+15 ) > box.x+box.w && this.player.y+26 > box.y+box.h)) {
@@ -537,7 +537,7 @@ window.addEventListener('DOMContentLoaded', function () {
         x:27*tile*scaleCanvas,
         y:24*tile*scaleCanvas,
         w:25*tile*scaleCanvas,
-        h:7*tile*scaleCanvas
+        h:8*tile*scaleCanvas
     },
     {
         // oldLife
@@ -1631,14 +1631,22 @@ full.addEventListener("click", function(){
             modal.style.display='none'
         }
     }
+    const greyBox=[
+        {
+            x: 34*tile*scaleCanvas,
+            y: 20*tile*scaleCanvas,
+            w:12*tile*scaleCanvas,
+            h:12*tile*scaleCanvas,
+        }
+    ]
     function enterInHouse() {
         for (let i = 0; i < blueBoxs.length; i++) {
 
-            if (((player.x +30 >= blueBoxs[i].x && player.x  <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingUp===true) {
+            if (((player.x >= blueBoxs[i].x && player.x  <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y > blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingUp===true) {
                 inHouse = true
                 blueBoxs[i].open=true
             }
-            if (((player.x +30 >= blueBoxs[i].x && player.x <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingDown===true) {
+            if (((player.x >= blueBoxs[i].x && player.x <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y-10 > blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingDown===true) {
                 inHouse = false
                 blueBoxs[i].open=false
             }  
@@ -1647,10 +1655,10 @@ full.addEventListener("click", function(){
                 for ( let j= 0; j<greenBoxsArray.length; j++) {
                     let createGreenbox= new Collision(greenBoxsArray[i], ctx, player); 
                     createGreenbox.enterInCollision(greenBoxsArray[i], ctx, player)
-                
+                    // createGreenbox.createBox()
                     
                 }
-            }          
+            }        
         }
 
 
@@ -1698,9 +1706,9 @@ full.addEventListener("click", function(){
     ]
     function contactBox(){
         const yellowBoxObject=new Collision(yellowBox, ctx, player, 'yellow');
-        yellowBoxObject.createBox();
+        
         yellowBoxObject.EnterInbox();
-        if(yellowBoxObject.inBox===true && actionBtn===true){
+        if(yellowBoxObject.inBox===true && actionBtn===true && player.frameY===1 ){
             actionBtn=false
             window.location.href = "mailto:mail@example.org"
         }
