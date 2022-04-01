@@ -6,25 +6,26 @@
 // import {scaleCanvas} from '/variables/variables.js';
 
 class Collision {   
-    constructor (boxes, ctx, player, color) {
+    constructor (boxes, ctx, player, color,) {
         this.boxes=boxes;
         this.ctx=ctx;
         this.player=player;
         this.color=color;
+        // this.inBox=inBox;
     };
-  
+    inBox=false
     createBox(){
         for (let box of this.boxes) {
-          this.ctx.fillStyle = this.color
-          this.ctx.fillRect(box.x, box.y, box.w, box.h)
+        this.ctx.fillStyle = this.color
+        this.ctx.fillRect(box.x, box.y, box.w, box.h)
         }
         return
     };
-   
+
     enterInCollision(){
-      
-      for (let box of this.boxes) {  
-          if(  (this.player.y+this.player.height > box.y && this.player.x+(this.player.width-5) > box.x && (this.player.x+15 ) < box.x+box.w && this.player.y+26 < box.y+box.h) ) {
+    
+    for (let box of this.boxes) {  
+        if(  (this.player.y+this.player.height > box.y && this.player.x+(this.player.width-5) > box.x && (this.player.x+15 ) < box.x+box.w && this.player.y+26 < box.y+box.h) ) {
             // this.ctx.fillStyle = 'yellow'
             // this.ctx.fillRect(box.x, box.y, box.w, box.h)
             if(this.player.frameY===0 ){
@@ -36,20 +37,26 @@ class Collision {
             } else if (this.player.frameY===3){
                 this.player.y+=this.player.speed
             }
-          }
-      }
+        }
+        }
     }
+
+    EnterInbox(){
+        for (let box of this.boxes) {  
+            if(  (this.player.y+this.player.height > box.y && this.player.x+(this.player.width-5) > box.x && (this.player.x+15 ) < box.x+box.w && this.player.y+26 < box.y+box.h) ) {
+                this.ctx.fillStyle = 'blue'
+                this.ctx.fillRect(box.x, box.y, box.w, box.h)
+                this.inBox=true
+            }
+            if((this.player.y+this.player.height < box.y && this.player.x+(this.player.width-5) < box.x && (this.player.x+15 ) > box.x+box.w && this.player.y+26 > box.y+box.h)) {
+                this.inBox=false
+            }
+        }
+    }
+
     
 };
-
-
-
-
 window.addEventListener('DOMContentLoaded', function () {
-    
-
-    
-
     const playerSprite = new Image();
     playerSprite.src = "img/main_chara.png ";
     const background = new Image();
@@ -98,639 +105,637 @@ window.addEventListener('DOMContentLoaded', function () {
     ];
     let index=false
     const blueBoxs = [
-       {
+        {
            // Git
-           open:false,
-           x: 37*tile*scaleCanvas,
-           y: 31*tile*scaleCanvas,
-           w:3*tile*scaleCanvas,
-           h:1*tile*scaleCanvas,
-           background: Images_array[2],
-           dx: 0,
-           dy: 0,
-           dw: 12*tile,
-           dh: 11*tile,
-           dpx: 34*tile*scaleCanvas,
-           dpy: 21*tile*scaleCanvas,
-           dpw: 12*tile*scaleCanvas,
-           dph: 11*tile*scaleCanvas,     
-       },
-       {
-           // 3W
-           open:false,
-           x: 47*tile*scaleCanvas,
-           y: 31*tile*scaleCanvas,
-           w:3*tile*scaleCanvas,
-           h:1*tile*scaleCanvas,
-           background: Images_array[3],
-           dx: 0,
-           dy: 0,
-           dw: 12*tile,
-           dh: 12*tile,
-           dpx: 42*tile*scaleCanvas,
-           dpy: 20*tile*scaleCanvas,
-           dpw: 12*tile*scaleCanvas,
-           dph: 12*tile*scaleCanvas,
-   
-       }, 
-       {
-           // contact
-           open:false,
-           x: 59*tile*scaleCanvas,
-           y: 32*tile*scaleCanvas,
-           w:3*tile*scaleCanvas,
-           h:1*tile*scaleCanvas,
-           background: Images_array[4],
-           dx: 0,
-           dy: 0,
-           dw: 12*tile,
-           dh: 12*tile,
-           dpx: 55*tile*scaleCanvas,
-           dpy: 21*tile*scaleCanvas,
-           dpw: 12*tile*scaleCanvas,
-           dph: 12*tile*scaleCanvas,
-       }, 
-       {
-           // grange
-           open:false,
-           x: 37*tile*scaleCanvas,
-           y: 54*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:1*tile*scaleCanvas,
-           background: Images_array[5],
-           dx: 0,
-           dy: 0,
-           dw: 10*tile,
-           dh: 11*tile,
-           dpx: 33*tile*scaleCanvas,
-           dpy: 44*tile*scaleCanvas,
-           dpw: 10*tile*scaleCanvas,
-           dph: 11*tile*scaleCanvas,
+            open:false,
+            x: 37*tile*scaleCanvas,
+            y: 31*tile*scaleCanvas,
+            w:3*tile*scaleCanvas,
+            h:1*tile*scaleCanvas,
+            background: Images_array[2],
+            dx: 0,
+            dy: 0,
+            dw: 12*tile,
+            dh: 11*tile,
+            dpx: 34*tile*scaleCanvas,
+            dpy: 21*tile*scaleCanvas,
+            dpw: 12*tile*scaleCanvas,
+            dph: 11*tile*scaleCanvas,     
         },
-       
-       {
-           // litl hous
-           open:false,
-           x: 47*tile*scaleCanvas,
-           y: 46*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:1*tile*scaleCanvas,
-           background: Images_array[6],
-           dx: 0,
-           dy: 0,
-           dw: 12*tile,
-           dh: 12*tile,
-           dpx: 42*tile*scaleCanvas,
-           dpy: 35*tile*scaleCanvas,
-           dpw: 12*tile*scaleCanvas,
-           dph: 12*tile*scaleCanvas,
-       },
-       {
-           // main
-           open:false,
-           x:55*tile*scaleCanvas,
-           y:46*tile*scaleCanvas,
-           w:3*tile*scaleCanvas,
-           h:1*tile*scaleCanvas,
-           background: Images_array[7],
-           dx: 0,
-           dy: 0,
-           dw: 22*tile,
-           dh: 12*tile,
-           dpx: 51*tile*scaleCanvas,
-           dpy: 35*tile*scaleCanvas,
-           dpw: 22*tile*scaleCanvas,
-           dph: 12*tile*scaleCanvas, 
-       }
-          
+        {
+            // 3W
+            open:false,
+            x: 47*tile*scaleCanvas,
+            y: 31*tile*scaleCanvas,
+            w:3*tile*scaleCanvas,
+            h:1*tile*scaleCanvas,
+            background: Images_array[3],
+            dx: 0,
+            dy: 0,
+            dw: 12*tile,
+            dh: 12*tile,
+            dpx: 42*tile*scaleCanvas,
+            dpy: 20*tile*scaleCanvas,
+            dpw: 12*tile*scaleCanvas,
+            dph: 12*tile*scaleCanvas,
+        }, 
+        {
+            // contact
+            open:false,
+            x: 59*tile*scaleCanvas,
+            y: 32*tile*scaleCanvas,
+            w:3*tile*scaleCanvas,
+            h:1*tile*scaleCanvas,
+            background: Images_array[4],
+            dx: 0,
+            dy: 0,
+            dw: 12*tile,
+            dh: 12*tile,
+            dpx: 55*tile*scaleCanvas,
+            dpy: 21*tile*scaleCanvas,
+            dpw: 12*tile*scaleCanvas,
+            dph: 12*tile*scaleCanvas,
+        }, 
+        {
+            // grange
+            open:false,
+            x: 37*tile*scaleCanvas,
+            y: 54*tile*scaleCanvas,
+            w:2*tile*scaleCanvas,
+            h:1*tile*scaleCanvas,
+            background: Images_array[5],
+            dx: 0,
+            dy: 0,
+            dw: 10*tile,
+            dh: 11*tile,
+            dpx: 33*tile*scaleCanvas,
+            dpy: 44*tile*scaleCanvas,
+            dpw: 10*tile*scaleCanvas,
+            dph: 11*tile*scaleCanvas,
+        },
+        
+        {
+            // litl hous
+            open:false,
+            x: 47*tile*scaleCanvas,
+            y: 46*tile*scaleCanvas,
+            w:2*tile*scaleCanvas,
+            h:1*tile*scaleCanvas,
+            background: Images_array[6],
+            dx: 0,
+            dy: 0,
+            dw: 12*tile,
+            dh: 12*tile,
+            dpx: 42*tile*scaleCanvas,
+            dpy: 35*tile*scaleCanvas,
+            dpw: 12*tile*scaleCanvas,
+            dph: 12*tile*scaleCanvas,
+        },
+        {
+            // main
+            open:false,
+            x:55*tile*scaleCanvas,
+            y:46*tile*scaleCanvas,
+            w:3*tile*scaleCanvas,
+            h:1*tile*scaleCanvas,
+            background: Images_array[7],
+            dx: 0,
+            dy: 0,
+            dw: 22*tile,
+            dh: 12*tile,
+            dpx: 51*tile*scaleCanvas,
+            dpy: 35*tile*scaleCanvas,
+            dpw: 22*tile*scaleCanvas,
+            dph: 12*tile*scaleCanvas, 
+        }
     ]; 
     const blackBoxs = [
        // Trees
-       {
-           x:23*tile*scaleCanvas,
-           y:28*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:19*tile*scaleCanvas,
-           y:29*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:15*tile*scaleCanvas,
-           y:32*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:13*tile*scaleCanvas,
-           y:37*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:22*tile*scaleCanvas,
-           y:37*tile*scaleCanvas,
-           w:3*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:15*tile*scaleCanvas,
-           y:41*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:42*tile*scaleCanvas,
-           y:49*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:46*tile*scaleCanvas,
-           y:50*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:2*tile*scaleCanvas
-       },
-       {
-           x:47*tile*scaleCanvas,
-           y:52*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:42*tile*scaleCanvas,
-           y:54*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       // Mountains
-       {
-           x:11*tile*scaleCanvas,
-           y:44*tile*scaleCanvas,
-           w:20*tile*scaleCanvas,
-           h:15*tile*scaleCanvas
-       },
-       {
-           x:64*tile*scaleCanvas,
-           y:29*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:65*tile*scaleCanvas,
-           y:31*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:67*tile*scaleCanvas,
-           y:32*tile*scaleCanvas,
-           w:3*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:77*tile*scaleCanvas,
-           y:36*tile*scaleCanvas,
-           w:3*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:72*tile*scaleCanvas,
-           y:32*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:75*tile*scaleCanvas,
-           y:38*tile*scaleCanvas,
-           w:3*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:70*tile*scaleCanvas,
-           y:33*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:73*tile*scaleCanvas,
-           y:33*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-   
-      
-       // fences
-       {
-           x:30*tile*scaleCanvas,
-           y:10*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:9*tile*scaleCanvas
-       },
-       {
-           x:25*tile*scaleCanvas,
-           y:37*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:8*tile*scaleCanvas
-       },
-       {
-           x:30*tile*scaleCanvas,
-           y:19*tile*scaleCanvas,
-           w:13*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:47*tile*scaleCanvas,
-           y:10*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:9*tile*scaleCanvas
-       },
-       {
-           x:47*tile*scaleCanvas,
-           y:18*tile*scaleCanvas,
-           w:4*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:60*tile*scaleCanvas,
-           y:20*tile*scaleCanvas,
-           w:4*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:60*tile*scaleCanvas,
-           y:39*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:20*tile*scaleCanvas
-       },
-       {
-           x:33*tile*scaleCanvas,
-           y:45*tile*scaleCanvas,
-           w:12*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:33*tile*scaleCanvas,
-           y:45*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:14*tile*scaleCanvas
-       },
-   
-   
-       // bush 
-       {
-           x:34*tile*scaleCanvas,
-           y:58*tile*scaleCanvas,
-           w:26*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:25*tile*scaleCanvas,
-           y:31*tile*scaleCanvas,
-           w:4*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:25*tile*scaleCanvas,
-           y:32*tile*scaleCanvas,
-           w:1*tile,
-           h:1*tile
-       },
-       {
-           x:25*tile*scaleCanvas,
-           y:35*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:2*tile*scaleCanvas
-       },
-       {
-           x:25*tile*scaleCanvas,
-           y:36*tile*scaleCanvas,
-           w:27*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:51*tile*scaleCanvas,
-           y:36*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:11*tile*scaleCanvas
-       },
-       {
-           x:54*tile*scaleCanvas,
-           y:37*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:10*tile*scaleCanvas
-       },
-       {
-           x:54*tile*scaleCanvas,
-           y:37*tile*scaleCanvas,
-           w:4*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:57*tile*scaleCanvas,
-           y:36*tile*scaleCanvas,
-           w:5*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:61*tile*scaleCanvas,
-           y:36*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:61*tile*scaleCanvas,
-           y:38*tile*scaleCanvas,
-           w:14*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:57*tile*scaleCanvas,
-           y:31*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:3*tile*scaleCanvas
-       },
-       {
-           x:56*tile*scaleCanvas,
-           y:23*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:9*tile*scaleCanvas
-       },
-       
-       {
-           x:56*tile*scaleCanvas,
-           y:23*tile*scaleCanvas,
-           w:9*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:64*tile*scaleCanvas,
-           y:20*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:4*tile*scaleCanvas
-       },
-       {
-           x:52*tile*scaleCanvas,
-           y:23*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:9*tile*scaleCanvas
-       },
-       {
-           x:43*tile*scaleCanvas,
-           y:23*tile*scaleCanvas,
-           w:10*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:43*tile*scaleCanvas,
-           y:19*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:5*tile*scaleCanvas
-       },
-       // house
-       { 
-           // grange
-           x:35*tile*scaleCanvas,
-           y:48*tile*scaleCanvas,
-           w:6*tile*scaleCanvas,
-           h:6*tile*scaleCanvas
-       },
-       {
-           // house
-           x:45*tile*scaleCanvas,
-           y:42*tile*scaleCanvas,
-           w:6*tile*scaleCanvas,
-           h:4*tile*scaleCanvas
-       },
-       {
-           // house
-           x:27*tile*scaleCanvas,
-           y:19*tile*scaleCanvas,
-           w:6*tile*scaleCanvas,
-           h:7*tile*scaleCanvas
-       },
-       {
-           // mainHouse
-           x:54*tile*scaleCanvas,
-           y:40*tile*scaleCanvas,
-           w:6*tile*scaleCanvas,
-           h:6*tile*scaleCanvas
-       },
-       
-       {
-           // contact
-           x:58*tile*scaleCanvas,
-           y:28*tile*scaleCanvas,
-           w:6*tile*scaleCanvas,
-           h:4*tile*scaleCanvas
-       },
-       {
-           // newLide
-           x:27*tile*scaleCanvas,
-           y:24*tile*scaleCanvas,
-           w:25*tile*scaleCanvas,
-           h:7*tile*scaleCanvas
-       },
-       {
-           // oldLife
-           x:51*tile*scaleCanvas,
-           y:13*tile*scaleCanvas,
-           w:14*tile*scaleCanvas,
-           h:6*tile*scaleCanvas
-       },
-       {
-           // oldLife
-           x:51*tile*scaleCanvas,
-           y:19*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           // oldLife
-           x:58*tile*scaleCanvas,
-           y:19*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-            // contact letter_box
-           x:58*tile*scaleCanvas,
-           y:32*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:2*tile*scaleCanvas
-       },
-       {
-            // contact panels
-           x:62*tile*scaleCanvas,
-           y:32*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:2*tile*scaleCanvas
-       },
-        {
-            x:43*tile*scaleCanvas,
-            y:31*tile*scaleCanvas,
-            w:4*tile*scaleCanvas,
-            h:1*tile*scaleCanvas
-        },
-       
-       {
-        x:31*tile*scaleCanvas,
-        y:31*tile*scaleCanvas,
-        w:7*tile*scaleCanvas,
-        h:1*tile*scaleCanvas
-       },
-       {
-           // montain panels
-           x:20*tile*scaleCanvas,
-           y:40*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:2*tile*scaleCanvas
-       },
-       {
-           // college panels
-           x:56*tile*scaleCanvas,
-           y:20*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-   
-       {
-           // college letterbox
-           x:53*tile*scaleCanvas,
-           y:20*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           // football pannel
-           x:46*tile*scaleCanvas,
-           y:18*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:2*tile*scaleCanvas
-       },
-       {
-           // forest pannel
-           x:75*tile*scaleCanvas,
-           y:34*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:2*tile*scaleCanvas
-       },
-       {
-           // main_house letterbox
-           x:55*tile*scaleCanvas,
-           y:46*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:2*tile*scaleCanvas
-       },
-       {
-           // main_house flower
-           x:49*tile*scaleCanvas,
-           y:46*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:2*tile*scaleCanvas
-       },
-       {
-           // house
-           x:58*tile*scaleCanvas,
-           y:47*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           // grange
-           x:35*tile*scaleCanvas,
-           y:54*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           // grange
-           x:39*tile*scaleCanvas,
-           y:54*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           // main_house flower
-           x:45*tile*scaleCanvas,
-           y:46*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:2*tile*scaleCanvas 
-       },
-       {
-           // 
-           x:58*tile*scaleCanvas,
-           y:50*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:1*tile*scaleCanvas 
-       },
-       {
-           // banc
-           x:57*tile*scaleCanvas,
-           y:51*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:2*tile*scaleCanvas 
-       },
-       {
-           // banc
-           x:58*tile*scaleCanvas,
-           y:50*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:1*tile*scaleCanvas 
-       },
-       {
-           // banc
-           x:57*tile*scaleCanvas,
-           y:54*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:2*tile*scaleCanvas 
-       },
-       // Various
-       {
-           x:50*tile*scaleCanvas,
-           y:31*tile*scaleCanvas,
-           w:2*tile*scaleCanvas,
-           h:1*tile*scaleCanvas
-       },
-       {
-           x:49*tile*scaleCanvas,
-           y:31*tile*scaleCanvas,
-           w:1*tile*scaleCanvas,
-           h:2*tile*scaleCanvas
-       },
     {
-        x:40*tile*scaleCanvas,
+        x:23*tile*scaleCanvas,
+        y:28*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:19*tile*scaleCanvas,
+        y:29*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:15*tile*scaleCanvas,
+        y:32*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:13*tile*scaleCanvas,
+        y:37*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:22*tile*scaleCanvas,
+        y:37*tile*scaleCanvas,
+        w:3*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:15*tile*scaleCanvas,
+        y:41*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:42*tile*scaleCanvas,
+        y:49*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:46*tile*scaleCanvas,
+        y:50*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:2*tile*scaleCanvas
+    },
+    {
+        x:47*tile*scaleCanvas,
+        y:52*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:42*tile*scaleCanvas,
+        y:54*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    // Mountains
+    {
+        x:11*tile*scaleCanvas,
+        y:44*tile*scaleCanvas,
+        w:20*tile*scaleCanvas,
+        h:15*tile*scaleCanvas
+    },
+    {
+        x:64*tile*scaleCanvas,
+        y:29*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:65*tile*scaleCanvas,
         y:31*tile*scaleCanvas,
         w:2*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:67*tile*scaleCanvas,
+        y:32*tile*scaleCanvas,
+        w:3*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:77*tile*scaleCanvas,
+        y:36*tile*scaleCanvas,
+        w:3*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:72*tile*scaleCanvas,
+        y:32*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
         h:1*tile*scaleCanvas
     },
     {
-        x:40*tile*scaleCanvas,
+        x:75*tile*scaleCanvas,
+        y:38*tile*scaleCanvas,
+        w:3*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:70*tile*scaleCanvas,
+        y:33*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:73*tile*scaleCanvas,
+        y:33*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+
+    
+    // fences
+    {
+        x:30*tile*scaleCanvas,
+        y:10*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:9*tile*scaleCanvas
+    },
+    {
+        x:25*tile*scaleCanvas,
+        y:37*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:8*tile*scaleCanvas
+    },
+    {
+        x:30*tile*scaleCanvas,
+        y:19*tile*scaleCanvas,
+        w:13*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:47*tile*scaleCanvas,
+        y:10*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:9*tile*scaleCanvas
+    },
+    {
+        x:47*tile*scaleCanvas,
+        y:18*tile*scaleCanvas,
+        w:4*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:60*tile*scaleCanvas,
+        y:20*tile*scaleCanvas,
+        w:4*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:60*tile*scaleCanvas,
+        y:39*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:20*tile*scaleCanvas
+    },
+    {
+        x:33*tile*scaleCanvas,
+        y:45*tile*scaleCanvas,
+        w:12*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:33*tile*scaleCanvas,
+        y:45*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:14*tile*scaleCanvas
+    },
+
+
+    // bush 
+    {
+        x:34*tile*scaleCanvas,
+        y:58*tile*scaleCanvas,
+        w:26*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:25*tile*scaleCanvas,
         y:31*tile*scaleCanvas,
+        w:4*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:25*tile*scaleCanvas,
+        y:32*tile*scaleCanvas,
+        w:1*tile,
+        h:1*tile
+    },
+    {
+        x:25*tile*scaleCanvas,
+        y:35*tile*scaleCanvas,
         w:1*tile*scaleCanvas,
         h:2*tile*scaleCanvas
     },
     {
-        x:53*tile*scaleCanvas,
-        y:19*tile*scaleCanvas,
+        x:25*tile*scaleCanvas,
+        y:36*tile*scaleCanvas,
+        w:27*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:51*tile*scaleCanvas,
+        y:36*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:11*tile*scaleCanvas
+    },
+    {
+        x:54*tile*scaleCanvas,
+        y:37*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:10*tile*scaleCanvas
+    },
+    {
+        x:54*tile*scaleCanvas,
+        y:37*tile*scaleCanvas,
+        w:4*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:57*tile*scaleCanvas,
+        y:36*tile*scaleCanvas,
         w:5*tile*scaleCanvas,
         h:1*tile*scaleCanvas
     },
     {
-        x:59*tile*scaleCanvas,
+        x:61*tile*scaleCanvas,
+        y:36*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:61*tile*scaleCanvas,
+        y:38*tile*scaleCanvas,
+        w:14*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:57*tile*scaleCanvas,
+        y:31*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:3*tile*scaleCanvas
+    },
+    {
+        x:56*tile*scaleCanvas,
+        y:23*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:9*tile*scaleCanvas
+    },
+    
+    {
+        x:56*tile*scaleCanvas,
+        y:23*tile*scaleCanvas,
+        w:9*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:64*tile*scaleCanvas,
+        y:20*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:4*tile*scaleCanvas
+    },
+    {
+        x:52*tile*scaleCanvas,
+        y:23*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:9*tile*scaleCanvas
+    },
+    {
+        x:43*tile*scaleCanvas,
+        y:23*tile*scaleCanvas,
+        w:10*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:43*tile*scaleCanvas,
+        y:19*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:5*tile*scaleCanvas
+    },
+    // house
+    { 
+        // grange
+        x:35*tile*scaleCanvas,
+        y:48*tile*scaleCanvas,
+        w:6*tile*scaleCanvas,
+        h:6*tile*scaleCanvas
+    },
+    {
+        // house
+        x:45*tile*scaleCanvas,
+        y:42*tile*scaleCanvas,
+        w:6*tile*scaleCanvas,
+        h:4*tile*scaleCanvas
+    },
+    {
+        // house
+        x:27*tile*scaleCanvas,
+        y:19*tile*scaleCanvas,
+        w:6*tile*scaleCanvas,
+        h:7*tile*scaleCanvas
+    },
+    {
+        // mainHouse
+        x:54*tile*scaleCanvas,
+        y:40*tile*scaleCanvas,
+        w:6*tile*scaleCanvas,
+        h:6*tile*scaleCanvas
+    },
+    
+    {
+        // contact
+        x:58*tile*scaleCanvas,
+        y:28*tile*scaleCanvas,
+        w:6*tile*scaleCanvas,
+        h:4*tile*scaleCanvas
+    },
+    {
+        // newLide
+        x:27*tile*scaleCanvas,
+        y:24*tile*scaleCanvas,
+        w:25*tile*scaleCanvas,
+        h:7*tile*scaleCanvas
+    },
+    {
+        // oldLife
+        x:51*tile*scaleCanvas,
+        y:13*tile*scaleCanvas,
+        w:14*tile*scaleCanvas,
+        h:6*tile*scaleCanvas
+    },
+    {
+        // oldLife
+        x:51*tile*scaleCanvas,
         y:19*tile*scaleCanvas,
         w:1*tile*scaleCanvas,
         h:1*tile*scaleCanvas
     },
     {
+        // oldLife
         x:58*tile*scaleCanvas,
+        y:19*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        // contact letter_box
+        x:58*tile*scaleCanvas,
+        y:32*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:2*tile*scaleCanvas
+    },
+    {
+        // contact panels
+        x:62*tile*scaleCanvas,
+        y:32*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:2*tile*scaleCanvas
+    },
+    {
+        x:43*tile*scaleCanvas,
+        y:31*tile*scaleCanvas,
+        w:4*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    
+    {
+    x:31*tile*scaleCanvas,
+    y:31*tile*scaleCanvas,
+    w:7*tile*scaleCanvas,
+    h:1*tile*scaleCanvas
+    },
+    {
+        // montain panels
+        x:20*tile*scaleCanvas,
+        y:40*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:2*tile*scaleCanvas
+    },
+    {
+        // college panels
+        x:56*tile*scaleCanvas,
+        y:20*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+
+    {
+        // college letterbox
+        x:53*tile*scaleCanvas,
+        y:20*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        // football pannel
+        x:46*tile*scaleCanvas,
+        y:18*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:2*tile*scaleCanvas
+    },
+    {
+        // forest pannel
+        x:75*tile*scaleCanvas,
+        y:34*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:2*tile*scaleCanvas
+    },
+    {
+        // main_house letterbox
+        x:55*tile*scaleCanvas,
         y:46*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:2*tile*scaleCanvas
+    },
+    {
+        // main_house flower
+        x:49*tile*scaleCanvas,
+        y:46*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:2*tile*scaleCanvas
+    },
+    {
+        // house
+        x:58*tile*scaleCanvas,
+        y:47*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        // grange
+        x:35*tile*scaleCanvas,
+        y:54*tile*scaleCanvas,
         w:2*tile*scaleCanvas,
         h:1*tile*scaleCanvas
     },
+    {
+        // grange
+        x:39*tile*scaleCanvas,
+        y:54*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        // main_house flower
+        x:45*tile*scaleCanvas,
+        y:46*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:2*tile*scaleCanvas 
+    },
+    {
+        // 
+        x:58*tile*scaleCanvas,
+        y:50*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas 
+    },
+    {
+        // banc
+        x:57*tile*scaleCanvas,
+        y:51*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:2*tile*scaleCanvas 
+    },
+    {
+        // banc
+        x:58*tile*scaleCanvas,
+        y:50*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas 
+    },
+    {
+        // banc
+        x:57*tile*scaleCanvas,
+        y:54*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:2*tile*scaleCanvas 
+    },
+    // Various
+    {
+        x:50*tile*scaleCanvas,
+        y:31*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:49*tile*scaleCanvas,
+        y:31*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:2*tile*scaleCanvas
+    },
+{
+    x:40*tile*scaleCanvas,
+    y:31*tile*scaleCanvas,
+    w:2*tile*scaleCanvas,
+    h:1*tile*scaleCanvas
+},
+{
+    x:40*tile*scaleCanvas,
+    y:31*tile*scaleCanvas,
+    w:1*tile*scaleCanvas,
+    h:2*tile*scaleCanvas
+},
+{
+    x:53*tile*scaleCanvas,
+    y:19*tile*scaleCanvas,
+    w:5*tile*scaleCanvas,
+    h:1*tile*scaleCanvas
+},
+{
+    x:59*tile*scaleCanvas,
+    y:19*tile*scaleCanvas,
+    w:1*tile*scaleCanvas,
+    h:1*tile*scaleCanvas
+},
+{
+    x:58*tile*scaleCanvas,
+    y:46*tile*scaleCanvas,
+    w:2*tile*scaleCanvas,
+    h:1*tile*scaleCanvas
+},
    
         
         
@@ -1404,8 +1409,6 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     
 ]
-
-
     const right = document.querySelector('.right');
     const down = document.querySelector('.down');
     const left = document.querySelector('.left');
@@ -1431,8 +1434,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
     ctx.imageSmoothingEnabled = false
     let frameChanging=0
-
-
 document.getElementById('body').addEventListener("touchstart", (e)=>{
     e.stopPropagation();
 }, { passive: true });
@@ -1453,7 +1454,6 @@ full.addEventListener("click", function(){
         else if(mydocument.webkitRequestFullScreen){
             mydocument.webkitRequestFullScreen();
         }
-
     }
     else 
     {
@@ -1574,7 +1574,7 @@ full.addEventListener("click", function(){
 
     function movePlayer() {
         if(openPannels===false) {
-          if(movingRight===false && movingLeft===false){
+            if(movingRight===false && movingLeft===false){
             if (movingDown===true && player.y < 2000) {
                 player.y += player.speed
                 player.frameY = 0;
@@ -1585,7 +1585,7 @@ full.addEventListener("click", function(){
                 player.frameY = 3;
                 player.moving = true
             }
-          }
+            }
             if (movingRight===true && player.x < 3000) {
                 player.x += player.speed
                 player.frameY = 2;
@@ -1600,7 +1600,6 @@ full.addEventListener("click", function(){
     }
     function handlePlayerFrame() {
         frameChanging++
-        
         if(frameChanging===5){
             if (player.frameX < 3 && player.moving === true) {
                 player.frameX++
@@ -1609,7 +1608,6 @@ full.addEventListener("click", function(){
             } 
             frameChanging=0
         }
-       
     }
 
     function displaGameboy(){
@@ -1639,7 +1637,6 @@ full.addEventListener("click", function(){
             if (((player.x +30 >= blueBoxs[i].x && player.x  <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingUp===true) {
                 inHouse = true
                 blueBoxs[i].open=true
-                
             }
             if (((player.x +30 >= blueBoxs[i].x && player.x <= blueBoxs[i].x + blueBoxs[i].w)) && (player.y >= blueBoxs[i].y && player.y <= blueBoxs[i].y + blueBoxs[i].h) && movingDown===true) {
                 inHouse = false
@@ -1689,12 +1686,31 @@ full.addEventListener("click", function(){
     }
 
 
-        
+ 
     }
+    let yellowBox =[
+        {
+            x:56*tile*scaleCanvas,
+            y:25*tile*scaleCanvas,
+            w:1*tile*scaleCanvas,
+            h:5*tile*scaleCanvas
+        },
+    ]
+    function contactBox(){
+        const yellowBoxObject=new Collision(yellowBox, ctx, player, 'yellow');
+        yellowBoxObject.createBox();
+        yellowBoxObject.EnterInbox();
+        if(yellowBoxObject.inBox===true && actionBtn===true){
+            actionBtn=false
+            window.location.href = "mailto:mail@example.org"
+        }
+    }
+    
     displayCanvas()
     function animate() {    
         ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height); //drawing the background
         enterInHouse()
+        contactBox()
         drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale) // drawing the sprite
         movePlayer() 
         ctx.resetTransform();
@@ -1705,8 +1721,8 @@ full.addEventListener("click", function(){
         if (inHouse === false) {
             createBlackbox.enterInCollision(blackBoxs, player)   
             // createBlackbox.createBox() 
-    }  
-    
+        }  
+        
     window.requestAnimationFrame(animate); 
 }
 
