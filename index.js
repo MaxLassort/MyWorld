@@ -511,6 +511,30 @@ window.addEventListener('DOMContentLoaded', function () {
         h:4*tile*scaleCanvas
     },
     {
+        x:60*tile*scaleCanvas,
+        y:32*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:56*tile*scaleCanvas,
+        y:46*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:47*tile*scaleCanvas,
+        y:46*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:37*tile*scaleCanvas,
+        y:54*tile*scaleCanvas,
+        w:2*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
         // house
         x:27*tile*scaleCanvas,
         y:19*tile*scaleCanvas,
