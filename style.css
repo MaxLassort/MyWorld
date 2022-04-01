@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
+    
 }
 body {
     background-color: 'transparent';
@@ -19,6 +20,7 @@ body {
 }
 
 canvas {
+    position: relative;
     width: 100%;
     height: 100%; 
     overflow: hidden;
@@ -85,9 +87,18 @@ content: "";
     position:absolute
 }
 
+.mail {
+    color: aliceblue;
+}
+.link {
+    color: aliceblue;
+    text-decoration: none;
+}
 
 .Presentation {
-    display: flex;
+    padding: 0 1rem;
+    display: flex; 
+    flex-direction: column;
     position: absolute;
 }
 /* .Presentation p {
@@ -115,7 +126,14 @@ content: "";
     display: none;
     width: 100%;
 }
-
+.competences{
+    position: absolute;
+    display: none;
+}
+.friends{
+    position: absolute;
+    display: none;
+}
 .football{
     position: absolute;
     display: none;
