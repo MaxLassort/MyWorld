@@ -760,18 +760,6 @@ window.addEventListener('DOMContentLoaded', function () {
     w:2*tile*scaleCanvas,
     h:1*tile*scaleCanvas
 },
-   
-        
-        
-        
-        
-   
-      
-   
-   
-   
-   
-   
     ];
     let greenBoxsArray=[
         [ index=false,
@@ -792,12 +780,6 @@ window.addEventListener('DOMContentLoaded', function () {
             x: 43*tile*scaleCanvas,
             y: 23*tile*scaleCanvas,
             w:2*tile*scaleCanvas,
-            h:1*tile*scaleCanvas,
-            },
-            {
-            x: 37*tile*scaleCanvas,
-            y: 32*tile*scaleCanvas,
-            w:1*tile*scaleCanvas,
             h:1*tile*scaleCanvas,
             },
             {
@@ -852,12 +834,6 @@ window.addEventListener('DOMContentLoaded', function () {
             y: 20*tile*scaleCanvas,
             w:1*tile*scaleCanvas,
             h:12*tile*scaleCanvas,
-            },
-            {
-            x: 46*tile*scaleCanvas,
-            y: 32*tile*scaleCanvas,
-            w:1*tile*scaleCanvas,
-            h:1*tile*scaleCanvas,
             },
             {
             x: 49*tile*scaleCanvas,
@@ -1655,14 +1631,6 @@ full.addEventListener("click", function(){
             modal.style.display='none'
         }
     }
-    const greyBox=[
-        {
-            x: 34*tile*scaleCanvas,
-            y: 20*tile*scaleCanvas,
-            w:12*tile*scaleCanvas,
-            h:12*tile*scaleCanvas,
-        }
-    ]
     function enterInHouse() {
         for (let i = 0; i < blueBoxs.length; i++) {
 
@@ -1730,18 +1698,47 @@ full.addEventListener("click", function(){
     ]
     function contactBox(){
         const yellowBoxObject=new Collision(yellowBox, ctx, player, 'yellow');
-        
         yellowBoxObject.EnterInbox();
         if(yellowBoxObject.inBox===true && actionBtn===true && player.frameY===1 ){
             actionBtn=false
-            window.location.href = "mailto:mail@example.org"
+            window.location.href = "mailto:maximelassort@gmail.com"
         }
     }
-    
+    let orangeBox =[
+        {
+            x:37*tile*scaleCanvas,
+            y:24*tile*scaleCanvas,
+            w:3*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
+        },
+    ]
+    let purpleBox =[
+        {
+            x:47*tile*scaleCanvas,
+            y:22*tile*scaleCanvas,
+            w:2*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
+        },
+    ]
+    function linkTo(){
+        const OrangeBoxObject= new Collision(orangeBox, ctx, player, 'orange')
+            OrangeBoxObject.EnterInbox();
+            if(OrangeBoxObject.inBox===true && actionBtn===true && player.frameY===0 ){
+                window.open("https://github.com/MaxLassort/")
+                actionBtn=false
+            }
+        const purpleBoxObject= new Collision(purpleBox, ctx, player, 'purple')
+            purpleBoxObject.EnterInbox();
+            if(purpleBoxObject.inBox===true && actionBtn===true && player.frameY===3 ){
+                window.open("https://3wa.fr/")
+                actionBtn=false
+            }
+    }
     displayCanvas()
     function animate() {    
         ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height); //drawing the background
         enterInHouse()
+        linkTo()
         contactBox()
         drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale) // drawing the sprite
         movePlayer() 
