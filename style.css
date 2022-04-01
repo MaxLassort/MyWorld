@@ -95,12 +95,7 @@ content: "";
     text-decoration: none;
 }
 
-.Presentation {
-    padding: 0 1rem;
-    display: flex; 
-    flex-direction: column;
-    position: absolute;
-}
+
 /* .Presentation p {
     padding-bottom: 4rem;
     margin: 1rem 1rem 0rem ;
@@ -215,6 +210,12 @@ content: "";
     left: 29%;
     width: 57%;
     height: 3%;
+}
+.Presentation {
+    padding: 0 1rem;
+    display: flex; 
+    flex-direction: column;
+    position: absolute;
 }
 
 /* .game_boy {
