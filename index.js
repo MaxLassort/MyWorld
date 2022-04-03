@@ -44,11 +44,10 @@ class Collision {
     EnterInbox(){
         for (let box of this.boxes) {  
             if(  (this.player.y+this.player.height > box.y && this.player.x+(this.player.width-5) > box.x && (this.player.x+15 ) < box.x+box.w && this.player.y+26 < box.y+box.h) ) {
-                // this.ctx.fillStyle = 'blue'
-                // this.ctx.fillRect(box.x, box.y, box.w, box.h)
+                this.ctx.fillSroke = 'black'
+                this.ctx.strokeRect(box.x, box.y, box.w, box.h)
                 this.inBox=true
-            }
-            if((this.player.y+this.player.height < box.y && this.player.x+(this.player.width-5) < box.x && (this.player.x+15 ) > box.x+box.w && this.player.y+26 > box.y+box.h)) {
+            } else if((this.player.y+this.player.height < box.y && this.player.x+(this.player.width-5) < box.x && (this.player.x+15 ) > box.x+box.w && this.player.y+26 > box.y+box.h)) {
                 this.inBox=false
             }
         }
@@ -125,7 +124,7 @@ window.addEventListener('DOMContentLoaded', function () {
         {
             // 3W
             open:false,
-            x: 47*tile*scaleCanvas,
+            x: 46*tile*scaleCanvas,
             y: 31*tile*scaleCanvas,
             w:3*tile*scaleCanvas,
             h:1*tile*scaleCanvas,
@@ -159,9 +158,9 @@ window.addEventListener('DOMContentLoaded', function () {
         {
             // grange
             open:false,
-            x: 37*tile*scaleCanvas,
+            x: 36*tile*scaleCanvas,
             y: 54*tile*scaleCanvas,
-            w:2*tile*scaleCanvas,
+            w:3*tile*scaleCanvas,
             h:1*tile*scaleCanvas,
             background: Images_array[5],
             dx: 0,
@@ -177,9 +176,9 @@ window.addEventListener('DOMContentLoaded', function () {
         {
             // litl hous
             open:false,
-            x: 47*tile*scaleCanvas,
+            x: 46*tile*scaleCanvas,
             y: 46*tile*scaleCanvas,
-            w:2*tile*scaleCanvas,
+            w:3*tile*scaleCanvas,
             h:1*tile*scaleCanvas,
             background: Images_array[6],
             dx: 0,
@@ -330,6 +329,18 @@ window.addEventListener('DOMContentLoaded', function () {
     
     // fences
     {
+        x:36*tile*scaleCanvas,
+        y:55*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:39*tile*scaleCanvas,
+        y:55*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
         x:30*tile*scaleCanvas,
         y:10*tile*scaleCanvas,
         w:1*tile*scaleCanvas,
@@ -382,6 +393,18 @@ window.addEventListener('DOMContentLoaded', function () {
         y:45*tile*scaleCanvas,
         w:1*tile*scaleCanvas,
         h:14*tile*scaleCanvas
+    },
+    {
+        x:37*tile*scaleCanvas,
+        y:32*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
+    },
+    {
+        x:46*tile*scaleCanvas,
+        y:32*tile*scaleCanvas,
+        w:1*tile*scaleCanvas,
+        h:1*tile*scaleCanvas
     },
 
 
@@ -825,6 +848,12 @@ window.addEventListener('DOMContentLoaded', function () {
             w:2*tile*scaleCanvas,
             h:4*tile*scaleCanvas,
             },
+            {
+                x:37*tile*scaleCanvas,
+                y:32*tile*scaleCanvas,
+                w:1*tile*scaleCanvas,
+                h:1*tile*scaleCanvas
+            },
         ], 
         [
             index=false,
@@ -962,7 +991,12 @@ window.addEventListener('DOMContentLoaded', function () {
             w:1*tile*scaleCanvas,
             h:1*tile*scaleCanvas,
             },
-         
+            {
+                x:46*tile*scaleCanvas,
+                y:32*tile*scaleCanvas,
+                w:1*tile*scaleCanvas,
+                h:1*tile*scaleCanvas
+            },
         ], 
         [
             // contact
@@ -1355,56 +1389,56 @@ window.addEventListener('DOMContentLoaded', function () {
         // Contact
         x: 62*tile*scaleCanvas,
         y: 34*tile*scaleCanvas,
-        width: 1*tile*scaleCanvas,
-        height: 1*tile*scaleCanvas,
+        w: 1*tile*scaleCanvas,
+        h: 1*tile*scaleCanvas,
         textToShow: document.querySelector('.contact')
     },
     {
         // oldlife
         x: 56*tile*scaleCanvas,
         y: 21*tile*scaleCanvas,
-        width: 1*tile*scaleCanvas,
-        height: 1*tile*scaleCanvas,
+        w: 1*tile*scaleCanvas,
+        h: 1*tile*scaleCanvas,
         textToShow: document.querySelector('.oldLife')
     },
     {
         // oldlife
         x: 58*tile*scaleCanvas,
         y: 48*tile*scaleCanvas,
-        width: 1*tile*scaleCanvas,
-        height: 1*tile*scaleCanvas,
+        w: 1*tile*scaleCanvas,
+        h: 1*tile*scaleCanvas,
         textToShow: document.querySelector('.personalLife')
     },
     {
         // oldlife
         x: 46*tile*scaleCanvas,
         y: 20*tile*scaleCanvas,
-        width: 1*tile*scaleCanvas,
-        height: 1*tile*scaleCanvas,
+        w: 1*tile*scaleCanvas,
+        h: 1*tile*scaleCanvas,
         textToShow: document.querySelector('.football')
     },
     {
          // Formation Dev
         x: 42*tile*scaleCanvas,
         y: 31*tile*scaleCanvas,
-        width: 2*tile*scaleCanvas,
-        height: 2*tile*scaleCanvas,
+        w: 2*tile*scaleCanvas,
+        h: 2*tile*scaleCanvas,
         textToShow: document.querySelector('.formationDev')
     },
     {
          // Soft Skills
         x: 34*tile*scaleCanvas,
         y: 32*tile*scaleCanvas,
-        width: 2*tile*scaleCanvas,
-        height: 1*tile*scaleCanvas,
+        w: 2*tile*scaleCanvas,
+        h: 1*tile*scaleCanvas,
         textToShow: document.querySelector('.competences')
     },
     {
          // mountain
         x: 20*tile*scaleCanvas,
         y: 42*tile*scaleCanvas,
-        width: 2*tile*scaleCanvas,
-        height: 1*tile*scaleCanvas,
+        w: 2*tile*scaleCanvas,
+        h: 1*tile*scaleCanvas,
         textToShow: document.querySelector('.friends')
     }
     
@@ -1430,7 +1464,8 @@ window.addEventListener('DOMContentLoaded', function () {
     let movingDown=false;
     let movingRight=false;
     let movingLeft=false;
-    let actionBtn=false
+    let actionBtn=false;
+    
 
     ctx.imageSmoothingEnabled = false
     let frameChanging=0
@@ -1485,26 +1520,26 @@ full.addEventListener("click", function(){
         if(e.key=== "e" || e.key=== "E" ){ 
             actionBtn=true
         }
-        if(e.key=== "t" || e.key=== "T" ){ 
-            actionBtn=false
-        }
         if(e.key=== "s" || e.key=== "S" || e.key==="ArrowDown"  ){ 
             movingDown=true
+            actionBtn=false
         }
         if(e.key=== "z" || e.key=== "Z" || e.key==="ArrowUp" ) {
             movingUp=true
+            actionBtn=false
         }
         if (e.key=== "d" || e.key=== "D" || e.key==="ArrowRight" ) {
             movingRight=true;
+            actionBtn=false
         }
         if (e.key=== "q" || e.key=== "Q" || e.key==="ArrowLeft") {
             movingLeft=true;
+            actionBtn=false
         }
         // player.moving=true
     },  )
 
     window.addEventListener('keyup', function (e) {
-        
         player.moving = false
         movingDown=false
         movingUp=false;
@@ -1512,15 +1547,19 @@ full.addEventListener("click", function(){
         movingLeft=false;
         
     })
-
+    const redBoxObject = new Collision(redBoxs, ctx, player, 'red')
+    
+    
     function eventListener(){
-        action_btnt.addEventListener('touchstart', function (e) {
-            (actionBtn=true)
-            e.stopPropagation();
+        
+        
+        action_btnt.addEventListener('click', function (e) {
+            actionBtn=true
         },{ passive: true })
         up.addEventListener('touchstart', function (e) {
             (movingUp=true)
             player.moving = true
+            actionBtn=false
             e.stopPropagation();
         },{ passive: true })
         up.addEventListener('touchend', function () {
@@ -1530,6 +1569,7 @@ full.addEventListener("click", function(){
         right.addEventListener('touchstart', function (e) {
             (movingRight=true)
             player.moving = true
+            actionBtn=false
             e.stopPropagation();
         },{ passive: true })
         right.addEventListener('touchend', function () {
@@ -1539,6 +1579,7 @@ full.addEventListener("click", function(){
         down.addEventListener('touchstart', function (e) {
             (movingDown=true)
             player.moving = true
+            actionBtn=false
             e.stopPropagation();
         },{ passive: true })
         down.addEventListener('touchend', function () {
@@ -1548,6 +1589,7 @@ full.addEventListener("click", function(){
         left.addEventListener('touchstart', function (e) {
             (movingLeft=true)
             player.moving = true
+            actionBtn=false
             e.stopPropagation();
         },{ passive: true })
         left.addEventListener('touchend', function () {
@@ -1560,17 +1602,13 @@ full.addEventListener("click", function(){
         close_presentation.forEach(element => {
             element.addEventListener('click',function(){
                 presentation.style.display='none'
-                landscape.style.display="none"
                 presentationReaded=true
                 openPannels=false 
-                actionBtn=false
                 actionBtn=false
             })
         });
     }
     eventListener()
-    
-
 
     function movePlayer() {
         if(openPannels===false) {
@@ -1659,57 +1697,60 @@ full.addEventListener("click", function(){
 
     for (let redBox of redBoxs) {
         // ctx.fillStyle = 'red'
-        // ctx.fillRect(redBox.x, redBox.y, redBox.width, redBox.height)
-        if(  ((player.y+player.height) > (redBox.y)) &&
-            ((player.y < (redBox.y + redBox.height))) &&
-            ((player.x+player.width)> redBox.x) &&
-            (player.x < (redBox.x+redBox.width))
-        ) {
-        insideRedbox= true
-        if (insideRedbox===true && actionBtn===true  && player.frameY===3) {
-            openPannels=true
-            redBox.textToShow.style.display='block'
-        }
-        if(actionBtn===false) {
-            openPannels=false
-            redBox.textToShow.style.display='none'
-            insideRedbox=false
-        }
-        if(  ((player.y+player.height) < (redBox.y)) &&
-            ((player.y > (redBox.y + redBox.height))) &&
-            ((player.x+player.width)< redBox.x) &&
-            (player.x > (redBox.x+redBox.width))
-        ) {
-        insideRedbox= false
+        // ctx.fillRect(redBox.x, redBox.y, redBox.w, redBox.h)
+            if(  ((player.y+player.height) > (redBox.y)) &&
+                ((player.y < (redBox.y + redBox.h))) &&
+                ((player.x+player.width)> redBox.x) &&
+                (player.x < (redBox.x+redBox.w))) {
+                insideRedbox= true
+                if (insideRedbox===true && actionBtn===true  && player.frameY===3) {
+                    openPannels=true
+                    redBox.textToShow.style.display='block'
+                }
+                if(actionBtn===false) {
+                    openPannels=false
+                    redBox.textToShow.style.display='none'
+                    insideRedbox=false
+                }
+                if(  ((player.y+player.height) < (redBox.y)) &&
+                    ((player.y > (redBox.y + redBox.h))) &&
+                    ((player.x+player.width)< redBox.x) &&
+                    (player.x > (redBox.x+redBox.w))) {
+                    insideRedbox= false
+                    actionBtn=false
+                    }
             }
+        }
     }
-    }
-
-
- 
-    }
-    let yellowBox =[
+    let contactBox =[
         {
             x:56*tile*scaleCanvas,
             y:25*tile*scaleCanvas,
             w:1*tile*scaleCanvas,
-            h:5*tile*scaleCanvas
+            h:2*tile*scaleCanvas,
+        },
+        {
+            x:56*tile*scaleCanvas,
+            y:28*tile*scaleCanvas,
+            w:1*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
         },
     ]
-    function contactBox(){
-        const yellowBoxObject=new Collision(yellowBox, ctx, player, 'yellow');
-        yellowBoxObject.EnterInbox();
-        if(yellowBoxObject.inBox===true && actionBtn===true && player.frameY===1 ){
+    function contactBoxFunction(){
+        const contactBoxObject=new Collision(contactBox, ctx, player, 'yellow');
+        contactBoxObject.EnterInbox();
+        if(contactBoxObject.inBox===true && actionBtn===true && player.frameY===1 ){
             actionBtn=false
             window.location.href = "mailto:maximelassort@gmail.com"
         }
+        
     }
-    let orangeBox =[
+    let gitHubBox =[
         {
             x:37*tile*scaleCanvas,
             y:24*tile*scaleCanvas,
             w:3*tile*scaleCanvas,
-            h:2*tile*scaleCanvas
+            h:1*tile*scaleCanvas
         },
     ]
     let purpleBox =[
@@ -1720,10 +1761,18 @@ full.addEventListener("click", function(){
             h:2*tile*scaleCanvas
         },
     ]
+    let cvBox =[
+        {
+            x:36*tile*scaleCanvas,
+            y:22*tile*scaleCanvas,
+            w:2*tile*scaleCanvas,
+            h:2*tile*scaleCanvas
+        },
+    ]
     function linkTo(){
-        const OrangeBoxObject= new Collision(orangeBox, ctx, player, 'orange')
-            OrangeBoxObject.EnterInbox();
-            if(OrangeBoxObject.inBox===true && actionBtn===true && player.frameY===0 ){
+        const gitHubBoxObject= new Collision(gitHubBox, ctx, player, 'orange')
+            gitHubBoxObject.EnterInbox();
+            if(gitHubBoxObject.inBox===true && actionBtn===true && player.frameY===0 ){
                 window.open("https://github.com/MaxLassort/")
                 actionBtn=false
             }
@@ -1733,13 +1782,20 @@ full.addEventListener("click", function(){
                 window.open("https://3wa.fr/")
                 actionBtn=false
             }
+            
+        const cvBoxObject= new Collision(cvBox, ctx, player, 'purple')
+        cvBoxObject.EnterInbox();
+            if(cvBoxObject.inBox===true && actionBtn===true && player.frameY===3 ){
+                window.open("https://drive.google.com/file/d/1vuGyHgLTyp2seFzl1H5M4OvxOvqCFVVx/view?usp=sharing")
+                actionBtn=false
+            }
     }
     displayCanvas()
     function animate() {    
         ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height); //drawing the background
         enterInHouse()
         linkTo()
-        contactBox()
+        contactBoxFunction()
         drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale) // drawing the sprite
         movePlayer() 
         ctx.resetTransform();
@@ -1751,11 +1807,13 @@ full.addEventListener("click", function(){
             createBlackbox.enterInCollision(blackBoxs, player)   
             // createBlackbox.createBox() 
         }  
-        
     window.requestAnimationFrame(animate); 
 }
 
     animate()
+
+
+
 
 })
 
