@@ -219,7 +219,9 @@ content: "";
 }
 
 
-
+.main_img{
+    display: none;
+}
 
 .fullscreen{
     background-color: #B4C96E;

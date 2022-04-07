@@ -11,7 +11,6 @@ class Collision {
         this.ctx=ctx;
         this.player=player;
         this.color=color;
-        // this.inBox=inBox;
     };
     inBox=false
     createBox(){
@@ -55,7 +54,33 @@ class Collision {
 
     
 };
-window.addEventListener('DOMContentLoaded', function () {
+
+class DrawCharact{
+    constructor(scale, src, ctx, originX, originY, originW, originH, canvasX, canvasY, canvasW, canvasH){
+        this.originX=originX
+        this.originY=originY
+        this.originW=originW
+        this.originH=originH
+        this.canvasX=canvasX
+        this.canvasY=canvasY
+        this.canvasW=canvasW
+        this.canvasH=canvasH
+        this.ctx=ctx
+        this.src=src
+        const image=new Image()
+        image.src=src
+        this.image=image
+        this.scale=scale
+    }
+    drawSprite() {
+        this.ctx.drawImage(this.image, this.originX, this.originY, this.originW, this.originH, this.canvasX, this.canvasY, this.canvasW*this.scale, this.canvasH*this.scale);
+    }
+
+}
+
+
+
+window.addEventListener('load', function () {
     const playerSprite = new Image();
     playerSprite.src = "img/main_chara.png ";
     const background = new Image();
@@ -72,8 +97,19 @@ window.addEventListener('DOMContentLoaded', function () {
     house.src = 'img/maison.png'
     const bigHouse= new Image();
     bigHouse.src='img/maison_principale.png'
+    function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
+        ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
+    }
+    let frameChanging2
+    function test(){
+
+        const testChart=new DrawCharact(1.8, 'img/femme1.png', ctx, 0, 0, 64, 64, 1300, 1200, player.width, player.height );
+        testChart.drawSprite();
 
 
+
+
+    }
 
     const full = document.querySelector('.fullscreen')
     let mydocument= document.documentElement;
@@ -1420,9 +1456,9 @@ window.addEventListener('DOMContentLoaded', function () {
     {
          // Formation Dev
         x: 42*tile*scaleCanvas,
-        y: 31*tile*scaleCanvas,
+        y: 32*tile*scaleCanvas,
         w: 2*tile*scaleCanvas,
-        h: 2*tile*scaleCanvas,
+        h: 1*tile*scaleCanvas,
         textToShow: document.querySelector('.formationDev')
     },
     {
@@ -1440,9 +1476,22 @@ window.addEventListener('DOMContentLoaded', function () {
         w: 2*tile*scaleCanvas,
         h: 1*tile*scaleCanvas,
         textToShow: document.querySelector('.friends')
+    },
+    {
+         // mountain
+        x: 75*tile*scaleCanvas,
+        y: 36*tile*scaleCanvas,
+        w: 2*tile*scaleCanvas,
+        h: 1*tile*scaleCanvas,
+        textToShow: document.querySelector('.inComing')
     }
     
 ]
+
+
+
+
+
     const right = document.querySelector('.right');
     const down = document.querySelector('.down');
     const left = document.querySelector('.left');
@@ -1513,9 +1562,7 @@ full.addEventListener("click", function(){
         canvas.height = window.innerHeight
         }
 
-    function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
-        ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
-    }  
+    
     window.addEventListener('keydown',  function (e) {   
         if(e.key=== "e" || e.key=== "E" ){ 
             actionBtn=true
@@ -1707,6 +1754,10 @@ full.addEventListener("click", function(){
                     openPannels=true
                     redBox.textToShow.style.display='block'
                 }
+                if( insideRedbox===true){
+                    ctx.strokeStyle = 'black'
+                    ctx.strokeRect(redBox.x, redBox.y, redBox.w, redBox.h)
+                }
                 if(actionBtn===false) {
                     openPannels=false
                     redBox.textToShow.style.display='none'
@@ -1753,12 +1804,12 @@ full.addEventListener("click", function(){
             h:1*tile*scaleCanvas
         },
     ]
-    let purpleBox =[
+    let schoolBox =[
         {
             x:47*tile*scaleCanvas,
-            y:22*tile*scaleCanvas,
+            y:23*tile*scaleCanvas,
             w:2*tile*scaleCanvas,
-            h:2*tile*scaleCanvas
+            h:1*tile*scaleCanvas
         },
     ]
     let cvBox =[
@@ -1776,9 +1827,9 @@ full.addEventListener("click", function(){
                 window.open("https://github.com/MaxLassort/")
                 actionBtn=false
             }
-        const purpleBoxObject= new Collision(purpleBox, ctx, player, 'purple')
-            purpleBoxObject.EnterInbox();
-            if(purpleBoxObject.inBox===true && actionBtn===true && player.frameY===3 ){
+        const schoolBoxObject= new Collision(schoolBox, ctx, player, 'purple')
+            schoolBoxObject.EnterInbox();
+            if(schoolBoxObject.inBox===true && actionBtn===true && player.frameY===3 ){
                 window.open("https://3wa.fr/")
                 actionBtn=false
             }
@@ -1794,19 +1845,25 @@ full.addEventListener("click", function(){
     function animate() {    
         ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height); //drawing the background
         enterInHouse()
+        // test()
+        
         linkTo()
+        collisionRedbox()
         contactBoxFunction()
         drawSprite(Images_array[0], player.width * player.frameX, player.height * player.frameY, player.width, player.height, player.x, player.y, player.width * scale, player.height * scale) // drawing the sprite
         movePlayer() 
         ctx.resetTransform();
         ctx.translate(-(player.x - canvas.width / 2), -(player.y - canvas.height / 2)); //for center the character on the map
         handlePlayerFrame()
-        collisionRedbox()
         displaGameboy()
+        
+    
+
         if (inHouse === false) {
             createBlackbox.enterInCollision(blackBoxs, player)   
             // createBlackbox.createBox() 
         }  
+        // console.log(playertest)
     window.requestAnimationFrame(animate); 
 }
 
