@@ -54,29 +54,135 @@ class Collision {
 
     
 };
-
 class DrawCharact{
-    constructor(scale, src, ctx, originX, originY, originW, originH, canvasX, canvasY, canvasW, canvasH){
-        this.originX=originX
-        this.originY=originY
-        this.originW=originW
-        this.originH=originH
-        this.canvasX=canvasX
-        this.canvasY=canvasY
-        this.canvasW=canvasW
-        this.canvasH=canvasH
-        this.ctx=ctx
-        this.src=src
+    constructor(src, x, y ){
+        this.originX=0
+        this.originY=0
+        this.x=x
+        this.y=y
+        this.w=64
+        this.h=64
+        this.canvasW=32
+        this.canvasH=32
+        this.scale=1.7
         const image=new Image()
         image.src=src
         this.image=image
-        this.scale=scale
+        this.ctx=ctx
+        this.distance=10
+        this.rightPNG
+        this.leftPNG
+        this.upPNG
+        this.downPNG=true
+        this.speed=2
+        this.frameX=0
+        this.frameY=0
+        this.NPCMoving=true
+        this.myTimeout
+        this.timer=0
     }
-    drawSprite() {
-        this.ctx.drawImage(this.image, this.originX, this.originY, this.originW, this.originH, this.canvasX, this.canvasY, this.canvasW*this.scale, this.canvasH*this.scale);
-    }
+    
+    
 
+    
+
+    drawSprite() {
+                this.ctx.drawImage(this.image, this.w*this.frameX, this.h*this.frameY, this.w, this.h, this.x, this.y, this.canvasW*this.scale, this.canvasH*this.scale);
+            }
+
+    moveX(distanceX, distanceW){
+        if(this.NPCMoving===true){
+            
+            if(this.rightPNG===true){
+                this.x+=this.speed
+                this.frameY=2
+            }
+            if(this.x+this.canvasW >=distanceW){
+                this.rightPNG=false
+                this.leftPNG=true
+            } 
+            if(this.leftPNG===true){
+                this.x-=this.speed
+                this.frameY=1
+            }
+            if(this.x<=distanceX){
+                this.rightPNG=true
+                this.leftPNG=false
+            } 
+            frameChanging++
+            if(frameChanging===5){
+                if (this.frameX < 3 ) {
+                    this.frameX++
+                } else {
+                    this.frameX = 0
+                } 
+                frameChanging=0
+            }
+        }
+    }
+    moveY(distanceY, distanceH){
+        if(this.NPCMoving===true){
+            
+            if(this.downPNG===true){
+                this.y+=this.speed
+                this.frameY=0
+            }
+            if(this.y+this.canvasH >=distanceH){
+                this.downPNG=false
+                this.upPNG=true
+            } 
+            if(this.upPNG===true){
+                this.y-=this.speed
+                this.frameY=3
+            }
+            if(this.y<=distanceY){
+                this.downPNG=true
+                this.upPNG=false
+            } 
+            frameChanging++
+            if(frameChanging===5){
+                if (this.frameX < 3 ) {
+                    this.frameX++
+                } else {
+                    this.frameX = 0
+                } 
+                frameChanging=0
+            }
+        }
+    }
+    collisionPNG(){
+    if(  (player.y+player.height > this.y && player.x+(player.width-5) > this.x && (player.x+25 ) < this.x+this.w && player.y+26 < this.y+this.h) ) {
+        if(player.frameY===0 ){
+            this.NPCMoving=false
+            this.frameY=3
+            player.y-=player.speed}
+        else if(player.frameY===1){
+            this.NPCMoving=false
+            this.frameY=2
+            player.x+=player.speed 
+        } else if (player.frameY===2) {
+            this.frameY=1
+            this.NPCMoving=false
+            player.x-=player.speed
+        } else if (player.frameY===3){
+            this.NPCMoving=false
+            this.frameY=0
+            player.y+=player.speed
+        }
+    }
+    if( this.NPCMoving===false){
+        this.timer++
+        this.frameX=0
+    }
+    if(this.timer===1000) {
+        this.NPCMoving=true
+        this.timer=0
+    }
+    
 }
+
+} 
+
 
 
 
@@ -100,16 +206,7 @@ window.addEventListener('load', function () {
     function drawSprite(img, sX, sY, sW, sH, dX, dY, dW, dH) {
         ctx.drawImage(img, sX, sY, sW, sH, dX, dY, dW, dH);
     }
-    let frameChanging2
-    function test(){
 
-        const testChart=new DrawCharact(1.8, 'img/femme1.png', ctx, 0, 0, 64, 64, 1300, 1200, player.width, player.height );
-        testChart.drawSprite();
-
-
-
-
-    }
 
     const full = document.querySelector('.fullscreen')
     let mydocument= document.documentElement;
@@ -1684,6 +1781,7 @@ full.addEventListener("click", function(){
         }
     }
     function handlePlayerFrame() {
+        // remettre un reglage de FPS sinon les ordi 120 FPS vont trop vite
         frameChanging++
         if(frameChanging===5){
             if (player.frameX < 3 && player.moving === true) {
@@ -1845,8 +1943,6 @@ full.addEventListener("click", function(){
     function animate() {    
         ctx.drawImage(Images_array[1], 0, 0, canvasSize.width / 1.1, canvasSize.height / 1.1, 0, 0, canvasSize.width, canvasSize.height); //drawing the background
         enterInHouse()
-        // test()
-        
         linkTo()
         collisionRedbox()
         contactBoxFunction()
