@@ -1,19 +1,14 @@
+# Hello World
 
+Si vous êtes ici, c'est que vous êtes intéressé par mon code ou par ma façon de coder !
 
-Hello there, 
+Avant de plonger dans le code, il y a quelques petites choses à savoir. Ce projet est un ancien code sur lequel j'ai travaillé au début pour découvrir JavaScript. Depuis, j'ai approfondi mes compétences en programmation orientée objet avec TypeScript et Java, et j'ai adopté des pratiques de code propre, notamment les principes **SOLID**, le **clean code**, et le style **KSS**. 
+D'autre part, le text à l'intérieur de l'application n'est pas à jour non plus et mes compétences ont largement évoluées, si vous souhaitez en savoir plus je vous laisse consulter mon linkedin qui lui est un peu plus à jour : https://www.linkedin.com/in/maxlassort/ 
 
-Si vous êtes ici c'est que vous êtes intéressé par mon code, ou par la façon dont je code! 
+À l'époque, j'ai construit ce site sans utiliser de framework, avec l'objectif de maîtriser le JavaScript "vanilla". Le projet s'est développé au rythme de mes idées et de mes apprentissages, sans refactorisation complète ; certaines fonctions peuvent ainsi entrer en collision ou être redondantes.
 
-Avant de commencer à lire le code il y a quelques petites choses à savoir! 
-Tout d'abord, ce site est  enconre en cours de construction, il se peut qu'il y ait quelques bugs ou bien quelques incohérences. 
+_Un jour, quand j'aurai le temps, je mettrai à jour ce projet pour refléter mes connaissances actuelles et mes nouvelles compétences en code propre._
 
-Pour créer ce site je n'ai utilisé aucun framework, je souhaite avec ce site perfectionner mes compétences en langage JavaScript "vanilla" avant d'aller plus loin. 
-
-Ensuite ce site se construit au rythme de mes idées, ce qui signifie qu'il n'est pas encore refactorisé, que certaines fonctions peuvent entrer en collision avec d'autres où se ressembler. Le site avance pas à pas, avec l'évolution de mes connaissances! 
-Par exemple il se peut que je veuille rajouter une fonctionnalité qui, sans le vouloir rendrait une autre fonction inutile  sans que je ne m'en rende compte, de fait la première fonction trainerait toujours sur le code. (Bien évidemment si je m'en rends compte j'effacerai la première fonction :D). 
-
-Enfin je rencontre quelques difficultés à importer des modules JS avec gitHub, de fait toutes les classes, variables, arrays qui logiquement sont rangées dans un module externe, sont insérées dans l'index, ce qui j'en conçois rend la lecture du code plus chaotique, je m'en excuse par avance. 
-
-Merci de votre attention, bonne recherche! 
+Merci de votre attention, bonne exploration !
 
 
